@@ -1,0 +1,27 @@
+﻿    <div id="topo">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="width: 50%">
+                    <img src="@Url.Content("~/Content/images/logo.png")" alt="logo" width="155px" height="50px" />
+                </td>
+                <td align="right" style="width: 50%">
+                    <table> 
+                        <tr>
+                            <td><b>Usuário:</b></td>
+                            <td>@(((ProjectMaster.Data.pm_usuario)ProjectMaster.Core.Context.UsuarioOnLine).nome)</td>
+                            <td>&nbsp;</td>
+                            <td><b>Empresa:</b></td>
+                            <td>@(((ProjectMaster.Data.pm_empresa)ProjectMaster.Core.Context.EmpresaLogin).apelido)</td>
+                            <td>&nbsp;</td>
+                            <td><b>Filial:</b></td>
+                            <td>@(((ProjectMaster.Data.pm_filial)ProjectMaster.Core.Context.FilialLogin).apelido)</td>
+                            <td>&nbsp;</td>
+                            <td><b>@Html.ActionLink("Sair", "Sair", "Usuario")</b></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    
+    </div>

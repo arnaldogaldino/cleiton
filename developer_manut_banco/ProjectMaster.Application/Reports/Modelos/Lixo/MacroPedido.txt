@@ -1,0 +1,68 @@
+Sub teste()
+    
+ 'NewRow(4, "LP", "Laranja Pera", 23, 2.45, "Saco", 1.75)
+ 'Call NewRow(numRow:=4, cod:="LP", desc:="Laranja Pera", qtd:=23, vlrUnit:=2.35, tipoEmabalagem:="Saco", vlrEmbalagem:=1.35)
+    
+End Sub
+
+Sub Cabecalho(nrPedido As Integer, TipoPagto As String, Data As String, CodCliente As String, RazaoSocial As String)
+        
+    Set rNrPedido = Range("C1")
+    Set rTipoPagto = Range("G1")
+    Set rData = Range("L1")
+    Set rCodCliente = Range("C2")
+    Set rRazaoSocial = Range("D2")
+        
+    rNrPedido.Value = nrPedido
+    rTipoPagto.Value = TipoPagto
+    rData.Value = Data
+    rCodCliente.Value = CodCliente
+    rRazaoSocial.Value = RazaoSocial
+        
+End Sub
+
+Sub NewPag(pag As Integer)
+    'Copia o cabeçalho
+    Dim CapInic As Integer
+    Dim CapPast As Integer
+        
+    CapInic = ((31 * pag) + 1) - (31 * pag)
+    CapPast = 31 * pag
+
+    Rows(CapInic & ":" & (CapInic + 30)).Select
+    Selection.Copy
+    
+    Range("A" & (CapPast + 1)).Select
+    ActiveSheet.Paste
+    Application.CutCopyMode = False
+      
+    'Muda o numero da pagina
+     Set Rng = Range("M" & (CapPast + 31))
+     Rng.Value = (pag + 1)
+End Sub
+
+Sub NewRow(numRow As Integer, cod As String, desc As String, qtd As Integer, vlrUnit As Double, tipoEmabalagem As String, vlrEmbalagem As Double)
+    
+    Set rCod = Range("A" & numRow)
+    Set rDesc = Range("B" & numRow)
+    Set rQtd = Range("E" & numRow)
+    Set rVlrUnit = Range("F" & numRow)
+    Set rVlrTotal = Range("G" & numRow)
+    Set rTipoEmabalagem = Range("H" & numRow)
+    Set rVlrEmbalagem = Range("J" & numRow)
+    Set rVlrTotalEmbalagem = Range("K" & numRow)
+    Set rTotal = Range("L" & numRow)
+        
+    rCod.Value = cod
+    rDesc.Value = desc
+    rQtd.Value = qtd
+    rVlrUnit.Value = vlrUnit
+    rVlrTotal.Formula = "=sum(E" & numRow & "*F" & numRow & ")"  'WorksheetFunction.Sum(rVlrUnit * rQtd)
+    rTipoEmabalagem.Value = tipoEmabalagem
+    rVlrEmbalagem.Value = vlrEmbalagem
+    rVlrTotalEmbalagem.Formula = "=sum(E" & numRow & "*J" & numRow & ")"  'WorksheetFunction.Sum(rVlrEmbalagem * rQtd)
+    rTotal.Formula = "=sum(G" & numRow & "+K" & numRow & ")"  'WorksheetFunction.Sum(rVlrTotal * rVlrTotalEmbalagem)
+        
+End Sub
+
+

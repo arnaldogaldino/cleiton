@@ -1,0 +1,44 @@
+﻿@{
+    var id_select = string.Empty;
+    var readOnly = string.Empty;
+    var domain = string.Empty;
+    var value = string.Empty;
+    
+    var selecione = "<option value=''>Selecione...</option>";
+    IQueryable<ProjectMaster.Data.pm_domain> queryDomain = (IQueryable<ProjectMaster.Data.pm_domain>)ProjectMaster.Core.Context.Domain;
+    ProjectMaster.Data.pm_domain daoDomain = new ProjectMaster.Data.pm_domain();
+
+    if (!string.IsNullOrEmpty(Model.id_select))
+    {
+        id_select = Model.id_select;
+    }
+
+    if (string.IsNullOrEmpty(Model.readOnly))
+    {
+        readOnly = Model.id_select;
+    }
+
+    if (!string.IsNullOrEmpty(Model.domain))
+    {
+        domain = Model.domain;
+        daoDomain = (from d in queryDomain where d.domain_name == domain select d).FirstOrDefault();
+    }
+
+    if (!Model.selecione)
+    {
+        selecione = string.Empty;
+    }
+
+    if (!Model.value)
+    {
+        value = string.Empty;
+    } 
+}
+
+ <select id="id_select" name="id_select" @readOnly>
+    @selecione
+    @foreach (var d in daoDomain.pm_domain_value)
+    {
+        <option value="@d.domain_value" @(d.domain_value == value ? "selected='selected'" : "")>@d.label</option>
+    }
+</select>

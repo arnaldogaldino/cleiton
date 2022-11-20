@@ -1,0 +1,15 @@
+﻿@using MvcJqGrid
+@using MvcJqGrid.Enums
+
+@(Html.Grid("gridCentroDeCusto")
+    .SetCaption("Centro de Custos")
+    .AddColumn(new Column("id").SetHidden(true))
+    .AddColumn(new Column("ds_codigo").SetLabel("Código").SetWidth(245).SetFixedWidth(true))
+    .AddColumn(new Column("ds_descricao").SetLabel("Descrição").SetWidth(900).SetFixedWidth(true))
+    .AddColumn(new Column("acoes").SetLabel("Ações").SetSearch(false).SetCustomFormatter("CriarBotoesCentroDeCusto"))
+    .SetUrl(Url.Action("ProcurarGrid", "CentroDeCusto")).SetAutoWidth(true).SetRowNum(20)
+    .SetRowList(new[] { 10, 15, 20, 50 }).SetViewRecords(true).SetPager("pager").SetSearchToolbar(true)
+    .SetSearchOnEnter(false)
+    .SetToolbar(true)
+    .SetToolbarPosition(ToolbarPosition.Bottom))
+<script src="@Url.Content("~/Scripts/MeusScripts/paginas/CentroDeCusto/procurar.js")" type="text/javascript"></script>

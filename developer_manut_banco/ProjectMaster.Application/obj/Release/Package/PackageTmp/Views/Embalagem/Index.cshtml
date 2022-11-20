@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Cadastro de Embalagem";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Embalagem.", "Cadastrar nova Embalagem.", "CadastrarNovo", "", Url.Content("~/Embalagem/Embalagem?acao=New"), true, true));
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar.", "Voltar", "", Url.Content("~/Home/Index"), true, true));
+
+    var queryEmbalagem = (IQueryable<ProjectMaster.Data.pm_embalagem>)ViewData["queryEmbalagem"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>ID</span> 
+                </th>
+                <th width="150px" align="center">
+                    <span>Tipo Embalagem</span> 
+                </th>
+                <th>
+                    <span>Valor</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (ProjectMaster.Data.pm_embalagem linha in queryEmbalagem)
+        {
+            <tr id='lin@(linha.id_embalagem.ToString())' class="@classRow">
+                <td>
+                    <span>@linha.id_embalagem</span>
+                </td>
+                <td>
+                    <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.TipoEmbalagem, linha.dm_tipo_embalagem)</span>
+                </td>
+                <td>
+                    <span>R$ @linha.valor.ToString("n2")</span>
+                </td>
+                <td align="center">
+                    <div style='width: 100px'> 
+                        <a href='@Url.Action("Embalagem", "Embalagem", new { acao = "View", id_embalagem = linha.id_embalagem})' title="Editar"> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                        <a href="JavaScript:delete_file('@linha.id_embalagem','Embalagem','rows')" title="Excluir"> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> </div>
+                </td>
+            </tr>        
+             if (classRow == "webgrid-alternating-rows")
+             {
+                 classRow = "webgrid-rows";
+             }
+             else
+             {
+                 classRow = "webgrid-alternating-rows";
+             }
+        }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div id="dialog-confirm" title="Embalagem" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Embalagem?</p>
+</div>

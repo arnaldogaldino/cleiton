@@ -1,0 +1,46 @@
+﻿@model ProjectMaster.Application.Models.TelefoneModel
+<script src="@Url.Content("~/Scripts/MeusScripts/paginas/telefone/index.js")" type="text/javascript"></script>
+@using MvcJqGrid
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "formTelefone" }))
+{
+    @Html.HiddenFor(model => model.proximoId, new { @id = "tell_proximoId" })
+    @Html.Hidden("id_edicao", "", new { @id = "id_edicao" })
+    
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Telefones</legend>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.dm_tipo_telefone)
+            @Html.DropDownListFor(model => model.dm_tipo_telefone, (SelectList)ViewBag.TipoTelefone)
+            @Html.ValidationMessageFor(model => model.dm_tipo_telefone)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.nr_telefone)
+            @Html.EditorFor(model => model.nr_telefone)
+            @Html.ValidationMessageFor(model => model.nr_telefone)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.nm_contato)
+            @Html.EditorFor(model => model.nm_contato)
+            @Html.ValidationMessageFor(model => model.nm_contato)
+        </div>
+        <br />
+        <p>
+            <input type="button" id="btnEdtTelefone" value="Editar" />
+            <input type="button" id="btnAddTelefone" value="Adicionar" />
+        </p>
+    </fieldset>
+    @(Html.Grid("gridTelefone")
+    .SetCaption("Telefones")
+    .AddColumn(new Column("id").SetKey(true).SetHidden(true))
+    .AddColumn(new Column("dm_tipo_telefone").SetHidden(true))
+    .AddColumn(new Column("ds_tipo_telefone").SetLabel("Tipo de Telefone"))
+    .AddColumn(new Column("nr_telefone").SetLabel("Telefone"))
+    .AddColumn(new Column("nm_contato").SetLabel("Contato"))
+    .AddColumn(new Column("acoes").SetLabel("Ações").SetCustomFormatter("CriarBotoesTelefone"))
+    .SetAutoWidth(true).SetRowNum(20)
+    .SetUrl(Url.Action("Procurar", "Telefone", new { idPessoa = Model.id_pessoa }))
+    .SetRowList(new[] { 10, 15, 20, 50 }).SetViewRecords(true))
+}
+
+

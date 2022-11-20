@@ -1,0 +1,17 @@
+﻿@using MvcJqGrid
+@using MvcJqGrid.Enums
+
+@(Html.Grid("gridProduto")
+    .SetCaption("Pesquisar Produto")
+    .AddColumn(new Column("cprod").SetHidden(true))
+    .AddColumn(new Column("cprod").SetLabel("Código do Produto").SetWidth(170).SetFixedWidth(true))
+    .AddColumn(new Column("xprod").SetLabel("Descrição do Produto").SetWidth(170).SetFixedWidth(true))
+    .AddColumn(new Column("acoes").SetLabel("Ações").SetSearch(false).SetCustomFormatter("CriarBotoesProduto")
+    .SetWidth(100).SetFixedWidth(true))
+    .SetUrl(Url.Action("ProcurarProduto", "Produto")).SetAutoWidth(true).SetRowNum(20)
+    .SetRowList(new[] { 10, 15, 20, 50 }).SetViewRecords(true).SetPager("pager").SetSearchToolbar(true)
+    .SetSearchOnEnter(false)
+    .SetToolbar(true)
+    .SetToolbarPosition(ToolbarPosition.Bottom))
+
+<script src="@Url.Content("~/Scripts/MeusScripts/paginas/produto/procurar.js")" type="text/javascript"></script>

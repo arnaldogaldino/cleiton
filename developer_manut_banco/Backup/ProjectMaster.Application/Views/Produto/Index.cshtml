@@ -1,0 +1,107 @@
+﻿@model ProjectMaster.Application.Models.ProdutoModels
+@{
+    ViewBag.Title = "Cadastro de Produto";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Produto.", "Cadastrar novo Produto.", "CadastrarNovo", "", Url.Content("~/Produto/Produto?acao=New"), true, true));
+
+    var queryProduto = (IQueryable<ProjectMaster.Data.pm_produto>)ViewData["queryProduto"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+
+
+@using (Html.BeginForm("Index", "Produto", FormMethod.Post, new { id = "formulario_procurar", name = "formulario_procurar" }))
+{           
+    <fieldset title="Procurar">
+    <legend>Procurar</legend>  
+    <table width="100%">
+        <tr>
+            <td>
+                <label class="normal">Código:</label>
+                <input type="text" value="@Model.cprod" id="cprod" name="cprod" size="25" maxlength="25" />
+                        
+                <label class="normal">Descrição:</label>
+                <input type="text" value="@Model.xprod" id="xprod" name="xprod" size="25" maxlength="80" />
+            </td>
+            <td align="right" valign="top">
+                <input id="procurar" name="procurar" type="submit" value="Procurar" />
+            </td>
+        </tr>
+    </table>
+    </fieldset>
+        <script type="text/javascript">
+            $(function () {
+                $("#procurar").button();
+            });
+        </script>
+}
+
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>ID</span> 
+                </th>
+                <th width="50px">
+                    <span>Código</span> 
+                </th>
+                <th>
+                    <span>Descrição</span>
+                </th>
+                <th>
+                    <span>Preço R$</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (queryProduto != null)
+        {
+            foreach (ProjectMaster.Data.pm_produto linha in queryProduto)
+            {
+            <tr id='lin@(linha.id_produto.ToString())' class="@classRow">
+                <td>
+                    <span>@linha.id_produto</span>
+                </td>
+                <td>
+                    <span>@linha.cprod</span>
+                </td>
+                <td>
+                    <span>@linha.xprod</span>
+                </td>
+                <td align="right">
+                    <span>R$ @(linha.vuncom != null ? linha.vuncom.Value.ToString("n2") : "0,00") </span>
+                </td>
+                <td align="center">
+                    <div style='width: 100px'> 
+                        <a href='@Url.Action("Produto", "Produto", new { acao = "View", id_produto = linha.id_produto })'> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                        <a href='JavaScript:delete_produto("@linha.id_produto")'> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> </div>
+                </td>
+            </tr>        
+                if (classRow == "webgrid-alternating-rows")
+                {
+                    classRow = "webgrid-rows";
+                }
+                else
+                {
+                    classRow = "webgrid-alternating-rows";
+                }
+            }
+        }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div id="dialog-confirm" title="Produto" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Produto?</p>
+</div>

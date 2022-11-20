@@ -1,0 +1,4 @@
+D:\projetos\ceasa\project\branches\developer\References\log4net-1.2.11\build\bin\net\1.0\release\log4net.dll
+D:\projetos\ceasa\project\branches\developer\References\log4net-1.2.11\build\bin\net\1.0\release\log4net.xml
+D:\projetos\ceasa\project\branches\developer\References\log4net-1.2.11\src\obj\Release\ResolveAssemblyReference.cache
+D:\projetos\ceasa\project\branches\developer\References\log4net-1.2.11\src\obj\Release\log4net.dll

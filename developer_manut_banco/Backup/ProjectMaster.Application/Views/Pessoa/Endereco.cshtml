@@ -1,0 +1,472 @@
+﻿@model IEnumerable<ProjectMaster.Application.Models.PessoaModels.EnderecoModels>
+@{
+    Layout = null;
+
+    var classRow = "webgrid-rows";
+    int row_num = 0;
+    var read_only = "";
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        read_only = "readonly='readonly'";
+    }
+}
+    <fieldset title="Endereco" id="Endereco" name="Endereco">
+        <legend>Endereco</legend>    
+               
+        <input type="hidden" value="" id="cp_id_pessoa_endereco" name="id_pessoa_endereco" />
+        <input type="hidden" value="" id="cp_id_pessoa" name="id_pessoa" />
+
+        <input type="hidden" value="-1" id="grid_linha_num" name="grid_linha_num" />
+
+        <label class="normal">Tipo Endereço:</label>
+        @if (string.IsNullOrEmpty(read_only))
+        { 
+            @Html.DropDownList("cp_dm_tipo_endereco", ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoEndereco, true), new { id = "cp_dm_tipo_endereco" });
+        }
+        else
+        { 
+            @Html.DropDownList("cp_dm_tipo_endereco", ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoEndereco, true), new { disabled = "disabled", id = "cp_dm_tipo_endereco" });
+        }
+        @Html.ValidationMessage("dm_tipo_endereco", "*")
+
+        <label class="normal">Cep:</label>
+        <input type="text" value="" id="cp_nr_cep" name="cp_nr_cep" size="8" maxlength="8" @read_only alt="number8" />
+        @Html.ValidationMessage("nr_cep", "*")
+
+        <br />
+
+        <label class="normal">Logradouro:</label>
+        <input type="text" value="" id="cp_nm_endereco" name="cp_nm_endereco" size="65" maxlength="60" @read_only />
+        @Html.ValidationMessage("nm_endereco", "*")
+
+        <label class="normal">Numero:</label>
+        <input type="text" value="" id="cp_nr_numero" name="cp_nr_numero" size="15" maxlength="10" @read_only />
+        @Html.ValidationMessage("nr_numero", "*")
+
+        <br />
+        
+        <label class="normal">Complemento:</label>
+        <input type="text" value="" id="cp_ds_complemento" name="cp_ds_complemento" size="30" maxlength="60" @read_only />
+
+        <label class="normal">Bairro:</label>
+        <input type="text" value="" id="cp_ds_bairro" name="cp_ds_bairro" size="35" maxlength="30" @read_only />
+        @Html.ValidationMessage("ds_bairro", "*")
+
+        <br />
+
+        <label class="normal">Código Município:</label>
+        <input type="text" value="" id="cp_codigo_municipio" name="cp_codigo_municipio" size="15" maxlength="10" @read_only />
+        @Html.ValidationMessage("codigo_municipio", "*")
+
+        <br />
+
+        <label class="normal">Município:</label>
+        <input type="text" value="" id="cp_municipio" name="cp_municipio" size="25" maxlength="50" @read_only />
+        @Html.ValidationMessage("municipio", "*")
+
+        <label class="normal">UF:</label>
+        @if (string.IsNullOrEmpty(read_only))
+        { 
+            @Html.DropDownList("cp_ds_uf", ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.Uf, true), new { id = "cp_ds_uf" });
+        }
+        else
+        { 
+            @Html.DropDownList("cp_ds_uf", ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.Uf, true), new { disabled = "disabled", id = "cp_ds_uf" });
+        }
+        @Html.ValidationMessage("ds_uf", "*")
+
+        <label class="normal">Pais:</label>
+        <input type="text" value="" id="cp_nr_codigo_pais" name="cp_nr_codigo_pais" size="35" maxlength="25" @read_only />
+        @Html.ValidationMessage("nr_codigo_pais", "*")
+                        
+        @if (string.IsNullOrEmpty(read_only))
+        {
+        <input id="gravar_endereco" name="gravar_endereco" type="button" value="Gravar" />
+        }
+        <br />
+        
+        <div id="ValidEndereco" class="validation-summary-valid" data-valmsg-summary="true"> </div>
+
+    <table id="grid_endereco" class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    <span>Tipo Endereço</span> 
+                </th>
+                <th>
+                    <span>Cep</span> 
+                </th>
+                <th>
+                    <span>Logradouro</span> 
+                </th>
+                <th>
+                    <span>Numero</span> 
+                </th>
+                <th>
+                    <span>Complemento</span> 
+                </th>
+                <th>
+                    <span>Bairro</span> 
+                </th>
+                <th>
+                    <span>Código Município</span> 
+                </th>
+                <th>
+                    <span>Município</span> 
+                </th>
+                <th>
+                    <span>UF</span> 
+                </th>
+                <th>
+                    <span>Pais</span> 
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var linha in Model)
+        {
+            <tr id='row_@(row_num.ToString())' class="@classRow">
+                <td>
+                    <input id="id_pessoa_endereco_@(row_num.ToString())" name="Endereco[@(row_num.ToString())].id_pessoa_endereco" type="hidden" value="@linha.id_pessoa_endereco" /> 
+                    <input id="id_pessoa_@(row_num.ToString())" name="Endereco[@(row_num.ToString())].id_pessoa" type="hidden" value="@linha.id_pessoa" /> 
+
+                    <input id="dm_tipo_endereco@(row_num.ToString())" name="Endereco[@(row_num.ToString())].dm_tipo_endereco" type="hidden" value="@linha.dm_tipo_endereco" /> 
+                    <input id="nr_cep@(row_num.ToString())" name="Endereco[@(row_num.ToString())].nr_cep" type="hidden" value="@linha.nr_cep" /> 
+                    <input id="nm_endereco@(row_num.ToString())" name="Endereco[@(row_num.ToString())].nm_endereco" type="hidden" value="@linha.nm_endereco" /> 
+                    <input id="nr_numero@(row_num.ToString())" name="Endereco[@(row_num.ToString())].nr_numero" type="hidden" value="@linha.nr_numero" /> 
+                    <input id="ds_complemento@(row_num.ToString())" name="Endereco[@(row_num.ToString())].ds_complemento" type="hidden" value="@linha.ds_complemento" /> 
+                    <input id="ds_bairro@(row_num.ToString())" name="Endereco[@(row_num.ToString())].ds_bairro" type="hidden" value="@linha.ds_bairro" /> 
+                    <input id="codigo_municipio@(row_num.ToString())" name="Endereco[@(row_num.ToString())].codigo_municipio" type="hidden" value="@linha.codigo_municipio" /> 
+                    <input id="municipio@(row_num.ToString())" name="Endereco[@(row_num.ToString())].municipio" type="hidden" value="@linha.municipio" /> 
+                    <input id="ds_uf@(row_num.ToString())" name="Endereco[@(row_num.ToString())].ds_uf" type="hidden" value="@linha.ds_uf" /> 
+                    <input id="nr_codigo_pais@(row_num.ToString())" name="Endereco[@(row_num.ToString())].nr_codigo_pais" type="hidden" value="@linha.nr_codigo_pais" /> 
+
+                    <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.TipoEndereco, linha.dm_tipo_endereco)</span>
+                </td>
+                <td>
+                    <span>@linha.nr_cep</span>
+                </td>
+                <td>
+                    <span>@linha.nm_endereco</span>
+                </td>
+                <td>
+                    <span>@linha.nr_numero</span>
+                </td>
+                <td>
+                    <span>@linha.ds_complemento</span>
+                </td>
+                <td>
+                    <span>@linha.ds_bairro</span>
+                </td>
+                <td>
+                    <span>@linha.codigo_municipio</span>
+                </td>
+                <td>
+                    <span>@linha.municipio</span>
+                </td>                
+                <td>
+                    <span>@linha.ds_uf</span>
+                </td>
+                <td>
+                    <span>@linha.nr_codigo_pais</span>
+                </td>                
+                <td align="center">
+                    <div style='width: 100px'> 
+                        @if (string.IsNullOrEmpty(read_only))
+                        {
+                            <a href='JavaScript:edit_pessoa_endereco(0,@row_num)'> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                            <a href='JavaScript:delete_pessoa_endereco(0,@row_num)'> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> 
+                        }
+                        else
+                        {
+                            <img src='@Url.Content("~/Content/images/edit.png")'/> 
+                            <img src='@Url.Content("~/Content/images/delete.png")'/>
+                        }
+                    </div>
+                </td>
+            </tr>
+            if (classRow == "webgrid-alternating-rows")
+            {
+                classRow = "webgrid-rows";
+                row_num = row_num + 1;
+            }
+            else
+            {
+                classRow = "webgrid-alternating-rows";
+                row_num = row_num + 1;
+            }
+        }
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#gravar_endereco").button().click(function (event) {
+
+                ShowLoad();
+                var enderecosRows = $("#grid_endereco > tbody").find("tr");
+                classRow = "";
+                row_num = (enderecosRows.length);
+
+                if (!validFormEndereco())
+                    return;
+
+                if (row_num % 2 == 0) {
+                    classRow = "webgrid-alternating-rows";
+                }
+                else {
+                    classRow = "webgrid-rows";
+                }
+
+                if ($("#grid_linha_num").val() != "-1") {
+                    row_num = $("#grid_linha_num").val();
+                }
+
+                new_rows = '' +
+                            '<tr id="row_' + row_num + '" class="' + classRow + '">' +
+                            '    <td>' +
+                                '	<input id="id_pessoa_endereco' + row_num + '" name="Endereco[' + row_num + '].id_pessoa_endereco" type="hidden" value="' + $("#cp_id_pessoa_endereco").val() + '" /> ' +
+                                '	<input id="id_pessoa' + row_num + '" name="Endereco[' + row_num + '].id_pessoa" type="hidden" value="' + $("#cp_id_pessoa").val() + '" /> ' +
+                                '	<input id="dm_tipo_endereco' + row_num + '" name="Endereco[' + row_num + '].dm_tipo_endereco" type="hidden" value="' + $("#cp_dm_tipo_endereco").val() + '" /> ' +
+                                '	<input id="nr_cep' + row_num + '" name="Endereco[' + row_num + '].nr_cep" type="hidden" value="' + $("#cp_nr_cep").val() + '" /> ' +
+                                '	<input id="nm_endereco' + row_num + '" name="Endereco[' + row_num + '].nm_endereco" type="hidden" value="' + $("#cp_nm_endereco").val() + '" /> ' +
+                                '	<input id="nr_numero' + row_num + '" name="Endereco[' + row_num + '].nr_numero" type="hidden" value="' + $("#cp_nr_numero").val() + '" /> ' +
+                                '	<input id="ds_complemento' + row_num + '" name="Endereco[' + row_num + '].ds_complemento" type="hidden" value="' + $("#cp_ds_complemento").val() + '" /> ' +
+                                '	<input id="ds_bairro' + row_num + '" name="Endereco[' + row_num + '].ds_bairro" type="hidden" value="' + $("#cp_ds_bairro").val() + '" /> ' +
+                                '	<input id="codigo_municipio' + row_num + '" name="Endereco[' + row_num + '].codigo_municipio" type="hidden" value="' + $("#cp_codigo_municipio").val() + '" /> ' +
+                                '	<input id="municipio' + row_num + '" name="Endereco[' + row_num + '].municipio" type="hidden" value="' + $("#cp_municipio").val() + '" /> ' +
+                                '	<input id="ds_uf' + row_num + '" name="Endereco[' + row_num + '].ds_uf" type="hidden" value="' + $("#cp_ds_uf").val() + '" /> ' +
+                                '	<input id="nr_codigo_pais' + row_num + '" name="Endereco[' + row_num + '].nr_codigo_pais" type="hidden" value="' + $("#cp_nr_codigo_pais").val() + '" /> ' +
+                                '' +
+                                '        <span>' + $('select[name="cp_dm_tipo_endereco"] option:selected').text() + '</span>' +
+                                '</td>' +
+                                '<td>' +
+                                '	<span>' + $("#cp_nr_cep").val() + '</span>' +
+                                '</td>' +
+                                '<td>' +
+                                '	<span>' + $("#cp_nm_endereco").val() + '</span>' +
+                                '</td>' +
+                                '<td>' +
+                                '	<span>' + $("#cp_nr_numero").val() + '</span>' +
+                                '</td>' +
+                                '<td>' +
+                                '	<span>' + $("#cp_ds_complemento").val() + '</span>' +
+                                '</td>' +
+                                '<td>' +
+                                '	<span>' + $("#cp_ds_bairro").val() + '</span>' +
+                                '</td>' +
+                                '<td>' +
+                                '	<span>' + $("#cp_codigo_municipio").val() + '</span>' +
+                                '</td>' +
+                                '<td>' +
+                                '	<span>' + $("#cp_municipio").val() + '</span>' +
+                                '</td>' +
+                                '<td>' +
+                                '	<span>' + $("#cp_ds_uf").val() + '</span>' +
+                                '</td>' +
+                                '<td>' +
+                                '	<span>' + $("#cp_nr_codigo_pais").val() + '</span>' +
+                                '</td>' +
+                            '    <td align="center">' +
+                            '        <div style="width: 100px"> ' +
+                            '            <a href="JavaScript:edit_pessoa_endereco(0,' + row_num + ')"> <img src="@Url.Content("~/Content/images/edit.png")"/> </a>  ' +
+                            '            <a href="JavaScript:delete_pessoa_endereco(0,' + row_num + ')"> <img src="@Url.Content("~/Content/images/delete.png")"/> </a> ' +
+                            '        </div>' +
+                            '    </td>' +
+                            '</tr>';
+
+                if ($("#grid_linha_num").val() == "-1") {
+                    $('#grid_endereco > tbody:last').append(new_rows);
+                } else {
+
+                    var enderecosRows = $("#grid_endereco > tbody").find("tr#row_" + row_num);
+                    enderecosRows.find("#dm_tipo_endereco" + row_num).val("DL");
+
+                    $("#grid_endereco > tbody").find('#row_' + row_num).fadeOut("slow", function () {
+                        $("#grid_endereco > tbody").find('#row_' + row_num).attr("style", "display:none");
+                        enderecosRows.remove();
+                        $("#grid_endereco > tbody").append(new_rows);
+                    });
+                }
+                HideLoad();
+                clear_endereco();
+                
+            });
+        });
+
+        function validFormEndereco() {
+            const_erro = false;
+            msg = "";
+ 
+            if ($("#cp_dm_tipo_endereco").val() == "") {
+                $('span[data-valmsg-for="dm_tipo_endereco"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Tipo Endereço) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="dm_tipo_endereco"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#cp_nr_cep").val() == "") {
+                $('span[data-valmsg-for="nr_cep"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Cep) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="nr_cep"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#cp_nm_endereco").val() == "") {
+                $('span[data-valmsg-for="nm_endereco"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Logradouro) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="nm_endereco"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#cp_nr_numero").val() == "") {
+                $('span[data-valmsg-for="nr_numero"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Numero) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="nr_numero"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#cp_ds_complemento").val() == "") {
+                $('span[data-valmsg-for="ds_complemento"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Complemento) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="ds_complemento"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#cp_ds_bairro").val() == "") {
+                $('span[data-valmsg-for="ds_bairro"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Bairro) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="ds_bairro"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#cp_codigo_municipio").val() == "") {
+                $('span[data-valmsg-for="codigo_municipio"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Código Município) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="codigo_municipio"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#cp_municipio").val() == "") {
+                $('span[data-valmsg-for="municipio"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Município) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="municipio"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#cp_ds_uf").val() == "") {
+                $('span[data-valmsg-for="ds_uf"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (UF) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="ds_uf"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#cp_nr_codigo_pais").val() == "") {
+                $('#Endereco > span[data-valmsg-for="nr_codigo_pais"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Pais) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="nr_codigo_pais"]').attr('class', "field-validation-valid");
+            }
+            
+            if (const_erro == true) {
+                $('#ValidEndereco').html("<ul>" + msg + "</ul>");
+                HideLoad();
+                return false;
+            }
+            else {
+                $('#ValidEndereco').html("");
+                return true;
+            }
+        }
+
+        function clear_endereco() {
+            $("#cp_id_pessoa_endereco").val("");
+            $("#cp_id_pessoa").val("");
+
+            $("#cp_dm_tipo_endereco").val("");
+            $("#cp_nr_cep").val("");
+            $("#cp_nm_endereco").val("");
+            $("#cp_nr_numero").val("");
+            $("#cp_ds_complemento").val("");
+            $("#cp_ds_bairro").val("");
+            $("#cp_codigo_municipio").val("");
+            $("#cp_municipio").val("");
+            $("#cp_ds_uf").val("");
+            $("#cp_nr_codigo_pais").val("");
+            $("#grid_linha_num").val("-1");
+        }
+
+        function edit_pessoa_endereco(id_pessoa_endereco, row) {
+            ShowLoad();
+            var enderecosRows = $("#grid_endereco > tbody").find("tr#row_" + row);
+
+            clear_endereco();
+
+            $("#cp_id_pessoa_endereco").val(enderecosRows.find("#id_pessoa_endereco_" + row).val());
+            $("#cp_id_pessoa").val(enderecosRows.find("#id_pessoa_" + row).val());
+
+            $("#cp_dm_tipo_endereco").val(enderecosRows.find("#dm_tipo_endereco" + row).val());
+            $("#cp_nr_cep").val(enderecosRows.find("#nr_cep" + row).val());
+            $("#cp_nm_endereco").val(enderecosRows.find("#nm_endereco" + row).val());
+            $("#cp_nr_numero").val(enderecosRows.find("#nr_numero" + row).val());
+            $("#cp_ds_complemento").val(enderecosRows.find("#ds_complemento" + row).val());
+            $("#cp_ds_bairro").val(enderecosRows.find("#ds_bairro" + row).val());
+            $("#cp_codigo_municipio").val(enderecosRows.find("#codigo_municipio" + row).val());
+            $("#cp_municipio").val(enderecosRows.find("#municipio" + row).val());
+            $("#cp_ds_uf").val(enderecosRows.find("#ds_uf" + row).val());
+            $("#cp_nr_codigo_pais").val(enderecosRows.find("#nr_codigo_pais" + row).val());
+            $("#grid_linha_num").val(row);
+
+            HideLoad();
+        }
+
+        function delete_pessoa_endereco(id_pessoa_endereco, row) {
+            if (id_pessoa_endereco == 0) {
+                clear_endereco();
+
+                var enderecosRows = $("#grid_endereco > tbody").find("tr#row_" + row);
+                enderecosRows.find("#dm_tipo_endereco" + row).val("DL");
+
+                $("#grid_endereco > tbody").find('#row_' + row).fadeOut("slow", function () {
+                    $("#grid_endereco > tbody").find('#row_' + row).attr("style", "display:none");
+                });
+            }
+        }
+    </script>
+    </fieldset>

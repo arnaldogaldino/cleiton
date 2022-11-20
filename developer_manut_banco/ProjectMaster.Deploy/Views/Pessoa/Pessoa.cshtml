@@ -1,0 +1,236 @@
+﻿@model ProjectMaster.Application.Models.PessoaModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de Pessoa ( Cliente / Fornecedor / Transportadora )";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Pessoa.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Pessoa/Pessoa?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Pessoa.", "Editar Pessoa.", "editar", "", Url.Content("~/Pessoa/Pessoa?acao=Edit&id_pessoa=" + Model.id_pessoa), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Pessoa.", "Excluir Pessoa.", "excluir", "", Url.Content("~/Pessoa/Pessoa"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Pessoa.", "Gravar Pessoa.", "gravar", "", "javascript:ShowLoad();$('#formulario_pessoa').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Pessoa/Pessoa"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Pessoa/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Pessoa.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Pessoa/Pessoa?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Pessoa.", "Editar Pessoa.", "editar", "", Url.Content("~/Pessoa/Pessoa?acao=Edit&id_pessoa=" + Model.id_pessoa), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Pessoa.", "Excluir Pessoa.", "excluir", "", "JavaScript:delete_file(" + Model.id_pessoa + ",'Pessoa','form')", true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Pessoa.", "Gravar Pessoa.", "gravar", "", "javascript:ShowLoad();$('#formulario_pessoa').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Pessoa/Pessoa?acao=View&id_pessoa=" + Model.id_pessoa), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Pessoa/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Pessoa.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Pessoa/Pessoa?acao=New"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Pessoa.", "Editar Pessoa.", "editar", "", Url.Content("~/Pessoa/Pessoa?acao=Edit&id_pessoa=" + Model.id_pessoa), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Pessoa.", "Excluir Pessoa.", "excluir", "", "JavaScript:delete_file(" + Model.id_pessoa + ",'Pessoa','form')", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Pessoa.", "Gravar Pessoa.", "gravar", "", Url.Content("~/Pessoa/Pessoa"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Pessoa/Pessoa"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Pessoa/Index"), true, true));
+
+        if (Model.dm_tipo_pessoa.Equals("C", StringComparison.OrdinalIgnoreCase))
+        {
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Separador, string.Empty, string.Empty, string.Empty, "", string.Empty, true, true));
+
+            //Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excel, "Exportar Extrato", "Exportar Extrato.", "exportar_extrato", "", Url.Content("~/Pessoa/ExportExtrato?id_pessoa=" + Model.id_pessoa), true, true));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excel, "Exportar Extrato", "Exportar Extrato.", "exportar_extrato", "ShowExportExtrato('" + Url.Content("~/Pessoa/ExportExtrato") + "','" + Model.id_pessoa + "')", string.Empty, true, true));
+        }
+
+        read_only = "readonly='readonly'";
+    }
+}
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    @using (Html.BeginForm("Pessoa", "Pessoa", FormMethod.Post, new { id = "formulario_pessoa", name = "formulario_pessoa" }))
+    {   
+        <fieldset title="Cliente / Fornecedor / Transportadora">
+            <legend>Cliente / Fornecedor / Transportadora</legend>
+
+            <label class="normal">Id:</label>
+            <input type="text" value="@Model.id_pessoa" id="id_pessoa" name="id_pessoa" size="7" maxlength="6" readonly="readonly" />
+            <input type="hidden" value="@Model.id_filial" id="id_filial" name="id_filial" />
+
+            <label class="normal">Data Cadastro:</label>
+            <input type="text" value="@(Model.dt_cadastro != DateTime.MinValue ? Model.dt_cadastro.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy"))" id="dt_cadastro" name="dt_cadastro" size="10" maxlength="10" readonly="readonly" />
+
+            <br />
+
+            <label class="normal">Marca / Código:</label>
+            <input type="text" value="@Model.ds_marca" id="ds_marca" name="ds_marca" size="30" maxlength="25" @read_only />
+            @Html.ValidationMessage("ds_marca", "*")
+
+            <label class="normal">Tipo Cadastro:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.dm_tipo_pessoa, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoCliente, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.dm_tipo_pessoa, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoCliente, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("dm_tipo_pessoa", "*")
+
+            <br />
+
+            <label class="normal">Razão Social:</label>
+            <input type="text" value="@Model.ds_razao_social" id="ds_razao_social" name="ds_razao_social" size="80" maxlength="60" @read_only />
+            @Html.ValidationMessage("ds_razao_social", "*")
+
+            <br />
+
+            <label class="normal">Nome Fantasia:</label>
+            <input type="text" value="@Model.ds_nome_fantasia" id="ds_nome_fantasia" name="ds_nome_fantasia" size="80" maxlength="60" @read_only />
+
+            <br />
+
+            <label class="normal">Tipo Documento:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.dm_tipo_documento, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoDocumento, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.dm_tipo_documento, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoDocumento, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("dm_tipo_documento", "*")
+
+            <label class="normal">Número Documento:</label>
+            <input type="text" value="@Model.nr_documento" id="nr_documento" name="nr_documento" size="20" maxlength="14" @read_only />
+            @Html.ValidationMessage("nr_documento", "*")
+
+            <br />
+
+            <label class="normal">Inscrição Estadual:</label>
+            <input type="text" value="@Model.nr_ie" id="nr_ie"" name="nr_ie" size="20" maxlength="14" @read_only />
+            @Html.ValidationMessage("nr_ie", "*")
+
+            <label class="normal">Inscrição SUFRAMA:</label>
+            <input type="text" value="@Model.nr_inscricao_suframa" id="nr_inscricao_suframa"" name="nr_inscricao_suframa" size="10" maxlength="9" @read_only />
+            
+            <br />
+
+            <label class="normal">Tipo do Cliente para Crédito:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.dm_tipo_cliente_credito, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoClienteCredito, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.dm_tipo_cliente_credito, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoClienteCredito, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("dm_tipo_cliente_credito", "*")
+
+            <label class="normal">Limite de Crédito:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.dm_limite_credito, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.LimiteCredito, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.dm_limite_credito, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.LimiteCredito, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("dm_limite_credito", "*")
+
+            <label class="normal">Venda Agendada:</label>
+
+            @if(Model.venda_agendada)
+            {
+                <input type="checkbox" checked="checked" id="venda_agendada" name="venda_agendada" @(read_only != string.Empty ? "disabled='disabled'" : "") />
+            }
+            else
+            {
+                <input type="checkbox" value="" id="venda_agendada" name="venda_agendada" @(read_only != string.Empty ? "disabled='disabled'" : "") />
+            }
+
+        </fieldset>  
+    
+        @Html.ValidationSummary()
+
+        @Html.Action("Endereco", "Pessoa", new { enderecos = Model == null ? null : Model.Endereco, acao = acao })
+
+        @Html.Action("Telefone", "Pessoa", new { telefones = Model == null ? null : Model.Telefone, acao = acao })
+    
+        @Html.Action("ContaCorrente", "Pessoa", new { conta_corrente = Model == null ? null : Model.ContaCorrente, acao = acao })
+    
+        <br />
+    }
+</div>
+
+<script type="text/javascript">
+    function ShowExportExtrato(url, id_pessoa) {
+        $(function () {
+            $("#dialog-export-extrato").dialog({
+                resizable: false,
+                height: 140,
+                modal: true,
+                buttons: {
+                    "Exportar": function () {
+                        $(this).dialog("close");
+                        
+                        var dtaInicio = $("#data_inicio_export_extrato").val().split("/");
+                        var dtaFim = $("#data_fim_export_extrato").val().split("/");
+                        
+                        window.open(url + "?id_pessoa=" + id_pessoa + "&dtInicio=" + (dtaInicio[2] + "-" + dtaInicio[1] + "-" + dtaInicio[0]) + "&dtFim=" + (dtaFim[2] + "-" + dtaFim[1] + "-" + dtaFim[0]), "_blank", "", false);
+                    }
+                }
+            });
+        });
+    }
+</script>
+
+<div id="dialog-confirm" title="Pessoa" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Pessoa?</p>
+</div>
+
+<div id="dialog-export-extrato" title="Exportar Extrato de Pedidos do Cliente." style="display: none">
+    <center>
+        <script type="text/javascript">
+            $("#data_inicio_export_extrato").datepicker({
+              beforeShowDay: $.datepicker.noWeekends,
+              dateFormat: "dd/mm/yy",
+              dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
+              dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+              dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+              monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+              monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+            });
+            $("#data_fim_export_extrato").datepicker({
+                beforeShowDay: $.datepicker.noWeekends,
+                dateFormat: "dd/mm/yy",
+                dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
+                dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+                dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+                monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+            });
+        </script>
+
+        <label class="normal">Data:</label>
+        <input type="text" value="@(DateTime.Now.AddMonths(-1).ToString("dd/MM/yyyy"))" id="data_inicio_export_extrato" name="data_inicio_export_extrato" size="10" maxlength="10" alt="date" />
+        <label class="normal">até</label>
+        <input type="text" value="@DateTime.Now.ToString("dd/MM/yyyy")" id="data_fim_export_extrato" name="data_fim_export_extrato" size="10" maxlength="10" alt="date" />
+    </center>
+</div>

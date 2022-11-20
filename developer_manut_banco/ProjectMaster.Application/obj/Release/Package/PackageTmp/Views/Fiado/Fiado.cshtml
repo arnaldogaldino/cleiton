@@ -1,0 +1,241 @@
+﻿@model ProjectMaster.Application.Models.FiadoModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de Conta Fiado";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Conta Fiado.", "Cadastrar nova Conta Fiado", "cadastrar", "", Url.Content("~/Fiado/Fiado?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Conta Fiado.", "Editar Conta Fiado.", "editar", "", Url.Content("~/Fiado/Fiado?acao=Edit&id_fiado=" + Model.id_fiado), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Conta Fiado.", "Excluir Conta Fiado.", "excluir", "", Url.Content("~/Fiado/Fiado"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Conta Fiado.", "Gravar Conta Fiado.", "gravar", "", "javascript:ShowLoad();$('#formulario_fiado').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Fiado/Fiado"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Fiado/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Conta Fiado.", "Cadastrar nova Conta Fiado.", "cadastrar", "", Url.Content("~/Fiado/Fiado?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Conta Fiado.", "Editar Conta Fiado.", "editar", "", Url.Content("~/Fiado/Fiado?acao=Edit&id_fiado=" + Model.id_fiado), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Conta Fiado.", "Excluir Conta Fiado.", "excluir", "", "JavaScript:delete_file(" + Model.id_fiado + ",'Fiado','form')", true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Conta Fiado.", "Gravar Conta Fiado.", "gravar", "", "javascript:ShowLoad();$('#formulario_fiado').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Fiado/Fiado?acao=View&id_fiado=" + Model.id_fiado), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Fiado/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Conta Fiado.", "Cadastrar nova Conta Fiado.", "cadastro", "", Url.Content("~/Fiado/Fiado?acao=New"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Conta Fiado.", "Editar Conta Fiado.", "editar", "", Url.Content("~/Fiado/Fiado?acao=Edit&id_fiado=" + Model.id_fiado), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Conta Fiado.", "Excluir Conta Fiado.", "excluir", "", "JavaScript:delete_file(" + Model.id_fiado + ",'Estoque','form')", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Conta Fiado.", "Gravar Conta Fiado.", "gravar", "", Url.Content("~/Fiado/Fiado"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Fiado/Fiado?acao=View&id_fiado=" + Model.id_fiado), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Fiado/Index"), true, true));
+        read_only = "readonly='readonly'";
+    }
+}
+@Html.Partial("_vuToolBar", Buttons)
+<div id="main" class="main-scroll">
+    @using (Html.BeginForm("Fiado", "Fiado", FormMethod.Post, new { id = "formulario_fiado", name = "formulario_fiado" }))
+    {   
+        <fieldset title="Conta de Fiado">
+            <legend>Conta de Fiado</legend>
+            <label class="normal">Id:</label>
+            <input type="text" value="@Model.id_fiado" id="id_fiado" name="id_fiado" size="7" maxlength="6" readonly="readonly" />
+
+            <label class="normal">Emissão:</label>
+            <input type="text" value="@(Model.dta_emissao != DateTime.MinValue ? Model.dta_emissao.ToString("dd/MM/yyyy") : DateTime.Now.ToString("dd/MM/yyyy"))" id="dta_emissao" name="dta_emissao" size="10" maxlength="10" alt="date" readonly="readonly" />
+
+            <label class="normal">Pago até:</label>
+            <input type="text" value="@(Model.pago_ate != null ? Model.pago_ate.Value.ToString("dd/MM/yyyy") : "")" id="pago_ate" name="pago_ate" size="10" maxlength="10" alt="date" readonly="readonly" />
+            @Html.ValidationMessage("pago_ate", "*")
+
+            @if (string.IsNullOrEmpty(read_only))
+            {
+                <script type="text/javascript">
+                    $("#pago_ate").datepicker({
+                        beforeShowDay: $.datepicker.noWeekends,
+                        dateFormat: "dd/mm/yy",
+                        dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
+                        dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+                        dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+                        monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                        monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+                    });
+                </script>
+            }
+
+            <br />
+
+            <label class="normal">Ocorrência:</label> @Html.ValidationMessage("ocorrencia", "*")
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.RadioButtonFor(model => model.ocorrencia, "VDA") <label class="normal">	VDA - Venda </label>
+                @Html.RadioButtonFor(model => model.ocorrencia, "DCX") <label class="normal">	DCX - Devolução de Caixa </label>
+                @Html.RadioButtonFor(model => model.ocorrencia, "PFR") <label class="normal">	PFR - Pagto Frutas </label>
+                @Html.RadioButtonFor(model => model.ocorrencia, "PCX") <label class="normal">	PCX - Pagto Caixas </label>
+                @Html.RadioButtonFor(model => model.ocorrencia, "DCF") <label class="normal">	DCF - Devolução de Caixa + Pagto Frutas </label>
+                @Html.RadioButtonFor(model => model.ocorrencia, "TRC") <label class="normal">	TRC - Troco </label>
+            }
+            else
+            {
+                @Html.RadioButtonFor(model => model.ocorrencia, "VDA", new { disabled = "disabled" }) <label class="normal">	VDA - Venda </label>
+                @Html.RadioButtonFor(model => model.ocorrencia, "DCX", new { disabled = "disabled" }) <label class="normal">	DCX - Devolução de Caixa </label>
+                @Html.RadioButtonFor(model => model.ocorrencia, "PFR", new { disabled = "disabled" }) <label class="normal">	PFR - Pagto Frutas </label>
+                @Html.RadioButtonFor(model => model.ocorrencia, "PCX", new { disabled = "disabled" }) <label class="normal">	PCX - Pagto Caixas </label>
+                @Html.RadioButtonFor(model => model.ocorrencia, "DCF", new { disabled = "disabled" }) <label class="normal">	DCF - Devolução de Caixa + Pagto Frutas </label>
+                @Html.RadioButtonFor(model => model.ocorrencia, "TRC", new { disabled = "disabled" }) <label class="normal">	TRC - Troco </label>
+            }
+            
+            <br />
+
+            <label class="normal">Cliente / Fornecedor:</label>
+
+            <input type="text" value="@(Model.ds_marca)" id="ds_marca" name="ds_marca" size="20" maxlength="50" @read_only />
+            <input type="hidden" value="@Model.id_pessoa" id="id_pessoa" name="id_pessoa" />
+
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                <a href="javascript:procurar_pessoa();">
+                    <img src="@Url.Content("~/Content/images/buttons/procurar_16x16.png")" id="procurar_pessoa" alt="Procurar Cliente" width="16" height="16" />
+                </a>
+            }
+
+            <input type="text" value="@(Model.ds_razao_social)" id="ds_razao_social" name="ds_razao_social" size="60" maxlength="100" readonly="readonly" />
+            @Html.ValidationMessage("id_pessoa", "*")
+
+            <script type="text/javascript">
+                $("#ds_marca").change(function () {
+
+                    $("#ds_razao_social").val("");
+                    $("#id_pessoa").val("0");
+
+                    if ($('#ds_marca').val() == '') {
+                        $("#ds_razao_social").val("");
+                        $("#id_pessoa").val("0");
+                        return;
+                    }
+
+                    if ($('#id_pessoa').val() != '0')
+                        return;
+
+                    LookupPessoa("ds_marca", "ds_razao_social", "id_pessoa");
+                });
+
+                function procurar_pessoa() {
+                    $("#ds_marca").val("");
+                    LookupPessoa("ds_marca", "ds_razao_social", "id_pessoa");
+                }
+            </script>
+
+            <br />
+
+            <label class="normal">Débito/Credito:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.dm_tipo_dc, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoDebitoCredito, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.dm_tipo_dc, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoDebitoCredito, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("dm_tipo_dc", "*")
+
+            <label class="normal">Forma de Pagamento:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.dm_forma_pagto, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.FormaPagamento, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.dm_forma_pagto, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.FormaPagamento, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("dm_forma_pagto", "*")
+
+            <br />
+
+            <label class="normal">Qtd. Caixas:</label>
+            <input type="text" value="@Model.qtd_caixas" id="qtd_caixas" name="qtd_caixas" size="5" maxlength="5" @read_only alt="decimal9" />
+
+            <label class="normal">Valor da Caixa:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.vlr_caixa, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.ValorEmbalagem, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.vlr_caixa, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.ValorEmbalagem, true), new { disabled = "disabled" });
+            }
+
+            <label class="normal">Caixas Pagas:</label>
+            <input type="checkbox" @( (Model.caixa_pagas != null && (Model.caixa_pagas.HasValue || Model.caixa_pagas.Value)) ? "checked" : "") id="caixa_pagas" name="caixa_pagas" @(!string.IsNullOrEmpty(read_only) ? "disabled" : "") />
+
+            <br />
+
+            <label class="normal">Valor Frutas:</label>
+            <input type="text" value="@(Model.vlr_frutas.HasValue ? Model.vlr_frutas.Value.ToString("n2") : "0,00")" id="vlr_frutas" name="vlr_frutas" size="10" @read_only alt="decimal9" />
+
+            <br />
+
+            <label class="normal">Código Banco:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.banco, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.Bancos, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.banco, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.Bancos, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("banco", "*")
+
+            <label class="normal">No. Vale:</label>
+            <input type="text" value="@Model.id_pedido" id="id_pedido" name="id_pedido" size="5" maxlength="5" @read_only alt="number9" />
+
+            <br />
+
+            <label class="normal">Observação:</label>
+            <input type="text" value="@Model.obs" id="obs" name="obs" size="100" maxlength="100" @read_only />
+
+            <input type="hidden" value="@Model.obs" id="" name="" />
+
+            <input type="hidden" value="@Model.bl_excluido" id="bl_excluido" name="bl_excluido" />
+            <input type="hidden" value="@Model.id_filial" id="id_filial" name="id_filial" />
+            <input type="hidden" value="@Model.qtd_cx_poder" id="qtd_cx_poder" name="qtd_cx_poder" />
+            <input type="hidden" value="@Model.saldo_caixa" id="saldo_caixa" name="saldo_caixa" />
+            <input type="hidden" value="@Model.saldo_caixa_fisico" id="saldo_caixa_fisico" name="saldo_caixa_fisico" />
+            <input type="hidden" value="@Model.saldo_fruta" id="saldo_fruta" name="saldo_fruta" />
+            <input type="hidden" value="@Model.saldo_geral" id="saldo_geral" name="saldo_geral" />
+            <input type="hidden" value="@Model.total_caixa" id="total_caixa" name="total_caixa" />
+            <input type="hidden" value="@Model.total_fruta" id="total_fruta" name="total_fruta" />
+            <input type="hidden" value="@Model.total_venda" id="total_venda" name="total_venda" />
+            <input type="hidden" value="@Model.id_produto" id="id_produto" name="id_produto" />
+
+        </fieldset>  
+        @Html.ValidationSummary()
+    }
+</div>
+
+<div id="dialog-confirm" style="display: none" title="Entrada / Saida de Estoque">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Excluir Conta Fiado?
+    </p>
+</div>

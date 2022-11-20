@@ -1,0 +1,205 @@
+﻿@model ProjectMaster.Application.Models.PedidoModels
+@{
+    ViewBag.Title = "Cadastro de Pedidos";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Pedido.", "Cadastrar novo Pedido.", "CadastrarNovo", "", Url.Content("~/Pedido/Pedido?acao=New"), true, true));
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.EfetivarEstoque, "Finalizar Pedidos.", "Finalizar Pedidos.", "FinalizarPedidos", null, "javascript:FinalizarPedidos();", true, true));
+    
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar.", "Voltar", "", Url.Content("~/Home/Index"), true, true));
+
+    var queryPedido = (IQueryable<ProjectMaster.Data.pm_pedido>)ViewData["queryPedido"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    @using (Html.BeginForm("Index", "Pedido", FormMethod.Post, new { id = "formulario_procurar", name = "formulario_procurar" }))
+    {           
+        <fieldset title="Procurar">
+            <legend>Procurar</legend>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <label class="normal">Nº Pedido:</label>
+                        <input type="text" value="@Model.nr_pedido" id="nr_pedido" name="nr_pedido" size="25" maxlength="25" alt="number9" />
+
+                        <br />
+
+                        <label class="normal">Razão Social:</label>
+                        <input type="text" value="@(Model.Pessoa != null ? Model.Pessoa.ds_razao_social : "")" id="Pessoa.ds_razao_social" name="Pessoa.ds_razao_social" size="25" maxlength="80" />
+
+                        <br />
+
+                        <label class="normal">Forma Pagto:</label>
+                        @Html.DropDownListFor(model => model.dm_forma_pagto, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.FormaPagamento, true))
+                    </td>
+                    <td align="right" valign="top">
+                        <input id="procurar" name="procurar" type="submit" value="Procurar" />
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <script type="text/javascript">
+            $(function () {
+                $("#procurar").button();
+            });
+        </script>
+    }
+
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th style="text-align: center">
+                    <input type="checkbox" id="chkTodos" name="chkTodos" />
+                </th>
+                <th>
+                    <span>Número Pedido</span>
+                </th>
+                <th>
+                    <span>Razão Social</span>
+                </th>
+                <th>
+                    <span>Data Emissão</span>
+                </th>
+                <th>
+                    <span>Data Vencimento</span>
+                </th>
+                <th>
+                    <span>Forma Pagamento</span>
+                </th>
+                <th>
+                    <span>Valor Total</span>
+                </th>
+                <th>
+                    <span>Status</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                    <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (queryPedido != null)
+            {
+                foreach (ProjectMaster.Data.pm_pedido linha in queryPedido)
+                {
+                <tr id='lin@(linha.id_pedido.ToString())' class="@classRow">
+                    <td style="text-align: center">
+                        @if (linha.dm_status_pedido == "A")
+                        {
+                            <input type="checkbox" id="chkPedido@(linha.id_pedido)" name="chkPedido[@(linha.id_pedido)]" alt="Pedido" value="@(linha.id_pedido)" />
+                        }
+                        else
+                        {
+                            <input type="checkbox" id="chkPedido@(linha.id_pedido)" name="chkPedido[@(linha.id_pedido)]" alt="Pedido" value="@(linha.id_pedido)" disabled="disabled" />   
+                        }
+                    </td>
+                    <td>
+                        <span>@linha.nr_pedido</span>
+                    </td>
+                    <td>
+                        <span>@linha.pm_pessoa.ds_razao_social</span>
+                    </td>
+                    <td>
+                        <span>@linha.dt_emissao.ToString("dd/MM/yyyy")</span>
+                    </td>
+                    <td>
+                        <span>@linha.dt_vencimento.ToString("dd/MM/yyyy")</span>
+                    </td>
+                    <td>
+                        <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.FormaPagamento, linha.dm_forma_pagto)</span>
+                    </td>
+                    <td align="right">
+                        <span>R$ @linha.pm_pedido_item.Sum(o => (o.quantidade * o.valor_unitario)).ToString("n2") </span>
+                    </td>
+                    <td>
+                        <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.StatusPedido, linha.dm_status_pedido)</span>
+                    </td>
+                    <td align="center">
+                        <div style='width: 100px'>
+                            <a href='@Url.Action("Pedido", "Pedido", new { acao = "View", id_pedido = linha.id_pedido })' title="Editar">
+                                <img src='@Url.Content("~/Content/images/edit.png")'/>
+                            </a>
+                            <a href='JavaScript:delete_file("@linha.id_pedido","Pedido","rows")' title="Excluir">
+                                <img src='@Url.Content("~/Content/images/delete.png")'/>
+                            </a>
+                        </div>
+                    </td>
+                </tr>        
+                        if (classRow == "webgrid-alternating-rows")
+                        {
+                            classRow = "webgrid-rows";
+                        }
+                        else
+                        {
+                            classRow = "webgrid-alternating-rows";
+                        }
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<script type="text/javascript">
+    $(function () {
+        $('#chkTodos').change(function () {
+            $('input[alt=Pedido]').each(function () {
+                if ($("#chkTodos").is(':checked')) {
+                    if ($(this).attr('disabled') != 'disabled') {
+                        $(this).attr('checked', 'checked');
+                    }
+                }
+                else {
+                    $(this).removeAttr('checked'); 
+                }
+            });            
+        });
+    });
+
+    function FinalizarPedidos() {
+        ShowLoad();
+
+        var count = 0;
+
+        $('input[alt=Pedido]').each(function () {
+            if ($(this).is(':checked')) {
+                if ($(this).attr('disabled') != 'disabled') {
+                    count++;
+                }
+            }
+        });
+
+        var pedidos = Int32Array(count);
+        count = 0;
+        
+        $('input[alt=Pedido]').each(function () {
+            if ($(this).is(':checked')) {
+                if ($(this).attr('disabled') != 'disabled') {
+                    pedidos[count] = $(this).val();
+                    count++;
+                    $(this).attr('disabled', 'disabled');
+                    $(this).removeAttr('checked');
+                }
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Content("~/Pedido/FinalizarPedidoALOT")',
+            context: document.body,
+            data: { id_pedido: pedidos }
+        }).done(function () {
+            HideLoad();
+        });
+    }
+</script>
+
+<div id="dialog-confirm" title="Pedido" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Pedido?</p>
+</div>

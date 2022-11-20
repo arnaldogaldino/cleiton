@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Cadastro de Menu";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo menu.", "Cadastrar novo menu.", "CadastrarNovo", "", Url.Content("~/Menu/Menu?acao=New"), true, true));
+
+    var queryMenus = (IQueryable<ProjectMaster.Data.pm_menu>)ViewData["queryMenus"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>ID</span> 
+                </th>
+                <th>
+                    <span>Menu Pai</span> 
+                </th>
+                <th>
+                    <span>Menu</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (ProjectMaster.Data.pm_menu linha in queryMenus)
+        {
+            <tr id='lin@(linha.id_menu.ToString())' class="@classRow">
+                <td>
+                    <span>@linha.id_menu</span>
+                </td>
+                <td>
+                    @if (linha.pm_menu2 != null)
+                    {
+                        <span>@linha.pm_menu2.nome</span>
+                    }
+                </td>
+                <td>
+                    <span>@linha.nome</span>
+                </td>
+                <td align="center">
+                    <div style='width: 100px'> 
+                        <a href='@Url.Action("Menu", "Menu", new { acao = "View", id_menu = linha.id_menu })'> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                        <a href='JavaScript:delete_menu("@linha.id_menu")'> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> </div>
+                </td>
+            </tr>        
+             if (classRow == "webgrid-alternating-rows")
+             {
+                 classRow = "webgrid-rows";
+             }
+             else
+             {
+                 classRow = "webgrid-alternating-rows";
+             }
+        }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div id="dialog-confirm" title="Menu" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Menu?</p>
+</div>

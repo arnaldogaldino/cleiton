@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Cadastro de Historico";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Historico.", "Cadastrar novo Historico.", "CadastrarNovo", "", Url.Content("~/Historico/Historico?acao=New"), true, true));
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar.", "Voltar", "", Url.Content("~/Home/Index"), true, true));
+    
+    var queryHistorico = (IQueryable<ProjectMaster.Data.pm_historico>)ViewData["queryHistorico"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>ID</span> 
+                </th>
+                <th width="150px">
+                    <span>Código</span> 
+                </th>
+                <th>
+                    <span>Descrição</span>
+                </th>
+                <th>
+                    <span>Tipo Historico</span>
+                </th>
+                <th>
+                    <span>Tipo de Situação Financeira</span>
+                </th>
+                <th>
+                    <span>Código Contábil</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (ProjectMaster.Data.pm_historico linha in queryHistorico)
+        {
+            <tr id='lin@(linha.id_historico.ToString())' class="@classRow">
+                <td>
+                    <span>@linha.id_historico</span>
+                </td>
+                <td>
+                    <span>@linha.ds_codigo</span>
+                </td>
+                <td>
+                    <span>@linha.ds_descricao</span>
+                </td>
+                <td>
+                    <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.TipoHistorico, linha.dm_operacao)</span>
+                </td>
+                <td>
+                    <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.TipoSituacaoFinanceira, linha.dm_associacao)</span>
+                </td>
+                <td>
+                    <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.CodigoContabil, linha.dm_codigo_contabil)</span>
+                </td>
+                <td align="center">
+                    <div style='width: 100px'> 
+                        <a href='@Url.Action("Historico", "Historico", new { acao = "View", id_historico = linha.id_historico })' title="Editar"> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                        <a href="JavaScript:delete_file('@linha.id_historico','Historico','rows')" title="Excluir"> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> </div>
+                </td>
+            </tr>        
+             if (classRow == "webgrid-alternating-rows")
+             {
+                 classRow = "webgrid-rows";
+             }
+             else
+             {
+                 classRow = "webgrid-alternating-rows";
+             }
+        }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div id="dialog-confirm" title="Historico" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Historico?</p>
+</div>

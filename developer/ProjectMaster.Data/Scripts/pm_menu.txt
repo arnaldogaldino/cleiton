@@ -1,0 +1,6 @@
+﻿UPDATE pm_menu  SET controller_name = 'Pessoa',action_name = 'Procurar' WHERE nome = 'Cliente/Fornecedor'
+UPDATE pm_menu  SET controller_name = 'Moeda',action_name = 'Procurar' WHERE nome = 'Cotação Moeda'
+UPDATE pm_menu  SET controller_name = 'CentroDeCusto',action_name = 'Procurar' WHERE nome = 'Centro de Custo'
+UPDATE pm_menu  SET controller_name = 'Classificacao',action_name = 'Procurar' WHERE nome = 'Classificação Operações'
+update pm_menu set controller_name='Produto', action_name='Procurar'
+where id_menu=4

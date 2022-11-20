@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <edmx:Designer>
+    <edmx:Diagrams>
+      <edmx:Diagram Name="PMEntities" ZoomLevel="87">
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_auditoria_log" Width="1.5" PointX="0.75" PointY="5" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_auditoria_log_detalhe" Width="1.5" PointX="3" PointY="5" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_banco" Width="1.5" PointX="5.25" PointY="23" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_cargo" Width="1.5" PointX="11" PointY="33" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_centro_de_custo" Width="1.5" PointX="5.25" PointY="25.75" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_cfop" Width="1.5" PointX="5.25" PointY="28.875" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_classificacao" Width="1.5" PointX="5.25" PointY="33.75" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_conta_corrente" Width="1.5" PointX="12.75" PointY="52.875" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_conta_pagar" Width="1.5" PointX="7.5" PointY="47.25" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_domain" Width="1.5" PointX="0.75" PointY="1.125" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_domain_value" Width="1.5" PointX="3" PointY="0.875" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_embalagem" Width="1.5" PointX="5.25" PointY="36.625" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_empresa" Width="1.5" PointX="0.75" PointY="40.75" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_enquadramento_ipi" Width="1.5" PointX="5.25" PointY="40" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_fiado" Width="1.5" PointX="10.5" PointY="45.25" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_filial" Width="1.5" PointX="3" PointY="38.875" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_historico" Width="1.5" PointX="5.25" PointY="42.5" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_icms" Width="1.5" PointX="5.25" PointY="46" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_limite_credito" Width="1.5" PointX="5.25" PointY="49.5" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_menu" Width="1.5" PointX="8.75" PointY="26.25" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_menu_detalhe" Width="1.5" PointX="11" PointY="27" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_modalidade_bc_icms" Width="1.5" PointX="5.75" PointY="0.75" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_modalidade_bc_icms_st" Width="1.5" PointX="5.75" PointY="3.75" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_moeda" Width="1.5" PointX="5.25" PointY="52.75" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_natureza_operacao" Width="1.5" PointX="7.5" PointY="34.375" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_ncm" Width="1.5" PointX="8.25" PointY="30.75" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_ncm_iva" Width="1.5" PointX="10.5" PointY="22.5" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_origem_mercadoria" Width="1.5" PointX="5.75" PointY="6.75" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_pedido" Width="1.5" PointX="9.75" PointY="53.875" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_pedido_item" Width="1.5" PointX="15.75" PointY="45.375" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_pessoa" Width="1.5" PointX="5.25" PointY="61.5" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_pessoa_conta_corrente" Width="1.5" PointX="7.5" PointY="43.75" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_pessoa_endereco" Width="1.5" PointX="7.5" PointY="61" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_pessoa_telefone" Width="1.5" PointX="7.5" PointY="65.625" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_produto" Width="1.5" PointX="10.5" PointY="35.625" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_produto_estoque" Width="1.5" PointX="12.75" PointY="36.125" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_produto_estoque_entrada" Width="1.5" PointX="15.75" PointY="49.5" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_produto_estoque_historico" Width="1.5" PointX="12.75" PointY="48.5" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_tributo_icms" Width="1.5" PointX="7.75" PointY="0.75" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_usuario" Width="1.5" PointX="13.25" PointY="40.5" />
+        <edmx:EntityTypeShape EntityType="ProjectMaster.Data.Model.pm_usuario_endereco" Width="1.5" PointX="15.5" PointY="42.125" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_auditoria_log_detalhe_pm_auditoria_log" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_banco_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_pessoa_conta_corrente_pm_banco" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_usuario_pm_cargo" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_centro_de_custo_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_conta_pagar_pm_centro_de_custo" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_natureza_operacao_cfop1" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_natureza_operacao_cfop11" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_natureza_operacao_cfop12" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_natureza_operacao_cfop7" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_natureza_operacao_cfop8" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_natureza_operacao_cfop9" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_natureza_operacao_fiscal_cfop10" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_natureza_operacao_fiscal_cfop4" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_cfop_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_classificacao_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_conta_corrente_pm_conta_pagar" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_conta_corrente_pm_fiado" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_conta_corrente_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_conta_corrente_pm_pedido" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_conta_corrente_pm_pessoa" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_conta_pagar_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_conta_pagar_pm_pessoa" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_domain_value_pm_domain" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_embalagem_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_fiado_pm_embalagem" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_produto_pm_embalagem" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_filial_pm_empresa" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_enquadramento_ipi_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_fiado_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_fiado_pm_pedido" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_fiado_pm_pessoa" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_fiado_pm_produto" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_historico_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_icms_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_limite_credito_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_moeda_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_natureza_operacao_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_pedido_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_pessoa_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_produto_estoque_entrada_pm_filial1" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_produto_pm_filial" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_menu_detalhe_pm_menu" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_menu_pm_menu" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_ncm_iva_pm_ncm" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_produto_pm_ncm" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_pedido_item_pm_pedido" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_pedido_pm_pessoa" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_pedido_pm_pessoa_endereco" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_pedido_item_pm_produto" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_pessoa_conta_corrente_pm_pessoa" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_pessoa_endereco_pm_pessoa" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_pessoa_telefone_pm_pessoa" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_produto_estoque_entrada_pm_pessoa" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_produto_estoque_entrada_pm_produto" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_produto_estoque_historico_pm_produto" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_produto_estoque_pm_produto" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.FK_pm_usuario_endereco_pm_usuario" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.pm_menu_detalhe_permissao" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.pm_menu_permissao" />
+        <edmx:AssociationConnector Association="ProjectMaster.Data.Model.pm_usuario_filial" />
+      </edmx:Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

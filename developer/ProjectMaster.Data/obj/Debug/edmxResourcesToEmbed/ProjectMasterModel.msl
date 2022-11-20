@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectMasterDataStoreContainer" CdmEntityContainer="PMEntities">
+    <EntitySetMapping Name="pm_auditoria_log">
+      <EntityTypeMapping TypeName="ProjectMaster.Data.pm_auditoria_log">
+        <MappingFragment StoreEntitySet="pm_auditoria_log">
+          <ScalarProperty Name="id_auditoria_log" ColumnName="id_auditoria_log" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_record" ColumnName="id_record" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="nome_tabela" ColumnName="nome_tabela" />
+          <ScalarProperty Name="acao" ColumnName="acao" />
+          <ScalarProperty Name="data_acao" ColumnName="data_acao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_auditoria_log_detalhe">
+      <EntityTypeMapping TypeName="ProjectMaster.Data.pm_auditoria_log_detalhe">
+        <MappingFragment StoreEntitySet="pm_auditoria_log_detalhe">
+          <ScalarProperty Name="id_auditoria_log_detalhe" ColumnName="id_auditoria_log_detalhe" />
+          <ScalarProperty Name="id_auditoria_log" ColumnName="id_auditoria_log" />
+          <ScalarProperty Name="nome_coluna" ColumnName="nome_coluna" />
+          <ScalarProperty Name="valor_original" ColumnName="valor_original" />
+          <ScalarProperty Name="valor_corrente" ColumnName="valor_corrente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_empresa">
+      <EntityTypeMapping TypeName="ProjectMaster.Data.pm_empresa">
+        <MappingFragment StoreEntitySet="pm_empresa">
+          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+          <ScalarProperty Name="id_fiscal_cnae_pri" ColumnName="id_fiscal_cnae_pri" />
+          <ScalarProperty Name="id_fiscal_cnae_sec" ColumnName="id_fiscal_cnae_sec" />
+          <ScalarProperty Name="apelido" ColumnName="apelido" />
+          <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+          <ScalarProperty Name="tipo_pessoa" ColumnName="tipo_pessoa" />
+          <ScalarProperty Name="crt" ColumnName="crt" />
+          <ScalarProperty Name="logotipo" ColumnName="logotipo" />
+          <ScalarProperty Name="razao_social" ColumnName="razao_social" />
+          <ScalarProperty Name="nome_fantasia" ColumnName="nome_fantasia" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+          <ScalarProperty Name="i_estadual" ColumnName="i_estadual" />
+          <ScalarProperty Name="i_municipal" ColumnName="i_municipal" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="fax" ColumnName="fax" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="end_cep" ColumnName="end_cep" />
+          <ScalarProperty Name="end_endereco" ColumnName="end_endereco" />
+          <ScalarProperty Name="end_numero" ColumnName="end_numero" />
+          <ScalarProperty Name="end_complemento" ColumnName="end_complemento" />
+          <ScalarProperty Name="end_bairro" ColumnName="end_bairro" />
+          <ScalarProperty Name="end_cidade" ColumnName="end_cidade" />
+          <ScalarProperty Name="end_estado" ColumnName="end_estado" />
+          <ScalarProperty Name="end_municipio" ColumnName="end_municipio" />
+          <ScalarProperty Name="cob_cep" ColumnName="cob_cep" />
+          <ScalarProperty Name="cob_endereco" ColumnName="cob_endereco" />
+          <ScalarProperty Name="cob_numero" ColumnName="cob_numero" />
+          <ScalarProperty Name="cob_complemento" ColumnName="cob_complemento" />
+          <ScalarProperty Name="cob_bairro" ColumnName="cob_bairro" />
+          <ScalarProperty Name="cob_cidade" ColumnName="cob_cidade" />
+          <ScalarProperty Name="cob_estado" ColumnName="cob_estado" />
+          <ScalarProperty Name="cob_municipio" ColumnName="cob_municipio" />
+          <ScalarProperty Name="ent_cep" ColumnName="ent_cep" />
+          <ScalarProperty Name="ent_endereco" ColumnName="ent_endereco" />
+          <ScalarProperty Name="ent_numero" ColumnName="ent_numero" />
+          <ScalarProperty Name="ent_complemento" ColumnName="ent_complemento" />
+          <ScalarProperty Name="ent_bairro" ColumnName="ent_bairro" />
+          <ScalarProperty Name="ent_cidade" ColumnName="ent_cidade" />
+          <ScalarProperty Name="ent_estado" ColumnName="ent_estado" />
+          <ScalarProperty Name="ent_municipio" ColumnName="ent_municipio" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_filial">
+      <EntityTypeMapping TypeName="ProjectMaster.Data.pm_filial">
+        <MappingFragment StoreEntitySet="pm_filial">
+          <ScalarProperty Name="id_filial" ColumnName="id_filial" />
+          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+          <ScalarProperty Name="id_fiscal_cnae_pri" ColumnName="id_fiscal_cnae_pri" />
+          <ScalarProperty Name="id_fiscal_cnae_sec" ColumnName="id_fiscal_cnae_sec" />
+          <ScalarProperty Name="apelido" ColumnName="apelido" />
+          <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+          <ScalarProperty Name="tipo_pessoa" ColumnName="tipo_pessoa" />
+          <ScalarProperty Name="crt" ColumnName="crt" />
+          <ScalarProperty Name="logotipo" ColumnName="logotipo" />
+          <ScalarProperty Name="razao_social" ColumnName="razao_social" />
+          <ScalarProperty Name="nome_fantasia" ColumnName="nome_fantasia" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+          <ScalarProperty Name="i_estadual" ColumnName="i_estadual" />
+          <ScalarProperty Name="i_municipal" ColumnName="i_municipal" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="fax" ColumnName="fax" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="end_cep" ColumnName="end_cep" />
+          <ScalarProperty Name="end_endereco" ColumnName="end_endereco" />
+          <ScalarProperty Name="end_numero" ColumnName="end_numero" />
+          <ScalarProperty Name="end_complemento" ColumnName="end_complemento" />
+          <ScalarProperty Name="end_bairro" ColumnName="end_bairro" />
+          <ScalarProperty Name="end_cidade" ColumnName="end_cidade" />
+          <ScalarProperty Name="end_estado" ColumnName="end_estado" />
+          <ScalarProperty Name="end_municipio" ColumnName="end_municipio" />
+          <ScalarProperty Name="cob_cep" ColumnName="cob_cep" />
+          <ScalarProperty Name="cob_endereco" ColumnName="cob_endereco" />
+          <ScalarProperty Name="cob_numero" ColumnName="cob_numero" />
+          <ScalarProperty Name="cob_complemento" ColumnName="cob_complemento" />
+          <ScalarProperty Name="cob_bairro" ColumnName="cob_bairro" />
+          <ScalarProperty Name="cob_cidade" ColumnName="cob_cidade" />
+          <ScalarProperty Name="cob_estado" ColumnName="cob_estado" />
+          <ScalarProperty Name="cob_municipio" ColumnName="cob_municipio" />
+          <ScalarProperty Name="ent_cep" ColumnName="ent_cep" />
+          <ScalarProperty Name="ent_endereco" ColumnName="ent_endereco" />
+          <ScalarProperty Name="ent_numero" ColumnName="ent_numero" />
+          <ScalarProperty Name="ent_complemento" ColumnName="ent_complemento" />
+          <ScalarProperty Name="ent_bairro" ColumnName="ent_bairro" />
+          <ScalarProperty Name="ent_cidade" ColumnName="ent_cidade" />
+          <ScalarProperty Name="ent_estado" ColumnName="ent_estado" />
+          <ScalarProperty Name="ent_municipio" ColumnName="ent_municipio" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_log">
+      <EntityTypeMapping TypeName="ProjectMaster.Data.pm_log">
+        <MappingFragment StoreEntitySet="pm_log">
+          <ScalarProperty Name="id_log" ColumnName="id_log" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="thread" ColumnName="thread" />
+          <ScalarProperty Name="level" ColumnName="level" />
+          <ScalarProperty Name="logger" ColumnName="logger" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="exception" ColumnName="exception" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_menu">
+      <EntityTypeMapping TypeName="ProjectMaster.Data.pm_menu">
+        <MappingFragment StoreEntitySet="pm_menu">
+          <ScalarProperty Name="id_menu" ColumnName="id_menu" />
+          <ScalarProperty Name="id_menu_pai" ColumnName="id_menu_pai" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="area_name" ColumnName="area_name" />
+          <ScalarProperty Name="action_name" ColumnName="action_name" />
+          <ScalarProperty Name="controller_name" ColumnName="controller_name" />
+          <ScalarProperty Name="route_name" ColumnName="route_name" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_menu_detalhe">
+      <EntityTypeMapping TypeName="ProjectMaster.Data.pm_menu_detalhe">
+        <MappingFragment StoreEntitySet="pm_menu_detalhe">
+          <ScalarProperty Name="id_menu_detalhe" ColumnName="id_menu_detalhe" />
+          <ScalarProperty Name="id_menu" ColumnName="id_menu" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_usuario">
+      <EntityTypeMapping TypeName="ProjectMaster.Data.pm_usuario">
+        <MappingFragment StoreEntitySet="pm_usuario">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="pm_menu_detalhe_permissao" TypeName="ProjectMaster.Data.pm_menu_detalhe_permissao" StoreEntitySet="pm_menu_detalhe_permissao">
+      <EndProperty Name="pm_menu_detalhe">
+        <ScalarProperty Name="id_menu_detalhe" ColumnName="id_menu_detalhe" />
+      </EndProperty>
+      <EndProperty Name="pm_usuario">
+        <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="pm_menu_permissao" TypeName="ProjectMaster.Data.pm_menu_permissao" StoreEntitySet="pm_menu_permissao">
+      <EndProperty Name="pm_menu">
+        <ScalarProperty Name="id_menu" ColumnName="id_menu" />
+      </EndProperty>
+      <EndProperty Name="pm_usuario">
+        <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="pm_usuario_filial" TypeName="ProjectMaster.Data.pm_usuario_filial" StoreEntitySet="pm_usuario_filial">
+      <EndProperty Name="pm_filial">
+        <ScalarProperty Name="id_filial" ColumnName="id_filial" />
+      </EndProperty>
+      <EndProperty Name="pm_usuario">
+        <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

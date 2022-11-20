@@ -1,0 +1,35 @@
+﻿@model ProjectMaster.Application.Models.MoedaModel
+<h1>Manutenção de Cotação de Moedas</h1>
+<script src="@Url.Content("~/Scripts/MeusScripts/paginas/moeda/novo.js")" type="text/javascript"></script>
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "formMoeda" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Cotação Moedas</legend>
+        @Html.HiddenFor(model => model.id_moeda)
+        <div class="editor-field">
+            @Html.LabelFor(model => model.id_tipo_moeda)
+            @Html.DropDownListFor(model => model.id_tipo_moeda, (SelectList)ViewBag.TiposDeMoedas)
+            @Html.ValidationMessageFor(model => model.id_tipo_moeda)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.dt_cotacao)
+            @Html.TextBox("dt_cotacao", Model == null ? "" : Model.dt_cotacao.ToString("dd/MM/yyyy"), new {@id = "dt_cotacao" })
+            @Html.ValidationMessageFor(model => model.dt_cotacao)
+        </div>
+
+        <div class="editor-field">
+            @Html.LabelFor(model => model.nr_valor)
+            @Html.EditorFor(model => model.nr_valor)
+            @Html.ValidationMessageFor(model => model.nr_valor)
+        </div>
+        <br />
+        <p>
+            <input id="btnSalvar" type="button" value="Salvar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Voltar para pesquisa", "Procurar")
+</div>

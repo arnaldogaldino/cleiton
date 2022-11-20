@@ -1,0 +1,83 @@
+﻿@model ProjectMaster.Application.Models.ClassificacaoModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de Classificação de Operação";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Classificação de Operação.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Classificacao/Classificacao?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Classificação de Operação.", "Editar Classificação de Operação.", "editar", "", Url.Content("~/Classificacao/Classificacao?acao=Edit&id_classificacao=" + Model.id_classificacao), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Classificação de Operação.", "Excluir Classificação de Operação.", "excluir", "", Url.Content("~/Classificacao/Classificacao"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Classificação de Operação.", "Gravar Classificação de Operação.", "gravar", "", "javascript:ShowLoad();$('#formulario_classificacao').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Classificacao/Classificacao"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Classificacao/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Classificação de Operação.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Classificacao/Classificacao?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Classificação de Operação.", "Editar Classificação de Operação.", "editar", "", Url.Content("~/Classificacao/Classificacao?acao=Edit&id_classificacao=" + Model.id_classificacao), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Classificação de Operação.", "Excluir Classificação de Operação.", "excluir", "", "JavaScript:delete_file('@linha.id_classificacao','Classificacao','form')", true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Classificação de Operação.", "Gravar Classificação de Operação.", "gravar", "", "javascript:ShowLoad();$('#formulario_classificacao').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Classificacao/Classificacao?acao=View&id_classificacao=" + Model.id_classificacao), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Classificacao/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Classificação de Operação.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Classificacao/Classificacao?acao=New"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Classificação de Operação.", "Editar Classificação de Operação.", "editar", "", Url.Content("~/Classificacao/Classificacao?acao=Edit&id_classificacao=" + Model.id_classificacao), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Classificação de Operação.", "Excluir Classificação de Operação.", "excluir", "", "JavaScript:delete_file('@linha.id_classificacao','Classificacao','form')", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Classificação de Operação.", "Gravar Classificação de Operação.", "gravar", "", Url.Content("~/Classificacao/Classificacao"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Classificacao/Classificacao"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Classificacao/Index"), true, true));
+        read_only = "readonly='readonly'";
+    }
+}
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+@using (Html.BeginForm("Classificacao", "Classificacao", FormMethod.Post, new { id = "formulario_classificacao", name = "formulario_classificacao" }))
+{   
+    <fieldset title="Classificacao">
+        <legend>Classificação de Operação</legend>
+        <label class="normal">Id:</label>
+        <input type="text" value="@Model.id_classificacao" id="id_classificacao" name="id_classificacao" size="7" maxlength="6" readonly="readonly" />
+
+        <br />
+        
+        <label class="normal">Código:</label>
+        <input type="text" value="@Model.ds_codigo" id="ds_codigo" name="ds_codigo" size="20" maxlength="15" @(Model.id_classificacao == 0 ? read_only : "readonly='readonly'") />
+        @Html.ValidationMessage("ds_codigo", "*")
+                        
+        <label class="normal">Descrição:</label>
+        <input type="text" value="@Model.ds_descricao" id="ds_descricao" name="ds_descricao" size="80" maxlength="60" @read_only  />
+        @Html.ValidationMessage("ds_descricao", "*")
+
+    </fieldset>  
+    @Html.ValidationSummary()
+
+}
+</div>
+
+<div id="dialog-confirm" title="Classificacao" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Classificacao?</p>
+</div>

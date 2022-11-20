@@ -1,0 +1,18 @@
+﻿@using MvcJqGrid
+@using MvcJqGrid.Enums
+
+@(Html.Grid("gridMoeda")
+    .SetCaption("Cotação Moeda")
+    .AddColumn(new Column("id").SetHidden(true))
+    .AddColumn(new Column("tipo_moeda").SetLabel("Tipo de moeda").SetWidth(245).SetFixedWidth(true).SetSearchType(MvcJqGrid.Enums.Searchtype.Select)
+               .SetSearchTerms((SelectList)ViewBag.TiposDeMoedas))
+    .AddColumn(new Column("dt_cotacao").SetLabel("Data de Cotação").SetWidth(170).SetFixedWidth(true).SetSearchType(Searchtype.Datepicker))
+    .AddColumn(new Column("nr_valor").SetLabel("Valor").SetWidth(170).SetFixedWidth(true))
+    .AddColumn(new Column("acoes").SetLabel("Ações").SetSearch(false).SetCustomFormatter("CriarBotoesMoeda")
+    .SetWidth(100).SetFixedWidth(true).SetSearchDateFormat("dd/MM/yyyy"))
+    .SetUrl(Url.Action("ProcurarMoedas", "Moeda")).SetAutoWidth(true).SetRowNum(20)
+    .SetRowList(new[] { 10, 15, 20, 50 }).SetViewRecords(true).SetPager("pager").SetSearchToolbar(true)
+    .SetSearchOnEnter(false)
+    .SetToolbar(true)
+    .SetToolbarPosition(ToolbarPosition.Bottom))
+<script src="@Url.Content("~/Scripts/MeusScripts/paginas/Moeda/procurar.js")" type="text/javascript"></script>

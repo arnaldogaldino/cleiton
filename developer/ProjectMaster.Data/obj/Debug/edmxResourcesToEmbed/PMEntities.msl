@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectMasterDataModelStoreContainer" CdmEntityContainer="PMEntities">
+    <EntitySetMapping Name="pm_auditoria_log">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_auditoria_log)">
+        <MappingFragment StoreEntitySet="pm_auditoria_log">
+          <ScalarProperty Name="id_auditoria_log" ColumnName="id_auditoria_log" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_record" ColumnName="id_record" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="nome_tabela" ColumnName="nome_tabela" />
+          <ScalarProperty Name="acao" ColumnName="acao" />
+          <ScalarProperty Name="data_acao" ColumnName="data_acao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_auditoria_log_detalhe">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_auditoria_log_detalhe)">
+        <MappingFragment StoreEntitySet="pm_auditoria_log_detalhe">
+          <ScalarProperty Name="id_auditoria_log_detalhe" ColumnName="id_auditoria_log_detalhe" />
+          <ScalarProperty Name="id_auditoria_log" ColumnName="id_auditoria_log" />
+          <ScalarProperty Name="nome_coluna" ColumnName="nome_coluna" />
+          <ScalarProperty Name="valor_original" ColumnName="valor_original" />
+          <ScalarProperty Name="valor_corrente" ColumnName="valor_corrente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_banco">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_banco)">
+        <MappingFragment StoreEntitySet="pm_banco">
+          <ScalarProperty Name="id_banco" ColumnName="id_banco" />
+          <ScalarProperty Name="ds_banco" ColumnName="ds_banco" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_cargo">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_cargo)">
+        <MappingFragment StoreEntitySet="pm_cargo">
+          <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
+          <ScalarProperty Name="nm_cargo" ColumnName="nm_cargo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_conta_corrente">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_conta_corrente)">
+        <MappingFragment StoreEntitySet="pm_conta_corrente">
+          <ScalarProperty Name="id_conta_corrente" ColumnName="id_conta_corrente" />
+          <ScalarProperty Name="ds_conta_corrente" ColumnName="ds_conta_corrente" />
+          <ScalarProperty Name="id_banco" ColumnName="id_banco" />
+          <ScalarProperty Name="ds_agencia" ColumnName="ds_agencia" />
+          <ScalarProperty Name="ds_numero_conta_corrente" ColumnName="ds_numero_conta_corrente" />
+          <ScalarProperty Name="ds_emitente" ColumnName="ds_emitente" />
+          <ScalarProperty Name="id_pessoa" ColumnName="id_pessoa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_domain">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_domain)">
+        <MappingFragment StoreEntitySet="pm_domain">
+          <ScalarProperty Name="id_domain" ColumnName="id_domain" />
+          <ScalarProperty Name="domain_name" ColumnName="domain_name" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_domain_value">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_domain_value)">
+        <MappingFragment StoreEntitySet="pm_domain_value">
+          <ScalarProperty Name="id_domain_value" ColumnName="id_domain_value" />
+          <ScalarProperty Name="id_domain" ColumnName="id_domain" />
+          <ScalarProperty Name="domain_value" ColumnName="domain_value" />
+          <ScalarProperty Name="label" ColumnName="label" />
+          <ScalarProperty Name="ordem" ColumnName="ordem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_empresa">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_empresa)">
+        <MappingFragment StoreEntitySet="pm_empresa">
+          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+          <ScalarProperty Name="id_fiscal_cnae_pri" ColumnName="id_fiscal_cnae_pri" />
+          <ScalarProperty Name="id_fiscal_cnae_sec" ColumnName="id_fiscal_cnae_sec" />
+          <ScalarProperty Name="apelido" ColumnName="apelido" />
+          <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+          <ScalarProperty Name="tipo_pessoa" ColumnName="tipo_pessoa" />
+          <ScalarProperty Name="crt" ColumnName="crt" />
+          <ScalarProperty Name="razao_social" ColumnName="razao_social" />
+          <ScalarProperty Name="nome_fantasia" ColumnName="nome_fantasia" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+          <ScalarProperty Name="i_estadual" ColumnName="i_estadual" />
+          <ScalarProperty Name="i_municipal" ColumnName="i_municipal" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="fax" ColumnName="fax" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_endereco">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_endereco)">
+        <MappingFragment StoreEntitySet="pm_endereco">
+          <ScalarProperty Name="id_endereco" ColumnName="id_endereco" />
+          <ScalarProperty Name="dm_tipo_endereco" ColumnName="dm_tipo_endereco" />
+          <ScalarProperty Name="nm_endereco" ColumnName="nm_endereco" />
+          <ScalarProperty Name="nr_numero" ColumnName="nr_numero" />
+          <ScalarProperty Name="ds_complemento" ColumnName="ds_complemento" />
+          <ScalarProperty Name="ds_bairro" ColumnName="ds_bairro" />
+          <ScalarProperty Name="ds_cidade" ColumnName="ds_cidade" />
+          <ScalarProperty Name="ds_uf" ColumnName="ds_uf" />
+          <ScalarProperty Name="nr_cep" ColumnName="nr_cep" />
+          <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_enquadramento_ipi">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_enquadramento_ipi)">
+        <MappingFragment StoreEntitySet="pm_enquadramento_ipi">
+          <ScalarProperty Name="cenq" ColumnName="cenq" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_filial">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_filial)">
+        <MappingFragment StoreEntitySet="pm_filial">
+          <ScalarProperty Name="id_filial" ColumnName="id_filial" />
+          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+          <ScalarProperty Name="id_fiscal_cnae_pri" ColumnName="id_fiscal_cnae_pri" />
+          <ScalarProperty Name="id_fiscal_cnae_sec" ColumnName="id_fiscal_cnae_sec" />
+          <ScalarProperty Name="apelido" ColumnName="apelido" />
+          <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+          <ScalarProperty Name="tipo_pessoa" ColumnName="tipo_pessoa" />
+          <ScalarProperty Name="crt" ColumnName="crt" />
+          <ScalarProperty Name="razao_social" ColumnName="razao_social" />
+          <ScalarProperty Name="nome_fantasia" ColumnName="nome_fantasia" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+          <ScalarProperty Name="i_estadual" ColumnName="i_estadual" />
+          <ScalarProperty Name="i_municipal" ColumnName="i_municipal" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="fax" ColumnName="fax" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_menu">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_menu)">
+        <MappingFragment StoreEntitySet="pm_menu">
+          <ScalarProperty Name="id_menu" ColumnName="id_menu" />
+          <ScalarProperty Name="id_menu_pai" ColumnName="id_menu_pai" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="texto" ColumnName="texto" />
+          <ScalarProperty Name="area_name" ColumnName="area_name" />
+          <ScalarProperty Name="controller_name" ColumnName="controller_name" />
+          <ScalarProperty Name="action_name" ColumnName="action_name" />
+          <ScalarProperty Name="ordem" ColumnName="ordem" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_menu_detalhe">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_menu_detalhe)">
+        <MappingFragment StoreEntitySet="pm_menu_detalhe">
+          <ScalarProperty Name="id_menu_detalhe" ColumnName="id_menu_detalhe" />
+          <ScalarProperty Name="id_menu" ColumnName="id_menu" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_modalidade_bc_icms">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_modalidade_bc_icms)">
+        <MappingFragment StoreEntitySet="pm_modalidade_bc_icms">
+          <ScalarProperty Name="modbc" ColumnName="modbc" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="ds_descricao" ColumnName="ds_descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_modalidade_bc_icms_st">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_modalidade_bc_icms_st)">
+        <MappingFragment StoreEntitySet="pm_modalidade_bc_icms_st">
+          <ScalarProperty Name="modbcst" ColumnName="modbcst" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="ds_descricao" ColumnName="ds_descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_ncm">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_ncm)">
+        <MappingFragment StoreEntitySet="pm_ncm">
+          <ScalarProperty Name="ncm" ColumnName="ncm" />
+          <ScalarProperty Name="ds_descricao" ColumnName="ds_descricao" />
+          <ScalarProperty Name="nr_tec" ColumnName="nr_tec" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_origem_mercadoria">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_origem_mercadoria)">
+        <MappingFragment StoreEntitySet="pm_origem_mercadoria">
+          <ScalarProperty Name="orig" ColumnName="orig" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="ds_descricao" ColumnName="ds_descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_pessoa">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_pessoa)">
+        <MappingFragment StoreEntitySet="pm_pessoa">
+          <ScalarProperty Name="id_pessoa" ColumnName="id_pessoa" />
+          <ScalarProperty Name="dt_cadastro" ColumnName="dt_cadastro" />
+          <ScalarProperty Name="ds_marca" ColumnName="ds_marca" />
+          <ScalarProperty Name="ds_razao_social" ColumnName="ds_razao_social" />
+          <ScalarProperty Name="ds_nome_fantasia" ColumnName="ds_nome_fantasia" />
+          <ScalarProperty Name="dm_tipo_pessoa" ColumnName="dm_tipo_pessoa" />
+          <ScalarProperty Name="ds_fisico_juridico" ColumnName="ds_fisico_juridico" />
+          <ScalarProperty Name="nr_documento" ColumnName="nr_documento" />
+          <ScalarProperty Name="nr_ie" ColumnName="nr_ie" />
+          <ScalarProperty Name="nr_inscricao_suframa" ColumnName="nr_inscricao_suframa" />
+          <ScalarProperty Name="dm_venda_agendada" ColumnName="dm_venda_agendada" />
+          <ScalarProperty Name="dm_dias_limite_credito" ColumnName="dm_dias_limite_credito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_produto">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_produto)">
+        <MappingFragment StoreEntitySet="pm_produto">
+          <ScalarProperty Name="cprod" ColumnName="cprod" />
+          <ScalarProperty Name="xprod" ColumnName="xprod" />
+          <ScalarProperty Name="cean" ColumnName="cean" />
+          <ScalarProperty Name="ncm" ColumnName="ncm" />
+          <ScalarProperty Name="extipi" ColumnName="extipi" />
+          <ScalarProperty Name="genero" ColumnName="genero" />
+          <ScalarProperty Name="ucom" ColumnName="ucom" />
+          <ScalarProperty Name="vuncom" ColumnName="vuncom" />
+          <ScalarProperty Name="ceantrib" ColumnName="ceantrib" />
+          <ScalarProperty Name="utrib" ColumnName="utrib" />
+          <ScalarProperty Name="vuntrib" ColumnName="vuntrib" />
+          <ScalarProperty Name="qtrib" ColumnName="qtrib" />
+          <ScalarProperty Name="mipi" ColumnName="mipi" />
+          <ScalarProperty Name="qtden" ColumnName="qtden" />
+          <ScalarProperty Name="cieng" ColumnName="cieng" />
+          <ScalarProperty Name="cnpjprod" ColumnName="cnpjprod" />
+          <ScalarProperty Name="cenq" ColumnName="cenq" />
+          <ScalarProperty Name="cst" ColumnName="cst" />
+          <ScalarProperty Name="orig" ColumnName="orig" />
+          <ScalarProperty Name="modbc" ColumnName="modbc" />
+          <ScalarProperty Name="modbcst" ColumnName="modbcst" />
+          <ScalarProperty Name="predbcst" ColumnName="predbcst" />
+          <ScalarProperty Name="pmvast" ColumnName="pmvast" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_telefone">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_telefone)">
+        <MappingFragment StoreEntitySet="pm_telefone">
+          <ScalarProperty Name="id_telefone" ColumnName="id_telefone" />
+          <ScalarProperty Name="id_pessoa" ColumnName="id_pessoa" />
+          <ScalarProperty Name="nr_telefone" ColumnName="nr_telefone" />
+          <ScalarProperty Name="dm_tipo_telefone" ColumnName="dm_tipo_telefone" />
+          <ScalarProperty Name="nm_contato" ColumnName="nm_contato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_tributo_icms">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_tributo_icms)">
+        <MappingFragment StoreEntitySet="pm_tributo_icms">
+          <ScalarProperty Name="cst" ColumnName="cst" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="ds_descricao" ColumnName="ds_descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_usuario">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_usuario)">
+        <MappingFragment StoreEntitySet="pm_usuario">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+          <ScalarProperty Name="dt_nascimento" ColumnName="dt_nascimento" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="id_cargo" ColumnName="id_cargo" />
+          <ScalarProperty Name="dm_status" ColumnName="dm_status" />
+          <ScalarProperty Name="nr_rg" ColumnName="nr_rg" />
+          <ScalarProperty Name="nr_cpf" ColumnName="nr_cpf" />
+          <ScalarProperty Name="nm_mae" ColumnName="nm_mae" />
+          <ScalarProperty Name="nm_pai" ColumnName="nm_pai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.sysdiagrams)">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_pais">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_pais)">
+        <MappingFragment StoreEntitySet="pm_pais">
+          <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+          <ScalarProperty Name="ds_iso" ColumnName="ds_iso" />
+          <ScalarProperty Name="ds_iso3" ColumnName="ds_iso3" />
+          <ScalarProperty Name="nr_codigo" ColumnName="nr_codigo" />
+          <ScalarProperty Name="nm_nome" ColumnName="nm_nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_moeda">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_moeda)">
+        <MappingFragment StoreEntitySet="pm_moeda">
+          <ScalarProperty Name="id_moeda" ColumnName="id_moeda" />
+          <ScalarProperty Name="dt_cotacao" ColumnName="dt_cotacao" />
+          <ScalarProperty Name="nr_valor" ColumnName="nr_valor" />
+          <ScalarProperty Name="id_tipo_moeda" ColumnName="id_tipo_moeda" />
+          <ScalarProperty Name="bl_excluido" ColumnName="bl_excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_tipo_moeda">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_tipo_moeda)">
+        <MappingFragment StoreEntitySet="pm_tipo_moeda">
+          <ScalarProperty Name="id_tipo_moeda" ColumnName="id_tipo_moeda" />
+          <ScalarProperty Name="nm_tipo_moeda" ColumnName="nm_tipo_moeda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_centro_de_custo">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_centro_de_custo)">
+        <MappingFragment StoreEntitySet="pm_centro_de_custo">
+          <ScalarProperty Name="id_centro_de_custo" ColumnName="id_centro_de_custo" />
+          <ScalarProperty Name="ds_codigo" ColumnName="ds_codigo" />
+          <ScalarProperty Name="ds_descricao" ColumnName="ds_descricao" />
+          <ScalarProperty Name="bl_excluido" ColumnName="bl_excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pm_classificacao">
+      <EntityTypeMapping TypeName="IsTypeOf(ProjectMaster.Data.Model.pm_classificacao)">
+        <MappingFragment StoreEntitySet="pm_classificacao">
+          <ScalarProperty Name="id_classificacao" ColumnName="id_classificacao" />
+          <ScalarProperty Name="ds_codigo" ColumnName="ds_codigo" />
+          <ScalarProperty Name="ds_descricao" ColumnName="ds_descricao" />
+          <ScalarProperty Name="bl_excluido" ColumnName="bl_excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="pm_menu_detalhe_permissao" TypeName="ProjectMaster.Data.Model.pm_menu_detalhe_permissao" StoreEntitySet="pm_menu_detalhe_permissao">
+      <EndProperty Name="pm_menu_detalhe">
+        <ScalarProperty Name="id_menu_detalhe" ColumnName="pm_menu_detalhe_id_menu_detalhe" />
+      </EndProperty>
+      <EndProperty Name="pm_usuario">
+        <ScalarProperty Name="id_usuario" ColumnName="pm_usuario_id_usuario" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="pm_menu_permissao" TypeName="ProjectMaster.Data.Model.pm_menu_permissao" StoreEntitySet="pm_menu_permissao">
+      <EndProperty Name="pm_menu">
+        <ScalarProperty Name="id_menu" ColumnName="pm_menu_id_menu" />
+      </EndProperty>
+      <EndProperty Name="pm_usuario">
+        <ScalarProperty Name="id_usuario" ColumnName="pm_usuario_id_usuario" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="pm_usuario_endereco" TypeName="ProjectMaster.Data.Model.pm_usuario_endereco" StoreEntitySet="pm_usuario_endereco">
+      <EndProperty Name="pm_endereco">
+        <ScalarProperty Name="id_endereco" ColumnName="pm_endereco_id_endereco" />
+      </EndProperty>
+      <EndProperty Name="pm_usuario">
+        <ScalarProperty Name="id_usuario" ColumnName="pm_usuario_id_usuario" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="pm_usuario_filial" TypeName="ProjectMaster.Data.Model.pm_usuario_filial" StoreEntitySet="pm_usuario_filial">
+      <EndProperty Name="pm_filial">
+        <ScalarProperty Name="id_filial" ColumnName="pm_filial_id_filial" />
+      </EndProperty>
+      <EndProperty Name="pm_usuario">
+        <ScalarProperty Name="id_usuario" ColumnName="pm_usuario_id_usuario" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="pm_pessoapm_endereco" TypeName="ProjectMaster.Data.Model.pm_pessoapm_endereco" StoreEntitySet="pm_pessoapm_endereco">
+      <EndProperty Name="pm_pessoa">
+        <ScalarProperty Name="id_pessoa" ColumnName="pm_pessoa_id_pessoa" />
+      </EndProperty>
+      <EndProperty Name="pm_endereco">
+        <ScalarProperty Name="id_endereco" ColumnName="pm_endereco_id_endereco" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,186 @@
+﻿@model ProjectMaster.Application.Models.PedidoModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de Pedido";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    int count = 0;
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Pedido.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Pedido/Pedido?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Pedido.", "Editar Pedido.", "editar", "", Url.Content("~/Pedido/Pedido?acao=Edit&id_pedido=" + Model.id_pedido), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Pedido.", "Excluir Pedido.", "excluir", "", "JavaScript:delete_file(" + Model.id_pedido + ",'Pedido','rows')", true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Pedido.", "Gravar Pedido.", "gravar", "", "javascript:ShowLoad();$('#formulario_pedido').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Pedido/Pedido"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Pedido/Index"), true, true));
+
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Pedido.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Pedido/Pedido?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Pedido.", "Editar Pedido.", "editar", "", Url.Content("~/Pedido/Pedido?acao=Edit&id_pedido=" + Model.id_pedido), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Pedido.", "Excluir Pedido.", "excluir", "", "JavaScript:delete_file(" + Model.id_pedido + ",'Pedido','rows')", true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Pedido.", "Gravar Pedido.", "gravar", "", "javascript:ShowLoad();$('#formulario_pedido').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Pedido/Pedido?acao=View&id_pedido=" + Model.id_pedido), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Pedido/Index"), true, true));
+
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        if (string.IsNullOrEmpty(Model.dm_status_pedido))
+        {
+            Model.dm_status_pedido = "A";
+        }
+
+        if (Model.dm_status_pedido.Equals("A", StringComparison.OrdinalIgnoreCase))
+        {
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Pedido.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Pedido/Pedido?acao=New"), true, true));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Pedido.", "Editar Pedido.", "editar", "", Url.Content("~/Pedido/Pedido?acao=Edit&id_pedido=" + Model.id_pedido), true, true));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Pedido.", "Excluir Pedido.", "excluir", "", Url.Content("~/Pedido/Pedido"), true, true));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Pedido.", "Gravar Pedido.", "gravar", "", Url.Content("~/Pedido/Pedido"), true, false));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Pedido/Pedido"), true, false));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Pedido/Index"), true, true));
+
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Separador, string.Empty, string.Empty, string.Empty, "", string.Empty, true, true));
+
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excel, "Exportar Pedido", "Exportar Pedido.", "exportar_pedido", "", Url.Content("~/Pedido/ExportPedido?id_pedido=" + Model.id_pedido), true, true));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.FinalizarPedido, "Finalizar Pedido", "Finalizar Pedido.", "finalizar_pedido", "", Url.Content("~/Pedido/FinalizarPedidoSCR?id_pedido=" + Model.id_pedido), true, true));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CancelarPedido, "Cancelar Pedido", "Cancelar Pedido.", "cancelar_pedido", "", Url.Content("~/Pedido/CancelarPedido?id_pedido=" + Model.id_pedido), true, true));
+        }
+        else
+        {
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Pedido.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Pedido/Pedido?acao=New"), true, true));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Pedido.", "Editar Pedido.", "editar", "", Url.Content("~/Pedido/Pedido?acao=Edit&id_pedido=" + Model.id_pedido), true, false));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Pedido.", "Excluir Pedido.", "excluir", "", Url.Content("~/Pedido/Pedido"), true, false));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Pedido.", "Gravar Pedido.", "gravar", "", "javascript:ShowLoad();$('#formulario_pedido').submit();", true, false));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Pedido/Pedido?acao=View&id_pedido=" + Model.id_pedido), true, false));
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Pedido/Index"), true, true));
+
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Separador, string.Empty, string.Empty, string.Empty, "", string.Empty, true, true));
+
+            Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excel, "Exportar Pedido", "Exportar Pedido.", "exportar_pedido", "", Url.Content("~/Pedido/ExportPedido?id_pedido=" + Model.id_pedido), true, true));
+        }
+
+        read_only = "readonly='readonly'";
+    }
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    @using (Html.BeginForm("Pedido", "Pedido", FormMethod.Post, new { id = "formulario_pedido", name = "formulario_pedido", onkeypress = "javascript:return WebForm_FireDefaultButton(event, 'incluir_item')" }))
+    {   
+        <fieldset title="Pedido">
+            <legend>Pedido</legend>
+            <label class="normal">Número do Pedido:</label>
+            <input type="text" value="@Model.nr_pedido" id="nr_pedido" name="nr_pedido" size="10" maxlength="10" readonly="readonly" />
+
+            <input type="hidden" value="@Model.id_pedido" id="id_pedido" name="id_pedido" />
+
+            <label class="normal">Cliente / Fornecedor:</label>
+
+            <input type="text" value="@(Model.Pessoa != null ? Model.Pessoa.ds_marca : "")" id="ds_marca" name="Pessoa.ds_marca" size="20" maxlength="50" @read_only />
+            <input type="hidden" value="@(Model.Pessoa != null ? Model.Pessoa.id_pessoa : 0)" id="id_pessoa" name="Pessoa.id_pessoa" />
+
+            <a href="javascript:procurar_pessoa();">
+                <img src="@Url.Content("~/Content/images/buttons/procurar_16x16.png")" id="procurar_pessoa" alt="Procurar Cliente" width="16" height="16" />
+            </a>
+
+            <input type="text" value="@(Model.Pessoa != null ? Model.Pessoa.ds_razao_social : "")" id="ds_razao_social" name="Pessoa.ds_razao_social" size="60" maxlength="100" readonly="readonly" />
+            @Html.ValidationMessage("id_pessoa", "*")
+
+            <script type="text/javascript">
+
+                $("#ds_marca").change(function () {
+
+                    $("#ds_razao_social").val("");
+                    $("#id_pessoa").val("0");
+
+                    if ($('#ds_marca').val() == '') {
+                        $("#ds_razao_social").val("");
+                        $("#id_pessoa").val("0");
+                        return;
+                    }
+
+                    if ($('#id_pessoa').val() != '0')
+                        return;
+
+                    LookupPessoa("ds_marca", "ds_razao_social", "id_pessoa");
+                });
+
+                function procurar_pessoa() {
+                    $("#ds_marca").val("");
+                    LookupPessoa("ds_marca", "ds_razao_social", "id_pessoa");
+                }
+            </script>
+
+            <label class="normal">Status:</label>
+            @Html.DropDownListFor(model => model.dm_status_pedido, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.StatusPedido, true), new { disabled = "disabled", id = "ddlStatusPedido", name = "ddlStatusPedido" })
+            <input type="hidden" value="@Model.dm_status_pedido" id="dm_status_pedido" name="dm_status_pedido" />
+
+            <br />
+
+            <label class="normal">Data Emissão:</label>
+            <input type="text" value="@Model.dt_emissao.ToString("dd/MM/yyyy")" id="dt_emissao" name="dt_emissao" size="10" maxlength="10" readonly="readonly" alt="date" />
+
+            <label class="normal">Data Vencimento:</label>
+            <input type="text" value="@Model.dt_vencimento.ToString("dd/MM/yyyy")" id="dt_vencimento" name="dt_vencimento" size="10" maxlength="10" readonly="readonly" alt="date" />
+            @Html.ValidationMessage("dt_vencimento", "*")
+
+            <script type="text/javascript">
+                $("#dt_vencimento").datepicker({
+                    beforeShowDay: $.datepicker.noWeekends,
+                    dateFormat: "dd/mm/yy",
+                    dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
+                    dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+                    dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+                    monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                    monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+                });
+            </script>
+
+            <br />
+
+            <label class="normal">Forma de Pagamento:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.dm_forma_pagto, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.FormaPagamento, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.dm_forma_pagto, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.FormaPagamento, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("dm_forma_pagto", "*")
+
+            <label class="normal">Observação:</label>
+            <input type="text" value="@Model.obs" id="obs" name="obs" size="100" maxlength="250" @read_only />
+
+        </fieldset>
+             
+        @Html.ValidationSummary()
+
+        @Html.Action("Items", "Pedido", new { items = Model == null ? null : Model.Items, acao = acao })
+
+    }
+</div>
+

@@ -1,0 +1,285 @@
+body, html
+{
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+    font-family: verdana, Tahoma , Arial, Helvetica, Serif;
+    font-size: 11px;
+}
+
+#topo
+{
+	margin: 0px 0px 3px 0px;
+	border: none 0px #ccc;
+	background-color: #eee;
+	height: 50px;    
+}
+
+#main_default
+{
+    position: absolute;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 5px 5px 5px;
+	top: 90px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+	display: block;
+	overflow: auto;	
+}
+
+#main
+{
+    position: absolute;
+	margin: 0px 0px 0px 0px;
+	padding: 5px 5px 5px 5px;
+	top: 160px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+	display: block;
+	overflow: auto;	
+}
+
+#tool_bar
+{
+    margin: 0px 0px 0px 0px;
+	padding: 0px 5px 0px 5px;
+	height: 38px;
+	background-color: #7cadd1;
+}
+
+#title_tag
+{
+    border-top: solid 5px #2a5d73;
+    border-bottom: solid 5px #2a5d73;
+	margin: 0px 0px 0px 0px;
+	padding-left: 30px;
+	height: 21px;
+	font-weight: bold;
+	font-size: 17px;
+	overflow: hidden;	
+}
+
+.main-center
+{
+     position:absolute;
+     top:50%;
+     left:50%;
+     margin:-150px 0 0 -150px;
+}
+
+.load
+{
+    z-index: 99999;
+    position:absolute;
+    width: 150px;
+    height: 50px;
+    top:50%;
+    left:50%;
+    margin: -25px 0 0 -75px;
+    padding-top: 30px;
+    background-color: #fff;
+    border: 1px solid #000; 
+    text-align: center;   
+}
+
+.main-scroll::-webkit-scrollbar {
+    width:10px;
+    height:10px;
+    background-color:#7cadd1;
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset -1px -1px 0 rgba(0,0,0,.07);
+}
+.main-scroll::-webkit-scrollbar:hover {
+    background-color:#7cadd1;
+}
+.main-scroll::-webkit-resizer {
+    -webkit-border-radius:4px;
+    background-color:#666;
+}
+.main-scroll::-webkit-scrollbar-thumb {
+    min-height:0.8em;
+    min-width:0.8em;
+    background-color: rgba(0, 0, 0, .2);
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset -1px -1px 0 rgba(0,0,0,.07);
+}
+.main-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #2a5d73;
+}
+.main-scroll::-webkit-scrollbar-thumb:active {
+    background-color:#2a5d73;
+}
+
+a
+{
+    border: 0px;
+    text-decoration: none;
+}
+
+img
+{
+    border: 0px;
+}
+
+h2
+{
+    color: #fff;
+    font-size: 25px;
+    font-weight: normal;
+}
+
+
+form label
+{
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+	width: 189px;
+	float: left;
+}
+
+form label.normal
+{
+    width: 50px;
+	float: none;
+}
+form .error, .field-validation-error, .error
+{
+    color: #ff3300;
+    float: none;
+}
+
+form label.obr
+{
+   
+}
+
+form br
+{
+    clear: left;
+}
+form select[multiple="multiple"]
+{
+    background: none;
+}
+
+form input[type="image"]
+{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    
+    border: none;
+    background: none;
+}
+
+form input, form textarea, form select
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.bt
+{
+    margin-top: 3px;
+    margin-right: 5px;
+    /* width: 32px;
+    height: 32px; */
+    border: none;
+}
+
+/* , input[readonly], select[readonly], checkbox[readonly], textarea[readonly] */
+input[disabled], select[disabled], checkbox[disabled], textarea[disabled]
+{
+    background: ;
+    border: 0px none Transparent;
+    color: #000;
+    font-weight: bold;
+    cursor: default;
+}
+input[readonly]
+{
+    /*background: ;*/
+    border: 0px none Transparent;
+    color: #000;
+    cursor: default;
+    
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+input, select /*[type='text']*/
+{
+    border: solid 1px #000;   
+    font-family: verdana, Tahoma , Arial, Helvetica, Serif;
+    font-size: 10px;
+    background: url("/content/images/bg_text.png") repeat-x;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin: 2px;
+}
+
+span.barra 
+{
+	width:200px; float:left;
+}
+
+select
+{
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+
+
+
+  .ui-tooltip, .arrow:after {
+    background: black;
+    border: 2px solid white;
+  }
+  .ui-tooltip {
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+    font: bold 14px "Helvetica Neue", Sans-Serif;
+    text-transform: uppercase;
+    box-shadow: 0 0 7px black;
+  }
+  .arrow {
+    width: 70px;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    margin-left: -35px;
+    bottom: -16px;
+  }
+  .arrow.top {
+    top: -16px;
+    bottom: auto;
+  }
+  .arrow.left {
+    left: 20%;
+  }
+  .arrow:after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: -20px;
+    width: 25px;
+    height: 25px;
+    box-shadow: 6px 5px 9px -9px black;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    tranform: rotate(45deg);
+  }
+  .arrow.top:after {
+    bottom: -20px;
+    top: auto;
+  }

@@ -1,0 +1,87 @@
+﻿@model ProjectMaster.Application.Models.CentroDeCustoModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de Centro de Custo";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Centro de Custo.", "cadastrar", "CadastrarNovo", "", Url.Content("~/CentroDeCusto/CentroDeCusto?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Centro de Custo.", "Editar Centro de Custo.", "editar", "", Url.Content("~/CentroDeCusto/CentroDeCusto?acao=Edit&id_centro_de_custo=" + Model.id_centro_de_custo), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Centro de Custo.", "Excluir Centro de Custo.", "excluir", "", Url.Content("~/CentroDeCusto/CentroDeCusto"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Centro de Custo.", "Gravar Centro de Custo.", "gravar", "", "javascript:ShowLoad();$('#formulario_centro_de_custo').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/CentroDeCusto/CentroDeCusto"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/CentroDeCusto/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Centro de Custo.", "cadastrar", "CadastrarNovo", "", Url.Content("~/CentroDeCusto/CentroDeCusto?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Centro de Custo.", "Editar Centro de Custo.", "editar", "", Url.Content("~/CentroDeCusto/CentroDeCusto?acao=Edit&id_centro_de_custo=" + Model.id_centro_de_custo), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Centro de Custo.", "Excluir Centro de Custo.", "excluir", "", "JavaScript:delete_file(" + Model.id_centro_de_custo + ",'CentroDeCusto','form')", true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Centro de Custo.", "Gravar Centro de Custo.", "gravar", "", "javascript:ShowLoad();$('#formulario_centro_de_custo').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/CentroDeCusto/CentroDeCusto?acao=View&id_centro_de_custo=" + Model.id_centro_de_custo), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/CentroDeCusto/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Centro de Custo.", "cadastrar", "CadastrarNovo", "", Url.Content("~/CentroDeCusto/CentroDeCusto?acao=New"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Centro de Custo.", "Editar Centro de Custo.", "editar", "", Url.Content("~/CentroDeCusto/CentroDeCusto?acao=Edit&id_centro_de_custo=" + Model.id_centro_de_custo), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Centro de Custo.", "Excluir Centro de Custo.", "excluir", "", "JavaScript:delete_file(" + Model.id_centro_de_custo + ",'CentroDeCusto','form')", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Centro de Custo.", "Gravar Centro de Custo.", "gravar", "", Url.Content("~/CentroDeCusto/CentroDeCusto"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/CentroDeCusto/CentroDeCusto"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/CentroDeCusto/Index"), true, true));
+        read_only = "readonly='readonly'";
+    }
+}
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+@using (Html.BeginForm("CentroDeCusto", "CentroDeCusto", FormMethod.Post, new { id = "formulario_centro_de_custo", name = "formulario_centro_de_custo" }))
+{   
+    <fieldset title="CentroDeCusto">
+        <legend>Centro de Custo</legend>
+        <label class="normal">Id:</label>
+        <input type="text" value="@Model.id_centro_de_custo" id="id_centro_de_custo" name="id_centro_de_custo" size="7" maxlength="6" readonly="readonly" />
+
+        <br />
+        
+        <label class="normal">Código:</label>
+        <input type="text" value="@Model.ds_codigo" id="ds_codigo" name="ds_codigo" size="20" maxlength="15" @read_only />
+        @Html.ValidationMessage("ds_codigo", "*")
+
+        
+        <label class="normal">Descrição:</label>
+        <input type="text" value="@Model.ds_descricao" id="ds_descricao" name="ds_descricao" size="80" maxlength="60" @read_only />
+        @Html.ValidationMessage("ds_descricao", "*")
+
+    </fieldset>  
+    @Html.ValidationSummary()
+
+}
+</div>
+
+<div id="dialog-confirm" style="display: none" title="Centro de Custo">
+<p>
+<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+Excluir Centro de Custo?
+</p>
+</div>

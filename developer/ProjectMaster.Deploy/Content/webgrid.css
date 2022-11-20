@@ -1,0 +1,106 @@
+﻿.webgrid
+{
+    font-family: Arial, Sans-Serif;    
+    font-size: 11px;    
+    table-layout: auto;    
+    border-collapse: collapse;    
+    border: #888 3px solid;
+    margin-top: 10px;   
+}
+
+.webgrid thead
+{
+    background: #fff url(images/bright_070.gif) no-repeat right top;
+    background-position: top;
+    background-repeat: repeat-x;
+    background-color: #1d1d1d;
+}
+
+.webgrid tfoot
+{
+    background-color: #f0f0f0;
+    font-weight: bold;
+    text-align: center;
+    border-top: solid 1px #1d1d1d;
+    border-left: solid 1px #000;
+    border-right: solid 1px #000;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.webgrid tfoot a
+{
+    font-weight: normal;
+    
+}
+    
+.webgrid table td
+{
+    border: 0px;    
+    padding: 5px;
+}
+
+.webgrid td
+{
+    border-top: solid 1px #1d1d1d;
+    border-left: solid 1px #000;
+    border-right: solid 1px #000;
+    padding: 5px;
+}
+
+.webgrid th
+{
+    padding: 5px;    
+    color: #000;
+    background: #000 url(images/gv_bmid_070.gif) no-repeat right top;
+    text-align: left;
+}
+
+.webgrid a
+{
+    color: #000;
+    font-size: 11px;
+    font-style: normal;
+    font-family: Verdana, Arial, Helvetica, sans-serif; 
+    text-decoration: none;      
+}
+
+.webgrid .webgrid-rows
+{
+    background-color: #c9c9c9;
+}
+
+.webgrid .webgrid-rows-empty
+{
+    background-color: #fff;
+}
+
+.webgrid .webgrid-alternating-rows
+{
+    background-color: #f0f0f0;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.webgrid tbody tr:hover
+{
+    background-color: #fcfcf0;
+    text-decoration: none;
+}
+
+.webgrid tbody td:hover
+{
+    text-decoration: underline;
+}
+
+.webgrid-col-action
+{
+    width: 120px;
+    text-align: center;
+}
+
+.webgrid-col-fill
+{
+    width: 100%;
+}
+

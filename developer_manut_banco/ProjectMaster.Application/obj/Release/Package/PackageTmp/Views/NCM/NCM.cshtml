@@ -1,0 +1,86 @@
+﻿@model ProjectMaster.Application.Models.NCMModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de NCM";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo NCM.", "cadastrar", "CadastrarNovo", "", Url.Content("~/NCM/NCM?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar NCM.", "Editar NCM.", "editar", "", Url.Content("~/NCM/NCM?acao=Edit&id_ncm=" + Model.id_ncm), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir NCM.", "Excluir NCM.", "excluir", "", Url.Content("~/NCM/NCM"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar NCM.", "Gravar NCM.", "gravar", "", "javascript:ShowLoad();$('#formulario_ncm').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/NCM/NCM"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/NCM/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo NCM.", "cadastrar", "CadastrarNovo", "", Url.Content("~/NCM/NCM?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar NCM.", "Editar NCM.", "editar", "", Url.Content("~/NCM/NCM?acao=Edit&id_ncm=" + Model.id_ncm), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir NCM.", "Excluir NCM.", "excluir", "", "JavaScript:delete_file(" + Model.id_ncm + ",'NCM','form')", true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar NCM.", "Gravar NCM.", "gravar", "", "javascript:ShowLoad();$('#formulario_ncm').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/NCM/NCM?acao=View&id_ncm=" + Model.id_ncm), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/NCM/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo NCM.", "cadastrar", "CadastrarNovo", "", Url.Content("~/NCM/NCM?acao=New"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar NCM.", "Editar NCM.", "editar", "", Url.Content("~/NCM/NCM?acao=Edit&id_ncm=" + Model.id_ncm), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir NCM.", "Excluir NCM.", "excluir", "", "JavaScript:delete_file(" + Model.id_ncm + ",'NCM','form')", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar NCM.", "Gravar NCM.", "gravar", "", Url.Content("~/NCM/NCM"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/NCM/NCM"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/NCM/Index"), true, true));
+        read_only = "readonly='readonly'";
+    }
+}
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+@using (Html.BeginForm("NCM", "NCM", FormMethod.Post, new { id = "formulario_ncm", name = "formulario_ncm" }))
+{   
+    <fieldset title="NCM">
+        <legend>NCM</legend>
+        <label class="normal">Id:</label>
+        <input type="text" value="@Model.id_ncm" id="id_ncm" name="id_ncm" size="7" maxlength="6" readonly="readonly" />
+
+        <br />
+        
+        <label class="normal">NCM:</label>
+        <input type="text" value="@Model.ncm" id="ncm" name="ncm" size="10" maxlength="20" @read_only alt="ncm" />
+        @Html.ValidationMessage("ncm", "*")
+
+        <label class="normal">Descrição:</label>
+        <input type="text" value="@Model.ds_descricao" id="ds_descricao" name="ds_descricao" size="100" maxlength="100" @read_only />
+        @Html.ValidationMessage("ds_descricao", "*")
+
+    </fieldset>  
+    @Html.ValidationSummary()
+
+}
+</div>
+
+<div id="dialog-confirm" style="display: none" title="NCM">
+<p>
+<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+Excluir NCM?
+</p>
+</div>

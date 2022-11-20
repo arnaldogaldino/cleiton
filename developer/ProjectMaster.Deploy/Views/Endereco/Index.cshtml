@@ -1,0 +1,80 @@
+﻿@model ProjectMaster.Application.Models.EnderecoModel
+@using MvcJqGrid
+<script src="@Url.Content("~/Scripts/MeusScripts/paginas/endereco/index.js")" type="text/javascript"></script>
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "formEndereco" }))
+{
+    @Html.HiddenFor(model => model.proximoId , new { @id = "end_proximoId"})
+        @Html.Hidden("id_edicao_endereco", "", new { @id = "id_edicao_endereco" })
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Endereço</legend>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.dm_tipo_endereco)
+            @Html.DropDownListFor(model => model.dm_tipo_endereco, (SelectList)ViewBag.TipoEndereco)
+            @Html.ValidationMessageFor(model => model.dm_tipo_endereco)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.nm_endereco)
+            @Html.EditorFor(model => model.nm_endereco)
+            @Html.ValidationMessageFor(model => model.nm_endereco)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.nr_numero)
+            @Html.EditorFor(model => model.nr_numero)
+            @Html.ValidationMessageFor(model => model.nr_numero)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_complemento)
+            @Html.EditorFor(model => model.ds_complemento)
+            @Html.ValidationMessageFor(model => model.ds_complemento)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_bairro)
+            @Html.EditorFor(model => model.ds_bairro)
+            @Html.ValidationMessageFor(model => model.ds_bairro)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_cidade)
+            @Html.EditorFor(model => model.ds_cidade)
+            @Html.ValidationMessageFor(model => model.ds_cidade)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_uf)
+            @Html.EditorFor(model => model.ds_uf)
+            @Html.ValidationMessageFor(model => model.ds_uf)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.nr_cep)
+            @Html.EditorFor(model => model.nr_cep)
+            @Html.ValidationMessageFor(model => model.nr_cep)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.id_pais)
+            @Html.DropDownListFor(model => model.id_pais, (SelectList)ViewBag.Paises)
+            @Html.ValidationMessageFor(model => model.id_pais)
+        </div>
+        <br />
+        <p>
+                <input type="button" id="btnEdtEndereco" value="Editar" />
+            <input type="button" id="btnAddEndereco" value="Adicionar" />
+        </p>
+    </fieldset>
+    @(Html.Grid("gridEndereco")
+    .SetCaption("Endereços")
+    .AddColumn(new Column("id").SetHidden(true))
+    .AddColumn(new Column("dm_tipo_endereco").SetHidden(true))
+    .AddColumn(new Column("ds_tipo_endereco").SetLabel("Tipo Endereço"))
+    .AddColumn(new Column("nr_cep").SetLabel("CEP"))
+    .AddColumn(new Column("nm_endereco").SetLabel("Logradouro"))
+    .AddColumn(new Column("nr_numero").SetLabel("Número"))
+    .AddColumn(new Column("ds_complemento").SetLabel("Complemento"))
+    .AddColumn(new Column("ds_bairro").SetLabel("Bairro"))
+    .AddColumn(new Column("ds_cidade").SetLabel("Município"))
+    .AddColumn(new Column("ds_uf").SetLabel("UF"))
+    .AddColumn(new Column("id_pais").SetHidden(true))
+    .AddColumn(new Column("ds_pais").SetLabel("País"))
+    .AddColumn(new Column("acoes").SetLabel("Ações").SetCustomFormatter("CriarBotoesEndereco"))
+    .SetAutoWidth(true).SetRowNum(20)
+    .SetUrl(Url.Action("Procurar", "Endereco", new { idPessoa = Model.id_pessoa }))
+    .SetRowList(new[] { 10, 15, 20, 50 }).SetViewRecords(true))
+}

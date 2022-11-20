@@ -1,0 +1,245 @@
+body, html {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    font-family: verdana, Tahoma, Arial, Helvetica, Serif;
+    font-size: 11px;
+}
+
+#topo {
+    margin: 0px 0px 3px 0px;
+    border: none 0px #ccc;
+    background-color: #eee;
+    height: 50px;
+}
+
+#main_default {
+    position: absolute;
+    margin: 0px 0px 0px 0px;
+    padding: 5px 5px 5px 5px;
+    top: 90px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: block;
+    overflow: auto;
+}
+
+#main {
+    position: absolute;
+    margin: 0px 0px 0px 0px;
+    padding: 5px 5px 5px 5px;
+    top: 160px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: block;
+    overflow: auto;
+}
+
+#tool_bar {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 5px 0px 5px;
+    height: 38px;
+    background-color: #bbd37e;
+}
+
+#title_tag {
+    border-top: solid 5px #5c731e;
+    border-bottom: solid 5px #5c731e;
+    margin: 0px 0px 0px 0px;
+    padding-left: 30px;
+    height: 21px;
+    font-weight: bold;
+    font-size: 17px;
+    overflow: hidden;
+}
+
+.main-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+}
+
+.load {
+    z-index: 99999;
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -75px;
+    padding-top: 30px;
+    background-color: #fff;
+    border: 1px solid #000;
+    text-align: center;
+}
+
+.div_loading {
+    display: none;
+    position: fixed !important;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+    text-align: center;
+}
+
+    .div_loading img {
+        top: 40%;
+        left: 47%;
+        position: absolute;
+    }
+
+.main-scroll::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: #bbd37e;
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset -1px -1px 0 rgba(0,0,0,.07);
+}
+
+    .main-scroll::-webkit-scrollbar:hover {
+        background-color: #bbd37e;
+    }
+
+.main-scroll::-webkit-resizer {
+    -webkit-border-radius: 4px;
+    background-color: #666;
+}
+
+.main-scroll::-webkit-scrollbar-thumb {
+    min-height: 0.8em;
+    min-width: 0.8em;
+    background-color: rgba(0, 0, 0, .2);
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset -1px -1px 0 rgba(0,0,0,.07);
+}
+
+    .main-scroll::-webkit-scrollbar-thumb:hover {
+        background-color: #6a812c;
+    }
+
+    .main-scroll::-webkit-scrollbar-thumb:active {
+        background-color: #6a812c;
+    }
+
+a {
+    border: 0px;
+    text-decoration: none;
+}
+
+img {
+    border: 0px;
+}
+
+h2 {
+    color: #fff;
+    font-size: 25px;
+    font-weight: normal;
+}
+
+input {
+    width: 130px;
+}
+
+select {
+    width: 137px;
+}
+
+form label {
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    width: 189px;
+    float: left;
+}
+
+    form label.normal {
+        width: 50px;
+        float: none;
+    }
+
+form .error, .field-validation-error, .error {
+    color: #ff3300;
+    float: none;
+}
+
+form label.obr {
+}
+
+form br {
+    clear: left;
+}
+
+form select[multiple="multiple"] {
+    background: none;
+}
+
+form input[type="image"] {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    border: none;
+    background: none;
+}
+
+form input, form textarea, form select {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.bt {
+    margin-top: 3px;
+    margin-right: 5px;
+    /* width: 32px;
+    height: 32px; */
+    border: none;
+}
+
+/* , input[readonly], select[readonly], checkbox[readonly], textarea[readonly] */
+input[disabled], select[disabled], checkbox[disabled], textarea[disabled] {
+    background:;
+    border: 0px none Transparent;
+    color: #000;
+    font-weight: bold;
+    cursor: default;
+}
+
+input[readonly] {
+    /*background: ;*/
+    border: 0px none Transparent;
+    color: #000;
+    cursor: default;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+input, select /*[type='text']*/ {
+    border: solid 1px #000;
+    font-family: verdana, Tahoma, Arial, Helvetica, Serif;
+    font-size: 10px;
+    background: url("/content/images/bg_text.png") repeat-x;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin: 2px;
+}
+
+span.barra {
+    width: 200px;
+    float: left;
+}
+
+select {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.editor-field {
+    width: 300px;
+    float: left;
+}

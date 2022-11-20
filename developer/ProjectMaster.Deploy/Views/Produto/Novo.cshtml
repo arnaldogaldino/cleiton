@@ -1,0 +1,67 @@
+﻿@model ProjectMaster.Application.Models.ProdutoModel
+<h1>Manutenção de Produto</h1>
+<script src="@Url.Content("~/Scripts/MeusScripts/paginas/produto/novo.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "formProduto" }))
+{
+    @Html.ValidationSummary(true)
+ 
+    <fieldset>
+        <legend>Produto e Serviço</legend>
+        <div class='editor-field'>@Html.LabelFor(model => model.cProd) @Html.EditorFor(model => model.cProd) @Html.ValidationMessageFor(model => model.cProd)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.xProd) @Html.EditorFor(model => model.xProd) @Html.ValidationMessageFor(model => model.xProd)  </div>
+    </fieldset>
+    
+    
+    <fieldset>
+        <legend>Complemento de Dados da Embalagem do Produto</legend>
+        <div class='editor-field'>@Html.LabelFor(model => model.TP_EMBALAGEM) @Html.DropDownListFor(model => model.TP_EMBALAGEM, (SelectList)ViewBag.TipoEmbalagem) @Html.ValidationMessageFor(model => model.TP_EMBALAGEM)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.VL_EMBALAGEM) @Html.EditorFor(model => model.VL_EMBALAGEM) @Html.ValidationMessageFor(model => model.VL_EMBALAGEM)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.cEAN) @Html.DropDownListFor(model => model.cEAN, (SelectList)ViewBag.TipoEan) @Html.ValidationMessageFor(model => model.cEAN)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.NCM) @Html.DropDownListFor(model => model.NCM, (SelectList)ViewBag.TipoEan) @Html.ValidationMessageFor(model => model.NCM)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.EXTIPI) @Html.EditorFor(model => model.EXTIPI) @Html.ValidationMessageFor(model => model.EXTIPI)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.Gênero) @Html.EditorFor(model => model.Gênero) @Html.ValidationMessageFor(model => model.Gênero)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.uCom) @Html.EditorFor(model => model.uCom) @Html.ValidationMessageFor(model => model.uCom)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.vUnCom) @Html.EditorFor(model => model.vUnCom) @Html.ValidationMessageFor(model => model.vUnCom)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.cEANTrib) @Html.DropDownListFor(model => model.cEANTrib, (SelectList)ViewBag.TipoEan) @Html.ValidationMessageFor(model => model.cEANTrib)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.uTrib) @Html.EditorFor(model => model.uTrib) @Html.ValidationMessageFor(model => model.uTrib)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.vUnTrib) @Html.EditorFor(model => model.vUnTrib) @Html.ValidationMessageFor(model => model.vUnTrib)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.qTrib) @Html.EditorFor(model => model.qTrib) @Html.ValidationMessageFor(model => model.qTrib)  </div>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Grupo de Tributos incidentes no Produto ou Serviço</legend>
+        <div class='editor-field'>@Html.LabelFor(model => model.mIPI) @Html.EditorFor(model => model.mIPI) @Html.ValidationMessageFor(model => model.mIPI)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.qtdeN) @Html.EditorFor(model => model.qtdeN) @Html.ValidationMessageFor(model => model.qtdeN)  </div>
+    </fieldset>    
+
+    <fieldset>
+        <legend>IPI - Informar apenas quando o item for sujeito ao IPI</legend>
+        <div class='editor-field'>@Html.LabelFor(model => model.cIEnq) @Html.EditorFor(model => model.cIEnq) @Html.ValidationMessageFor(model => model.cIEnq)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.CNPJProd) @Html.EditorFor(model => model.CNPJProd) @Html.ValidationMessageFor(model => model.CNPJProd)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.cEnq) @Html.DropDownListFor(model => model.cEnq, (SelectList)ViewBag.TipoEan) @Html.ValidationMessageFor(model => model.cEnq)  </div>
+    </fieldset>    
+
+    <fieldset>
+        <legend>IPI - Informar apenas quando o item for sujeito ao IPI</legend>
+        <div class='editor-field'>@Html.LabelFor(model => model.CST) @Html.DropDownListFor(model => model.CST, (SelectList)ViewBag.Cst) @Html.ValidationMessageFor(model => model.CST)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.Orig) @Html.DropDownListFor(model => model.Orig, (SelectList)ViewBag.CstOrigem) @Html.ValidationMessageFor(model => model.Orig)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.modBC) @Html.DropDownListFor(model => model.modBC, (SelectList)ViewBag.ModBc) @Html.ValidationMessageFor(model => model.modBC)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.pICMS) @Html.EditorFor(model => model.pICMS) @Html.ValidationMessageFor(model => model.pICMS)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.pRedBC) @Html.EditorFor(model => model.pRedBC) @Html.ValidationMessageFor(model => model.pRedBC)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.modBCST) @Html.DropDownListFor(model => model.modBCST, (SelectList)ViewBag.ModBcSt) @Html.ValidationMessageFor(model => model.modBCST)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.pRedBCST) @Html.EditorFor(model => model.pRedBCST) @Html.ValidationMessageFor(model => model.pRedBCST)  </div>
+        <div class='editor-field'>@Html.LabelFor(model => model.pMVAST) @Html.EditorFor(model => model.pMVAST) @Html.ValidationMessageFor(model => model.pMVAST)  </div>
+    </fieldset>    
+
+    
+
+
+<p>
+    <input type="submit" value="Salvar" />
+</p>
+<div>
+    @Html.ActionLink("Voltar para pesquisa", "Procurar")
+</div>
+<br /><br />
+}

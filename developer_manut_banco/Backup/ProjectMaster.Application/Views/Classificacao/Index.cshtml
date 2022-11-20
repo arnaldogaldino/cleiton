@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Cadastro de Classificação de Operação";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Classificação de Operação.", "Cadastrar nova Classificação de Operação.", "CadastrarNovo", "", Url.Content("~/Classificacao/Classificacao?acao=New"), true, true));
+
+    var queryClassificacao = (IQueryable<ProjectMaster.Data.pm_classificacao>)ViewData["queryClassificacao"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>ID</span> 
+                </th>
+                <th width="150px" align="center">
+                    <span>Código</span> 
+                </th>
+                <th>
+                    <span>Classificação de Operação</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (ProjectMaster.Data.pm_classificacao linha in queryClassificacao)
+        {
+            <tr id='lin@(linha.id_classificacao.ToString())' class="@classRow">
+                <td>
+                    <span>@linha.id_classificacao</span>
+                </td>
+                <td>
+                    <span>@linha.ds_codigo</span>
+                </td>
+                <td>
+                    <span>@linha.ds_descricao</span>
+                </td>
+                <td align="center">
+                    <div style='width: 100px'> 
+                        <a href='@Url.Action("Classificacao", "Classificacao", new { acao = "View", id_classificacao = linha.id_classificacao })'> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                        <a href="JavaScript:delete_file('@linha.id_classificacao','Classificacao','rows')"> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> </div>
+                </td>
+            </tr>        
+             if (classRow == "webgrid-alternating-rows")
+             {
+                 classRow = "webgrid-rows";
+             }
+             else
+             {
+                 classRow = "webgrid-alternating-rows";
+             }
+        }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div id="dialog-confirm" title="Classificacao" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Classificacao?</p>
+</div>

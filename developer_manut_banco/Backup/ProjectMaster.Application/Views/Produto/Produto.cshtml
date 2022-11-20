@@ -1,0 +1,259 @@
+﻿@model ProjectMaster.Application.Models.ProdutoModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de Produto";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Produto.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Produto/Produto?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Produto.", "Editar Produto.", "editar", "", Url.Content("~/Produto/Produto?acao=Edit&id_produto=" + Model.id_produto), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Produto.", "Excluir Produto.", "excluir", "", Url.Content("~/Produto/Produto"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Produto.", "Gravar Produto.", "gravar", "", "javascript:$('#formulario_produto').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Produto/Produto"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Produto/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Produto.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Produto/Produto?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Produto.", "Editar Produto.", "editar", "", Url.Content("~/Produto/Produto?acao=Edit&id_produto=" + Model.id_produto), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Produto.", "Excluir Produto.", "excluir", "", "JavaScript:delete_file(" + Model.id_produto + ",'Produto','form')", true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Produto.", "Gravar Produto.", "gravar", "", "javascript:$('#formulario_produto').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Produto/Produto?acao=View&id_produto=" + Model.id_produto), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Produto/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Produto.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Produto/Produto?acao=New"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Produto.", "Editar Produto.", "editar", "", Url.Content("~/Produto/Produto?acao=Edit&id_produto=" + Model.id_produto), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Produto.", "Excluir Produto.", "excluir", "", "JavaScript:delete_file(" + Model.id_produto + ",'Produto','form')", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Produto.", "Gravar Produto.", "gravar", "", Url.Content("~/Produto/Produto"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Produto/Produto"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Produto/Index"), true, true));
+        read_only = "readonly='readonly'";
+    }
+}
+@Html.Partial("_vuToolBar", Buttons)
+<div id="main" class="main-scroll">
+    @using (Html.BeginForm("Produto", "Produto", FormMethod.Post, new { id = "formulario_produto", name = "formulario_produto" }))
+    {           
+        <fieldset>
+            <legend>Produto e Serviço</legend>
+            <label class="normal">Id:</label>
+            <input type="text" value="@Model.id_produto" id="id_produto" name="id_produto" size="7" maxlength="6" readonly="readonly" />
+            
+            <label class="normal">Código:</label>
+            <input type="text" value="@Model.cprod" id="cprod" name="cprod" size="25" maxlength="25" @read_only />
+            @Html.ValidationMessage("cprod", "*")
+            
+            <br />
+
+            <label class="normal">Descrição:</label>
+            <input type="text" value="@Model.xprod" id="xprod" name="xprod" size="50" maxlength="120" @read_only />
+            @Html.ValidationMessage("xprod", "*")
+        </fieldset>
+            
+        <fieldset>
+            <legend>Complemento de Dados da Embalagem do Produto</legend>
+
+            <label class="normal">Tipo de Embalagem:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.tp_embalagem, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoEmbalagem, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.tp_embalagem, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoEmbalagem, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("tp_embalagem", "*")
+            
+            <label class="normal">Valor Embalagem:</label>
+            <input type="text" value="@Model.vl_embalagem" id="vl_embalagem" name="vl_embalagem" size="15" maxlength="10" @read_only alt="decimal" />
+            @Html.ValidationMessage("vl_embalagem", "*")
+
+            <br />
+
+            <label class="normal">Código EAN:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.cean, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoEan, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.cean, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoEan, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("cean", "*")
+                        
+            <label class="normal">Código NCM:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.id_ncm, ProjectMaster.Bussiness.NCM.GetDomainByNCM(true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.id_ncm, ProjectMaster.Bussiness.NCM.GetDomainByNCM(true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("id_ncm", "*")
+
+            <br />
+
+            <label class="normal">Código EXTIPI:</label>
+            <input type="text" value="@Model.extipi" id="extipi" name="extipi" size="5" maxlength="3" @read_only />
+
+            <label class="normal">Gênero:</label>
+            <input type="text" value="@Model.genero" id="genero" name="genero" size="5" maxlength="2" @read_only alt="number5" />
+
+            <label class="normal">Unidade Comercial:</label>
+            <input type="text" value="@Model.ucom" id="ucom" name="ucom" size="10" maxlength="6" @read_only />
+
+            <label class="normal">Valor de Comercialização:</label>
+            <input type="text" value="@Model.vuncom" id="vuncom" name="vuncom" size="15" maxlength="10" @read_only alt="decimal" />
+            
+            <br />
+            
+            <label class="normal">Código EAN Tributário:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.ceantrib, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoEan, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.ceantrib, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoEan, true), new { disabled = "disabled" });
+            }
+
+            <label class="normal">Unidade Tributável:</label>
+            <input type="text" value="@Model.utrib" id="utrib" name="utrib" size="10" maxlength="6" @read_only />
+
+            <label class="normal">Valor Unitário de Tributação:</label>
+            <input type="text" value="@Model.vuntrib" id="vuntrib" name="vuntrib" size="15" maxlength="6" @read_only alt="decimal" />
+
+            <label class="normal">Quantidade Tributável:</label>
+            <input type="text" value="@Model.qtrib" id="qtrib" name="qtrib" size="15" maxlength="6" @read_only alt="decimal" />
+
+        </fieldset>
+    
+        <fieldset>
+            <legend>Grupo de Tributos incidentes no Produto ou Serviço</legend>
+
+            <label class="normal">Marcador de Cadastro de IPI:</label>
+            <input type="text" value="@Model.mipi" id="mipi" name="mipi" size="1" maxlength="1" @read_only alt="number1" />
+                        
+            <label class="normal">Quantidade de Registro N para o Produto:</label>
+            <input type="text" value="@Model.qtden" id="qtden" name="qtden" size="15" maxlength="11" @read_only alt="number10" />
+
+        </fieldset>
+        
+        <fieldset>
+            <legend>IPI - Informar apenas quando o item for sujeito ao IPI</legend>
+
+            <label class="normal">Classe de enquadramento do IPI para Cigarros e Bebidas:</label>
+            <input type="text" value="@Model.cienq" id="cienq" name="cienq" size="10" maxlength="5" @read_only />
+
+            <label class="normal">CNPJ Produtor:</label>
+            <input type="text" value="@Model.cnpjprod" id="cnpjprod" name="cnpjprod" size="20" maxlength="18" @read_only alt="cnpj" />
+            
+            <br />
+            
+            <label class="normal">Código Enquadramento Legal do IPI:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.cenq, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.Enquadramento, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.cenq, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.Enquadramento, true), new { disabled = "disabled" });
+            }
+
+        </fieldset>
+        
+        <fieldset>
+            <legend>ICMS</legend>
+
+            <label class="normal">Tributação do ICMS:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.cst, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.CST, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.cst, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.CST, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("cst", "*")
+
+            <label class="normal">Origem da Mercadoria:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.orig, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.CSTOrigem, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.orig, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.CSTOrigem, true), new { disabled = "disabled" });
+            }
+            @Html.ValidationMessage("orig", "*")
+            
+            <br />
+
+            <label class="normal">Modalidade de determinação da BC do ICMS:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.modbc, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.ModBC, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.modbc, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.ModBC, true), new { disabled = "disabled" });
+            }
+            
+            <label class="normal">Alíquota de Imposto:</label>
+            <input type="text" value="@Model.picms" id="picms" name="picms" size="15" maxlength="5" @read_only alt="decimal" />
+
+            <label class="normal">Percentual da Redução de BC:</label>
+            <input type="text" value="@Model.predbc" id="predbc" name="predbc" size="15" maxlength="5" @read_only alt="decimal" />
+
+            <br />
+            
+            <label class="normal">Modalidade de determinação da BC do ICMS ST:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.modbcst, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.ModBCST, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.modbcst, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.ModBCST, true), new { disabled = "disabled" });
+            }
+
+            <label class="normal">Percentual da Redução de BC do ICMS ST:</label>
+            <input type="text" value="@Model.predbcst" id="predbcst" name="predbcst" size="15" maxlength="5" @read_only alt="decimal" />
+            
+            <br />
+
+            <label class="normal">Percentual da margem de valor Adicionado do ICMS ST:</label>
+            <input type="text" value="@Model.pmvast" id="pmvast" name="pmvast" size="15" maxlength="5" @read_only alt="decimal" />
+
+        </fieldset>
+        
+        @Html.ValidationSummary()
+    }
+</div>
+
+<div id="dialog-confirm" title="Produto" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Produto?</p>
+</div>

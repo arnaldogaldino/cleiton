@@ -1,0 +1,430 @@
+﻿@model IEnumerable<ProjectMaster.Application.Models.PedidoModels.ItemModels>
+@{
+    Layout = null;
+
+    var classRow = "webgrid-rows";
+    int row_num = 0;
+    var read_only = "";
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        read_only = "readonly='readonly'";
+    }
+}
+<fieldset title="Items" id="Items" name="Items">
+    <legend>Items</legend>
+
+    <input type="hidden" value="" id="cp_id_pedido_item" name="id_pedido_item" />
+    <input type="hidden" value="" id="cp_id_pedido" name="id_pedido" />
+    <input type="hidden" value="-1" id="grid_linha_num" name="grid_linha_num" />
+
+    <label class="normal">Código do Produto:</label>
+    <input type="text" id="cprod" name="cprod" size="10" maxlength="10" @read_only />
+
+    <input type="hidden" value="0" id="id_produto" name="id_produto" />
+    <input type="hidden" value="0" id="tp_embalagem" name="tp_embalagem" />
+    @if (string.IsNullOrEmpty(read_only))
+    {
+        <a href="javascript:procurar_produto();">
+            <img src="@Url.Content("~/Content/images/buttons/procurar_16x16.png")" id="procurar_produto" alt="Procurar Produto" width="16" height="16" />
+        </a>
+    }
+
+    <script type="text/javascript">
+        $("#cprod").change(function () {
+
+            $("#xprod").val("");
+            $("#valor_unitario").val("0,00");
+            $("#quantidade").val("0,00");
+            $("#total").val("0,00");
+            $("#id_produto").val("0");
+            $("#valor_unitario").val("");
+            $("#tp_embalagem").val("");
+
+            if ($('#cprod').val() == '') {
+                $("#xprod").val("");
+                $("#valor_unitario").val("0,00");
+                $("#quantidade").val("0,00");
+                $("#total").val("0,00");
+                $("#id_produto").val("0");
+                $("#valor_unitario").val("");
+                $("#tp_embalagem").val("");
+                return;
+            }
+
+            if ($('#id_produto').val() != '0')
+                return;
+
+            LoockProduto("cprod", "xprod", "id_produto", "valor_unitario", "tp_embalagem");
+        });
+
+        function procurar_produto() {
+            $("#cprod").val("");
+            LoockProduto("cprod", "xprod", "id_produto", "valor_unitario", "tp_embalagem");
+        }
+
+    </script>
+    <input type="text" id="xprod" name="xprod" size="30" maxlength="50" readonly="readonly" />
+    @Html.ValidationMessage("xprod", "*")
+    
+    <label class="normal">Quantidade:</label>
+    <input type="text" id="quantidade" name="quantidade" size="10" maxlength="10" @read_only onchange="calcular_total_produto('valor_unitario','quantidade','total')" value="0,00" alt="decimal9" />
+    @Html.ValidationMessage("quantidade", "*")
+    
+    <label class="normal">Valor Unitário:</label>
+    <input type="text" id="valor_unitario" name="valor_unitario" size="10" maxlength="10" @read_only onchange="calcular_total_produto('valor_unitario','quantidade','total')" value="0,00" alt="decimal9" />
+    @Html.ValidationMessage("valor_unitario", "*")
+
+    <label class="normal">Total:</label>
+    <input type="text" id="total" name="total" size="10" maxlength="10" value="0,00" alt="decimal9" readonly="readonly" />
+
+    <input id="qtd_cx_empr" name="qtd_cx_empr" type="hidden" value="0" />
+    <input id="qtd_cx_devol" name="qtd_cx_devol" type="hidden" value="0" />
+    <input id="qtd_cx_pag_int" name="qtd_cx_devol" type="hidden" value="0" />
+
+    @if (string.IsNullOrEmpty(read_only))
+    {
+        <input id="gravar_item" name="gravar_item" type="button" value="Gravar" />
+    }
+    <br />
+
+    <div id="ValidItem" class="validation-summary-valid" data-valmsg-summary="true"></div>
+
+    <table id="grid_item" class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th style="white-space: nowrap">
+                    <span>Código Produto</span>
+                </th>
+                <th style="white-space: nowrap">
+                    <span>Descrição</span>
+                </th>
+                <th style="white-space: nowrap; text-align: right">
+                    <span>Qtd</span>
+                </th>
+                <th style="white-space: nowrap; text-align: right">
+                    <span>Vlr. Unit.</span>
+                </th>
+                <th style="white-space: nowrap; text-align: right">
+                    <span>Vlr. Total</span>
+                </th>
+                <th style="white-space: nowrap">
+                    <span>Tipo Embalagem</span>
+                </th>
+                <th style="white-space: nowrap; text-align: right">
+                    <span>Qtd Cx Emprestada</span>
+                </th>
+                <th style="white-space: nowrap; text-align: right">
+                    <span>Qtd Cx Devolvida</span>
+                </th>
+                <th style="white-space: nowrap; text-align: right">
+                    <span>Qtd Cx Vazias Paga</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                    <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var linha in Model)
+            {
+                <tr id='row_@(row_num.ToString())' class="@classRow">
+                    <td>
+                        <input id="id_pedido_item_@(row_num)" name="Items[@(row_num)].id_pedido_item" type="hidden" value="@linha.id_pedido_item" />
+                        <input id="id_pedido_@(row_num)" name="Items[@(row_num)].id_pedido" type="hidden" value="@linha.id_pedido" />
+                        <input id="id_produto_@(row_num)" name="Items[@(row_num)].id_produto" type="hidden" value="@linha.id_produto" />
+                        <input id="cprod_@(row_num)" name="Items[@(row_num)].Produto.cprod" type="hidden" value="@linha.Produto.cprod" />
+                        <input id="xprod_@(row_num)" name="Items[@(row_num)].Produto.xprod" type="hidden" value="@linha.Produto.xprod" />
+                        <input id="tp_embalagem_@(row_num)" name="Items[@(row_num)].Produto.tp_embalagem" type="hidden" value="@linha.Produto.tp_embalagem" />
+                        <span id="tx_cprod_@(row_num)">@linha.Produto.cprod</span>
+                    </td>
+                    <td>
+                        <span id="tx_xprod_@(row_num)">@linha.Produto.xprod</span>
+                    </td>
+                    <td style="text-align: right">
+                        <input type="text" id="quantidade_@(row_num)" name="Items[@(row_num)].quantidade" onchange="calcular_total_produto('valor_unitario_@(row_num)','quantidade_@(row_num)','valor_total_@(row_num)')"  size="5" maxlength="15" value="@linha.quantidade.ToString("n2")" alt="decimal9"  @read_only />
+                    </td>
+                    <td style="text-align: right">
+                        <input type="text" id="valor_unitario_@(row_num)" name="Items[@(row_num)].valor_unitario" onchange="calcular_total_produto('valor_unitario_@(row_num)','quantidade_@(row_num)','valor_total_@(row_num)')"  size="7" maxlength="15" value="@linha.valor_unitario.ToString("n2")" alt="decimal9"  @read_only />
+                    </td>
+                    <td style="text-align: right">
+                        <input type="text" id="valor_total_@(row_num)" name="Items[@(row_num)].valor_total" size="10" maxlength="15" value="@((linha.valor_unitario * linha.quantidade).ToString("n2"))" alt="decimal9" readonly="readonly" />
+                    </td>
+                    <td>
+                        <span id="tx_tp_embalagem_@(row_num)">@(!string.IsNullOrEmpty(linha.Produto.tp_embalagem) ? @Html.Encode(ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.TipoEmbalagem, linha.Produto.tp_embalagem)) : "")</span>
+                    </td>
+                    <td style="text-align: right">
+                        <input type="text" id="qtd_cx_empr_@(row_num)" name="Items[@(row_num)].qtd_cx_empr" size="5" maxlength="15" value="@linha.qtd_cx_empr.ToString("n2")" alt="decimal9" @read_only />
+                    </td>
+                    <td style="text-align: right">
+                        <input type="text" id="qtd_cx_devol_@(row_num)" name="Items[@(row_num)].qtd_cx_devol" size="5" maxlength="15" value="@linha.qtd_cx_devol.ToString("n2")" alt="decimal9" @read_only />
+                    </td>
+                    <td style="text-align: right">
+                        <input type="text" id="qtd_cx_pag_int_@(row_num)" name="Items[@(row_num)].qtd_cx_pag_int" size="5" maxlength="15" value="@linha.qtd_cx_pag_int.ToString("n2")" alt="decimal9" @read_only />
+                    </td>
+
+                    <td align="center">
+                        <div style='width: 100px'>
+                            @if (string.IsNullOrEmpty(read_only))
+                            {
+                                <a href='JavaScript:edit_item(0,@(row_num))' title="Editar">
+                                    <img src='@Url.Content("~/Content/images/edit.png")'/>
+                                </a>  
+                                <a href='JavaScript:delete_item(0,@(row_num))' title="Excluir">
+                                    <img src='@Url.Content("~/Content/images/delete.png")'/>
+                                </a> 
+                            }
+                            else
+                            {
+                                <img src='@Url.Content("~/Content/images/edit.png")' alt="Editar"/> 
+                                <img src='@Url.Content("~/Content/images/delete.png")' alt="Excluir"/>
+                            }
+                        </div>
+                    </td>
+                </tr>
+                if (classRow == "webgrid-alternating-rows")
+                {
+                    classRow = "webgrid-rows";
+                    row_num = row_num + 1;
+                }
+                else
+                {
+                    classRow = "webgrid-alternating-rows";
+                    row_num = row_num + 1;
+                }
+            }
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#gravar_item").button().click(function (event) {
+                ShowLoad();
+                var itemsRows = $("#grid_item > tbody").find("tr");
+                classRow = "";
+                //row_num = ($('#grid_item > tbody tr').length) - 1;
+                row_num = (itemsRows.length);
+
+                if (row_num == -1)
+                    row_num = 0;
+
+                if (!validFormItem())
+                    return;
+
+                if (row_num % 2 == 0) {
+                    classRow = "webgrid-alternating-rows";
+                }
+                else {
+                    classRow = "webgrid-rows";
+                }
+
+                if ($("#grid_linha_num").val() != "-1") {
+                    row_num = $("#grid_linha_num").val();
+                }
+
+                calc = "calcular_total_produto('valor_unitario_" + row_num + "','quantidade_" + row_num + "','valor_total_" + row_num + "')";
+
+                if ($("#qtd_cx_empr").val() == "0") {
+                    $("#qtd_cx_empr").val($("#quantidade").val());
+                }
+
+                new_rows = '<tr id="row_' + row_num + '" class="' + classRow + '">' +
+                            ' <td>' +
+                            '     <input id="id_pedido_item_' + row_num + '" name="Items[' + row_num + '].id_pedido_item" type="hidden" value="' + $("#id_pedido_item").val() + '" />' +
+                            '     <input id="id_pedido_' + row_num + '" name="Items[' + row_num + '].id_pedido" type="hidden" value="' + $("#id_pedido").val() + '" />' +
+                            '     <input id="id_produto_' + row_num + '" name="Items[' + row_num + '].id_produto" type="hidden" value="' + $("#id_produto").val() + '" />' +
+                            '     <input id="cprod_' + row_num + '" name="Items[' + row_num + '].Produto.cprod" type="hidden" value="' + $("#cprod").val() + '" />' +
+                            '     <input id="xprod_' + row_num + '" name="Items[' + row_num + '].Produto.xprod" type="hidden" value="' + $("#xprod").val() + '" />' +
+                            '     <input id="tp_embalagem_' + row_num + '" name="Items[' + row_num + '].Produto.tp_embalagem" type="hidden" value="' + $("#tp_embalagem").val() + '" />' +
+                            '     <span id="tx_cprod_' + row_num + '">' + $("#cprod").val() + '</span>' +
+                            ' </td>' +
+                            ' <td>' +
+                            '     <span id="tx_xprod_' + row_num + '">' + $("#xprod").val() + '</span>' +
+                            ' </td>' +
+                            ' <td style="text-align: right">' +
+                            '     <input type="text" id="quantidade_' + row_num + '" name="Items[' + row_num + '].quantidade" onchange="' + calc + '"  size="5" maxlength="15" value="' + $("#quantidade").val() + '" alt="decimal9" />' +
+                            ' </td>' +
+                            ' <td style="text-align: right">' +
+                            '     <input type="text" id="valor_unitario_' + row_num + '" name="Items[' + row_num + '].valor_unitario" onchange="' + calc + '"  size="7" maxlength="15" value="' + $("#valor_unitario").val() + '" alt="decimal9" />' +
+                            ' </td>' +
+                            ' <td style="text-align: right">' +
+                            '     <input type="text" id="valor_total_' + row_num + '" name="Items[' + row_num + '].valor_total" size="10" maxlength="15" value="' + $("#total").val() + '" alt="decimal9" readonly="readonly" />' +
+                            ' </td>' +
+                            ' <td>' +
+                            '     <span id="tx_tp_embalagem_' + row_num + '">' + GetTipoEmpalagem($("#tp_embalagem").val()) + '</span>' +
+                            ' </td>' +
+                            ' <td style="text-align: right">' +
+                            '     <input type="text" id="qtd_cx_empr_' + row_num + '" name="Items[' + row_num + '].qtd_cx_empr" size="5" maxlength="15" value="' + $("#qtd_cx_empr").val() + '" alt="decimal9" />' +
+                            ' </td>' +
+                            ' <td style="text-align: right">' +
+                            '     <input type="text" id="qtd_cx_devol_' + row_num + '" name="Items[' + row_num + '].qtd_cx_devol" size="5" maxlength="15" value="' + $("#qtd_cx_devol").val() + '" alt="decimal9" />' +
+                            ' </td>' +
+                            ' <td style="text-align: right">' +
+                            '     <input type="text" id="qtd_cx_pag_int_' + row_num + '" name="Items[' + row_num + '].qtd_cx_pag_int" size="5" maxlength="15" value="' + $("#qtd_cx_pag_int").val() + '" alt="decimal9" />' +
+                            ' </td>' +
+                            '    <td align="center">' +
+                            '        <div style="width: 100px"> ' +
+                            '            <a href="JavaScript:edit_item(0,' + row_num + ')" title="Editar"> <img src="@Url.Content("~/Content/images/edit.png")"/> </a>  ' +
+                            '            <a href="JavaScript:delete_item(0,' + row_num + ')" title="Excluir"> <img src="@Url.Content("~/Content/images/delete.png")"/> </a> ' +
+                            '        </div>' +
+                            '    </td>' +
+                            '<tr/>';
+
+                if ($("#grid_linha_num").val() == "-1") {
+                    $('#grid_item > tbody:last').append(new_rows);
+                } else {
+                    var itemsRows = $("#grid_item > tbody").find("tr#row_" + row_num);
+
+                    itemsRows.find("#id_pedido_item_" + row_num).val($("#cp_id_pedido_item").val());
+                    itemsRows.find("#id_pedido_" + row_num).val($("#cp_id_pedido").val());
+                    itemsRows.find("#id_produto_" + row_num).val($("#id_produto").val());
+                    itemsRows.find("#cprod_" + row_num).val($("#cprod").val());
+                    itemsRows.find("#xprod_" + row_num).val($("#xprod").val());
+                    itemsRows.find("#tp_embalagem_" + row_num).val($("#tp_embalagem").val());
+                    itemsRows.find("#tx_cprod_" + row_num).html($("#cprod").val());
+                    itemsRows.find("#tx_xprod_" + row_num).html($("#xprod").val());
+                    itemsRows.find("#quantidade_" + row_num).val($("#quantidade").val());
+                    itemsRows.find("#valor_unitario_" + row_num).val($("#valor_unitario").val());
+                    itemsRows.find("#valor_total_" + row_num).val($("#total").val());
+                    itemsRows.find("#tx_tp_embalagem_" + row_num).html(GetTipoEmpalagem($("#tp_embalagem").val()));
+                    itemsRows.find("#qtd_cx_empr_" + row_num).val($("#qtd_cx_empr").val());
+                    itemsRows.find("#qtd_cx_devol_" + row_num).val($("#qtd_cx_devol").val());
+                    itemsRows.find("#qtd_cx_pag_int_" + row_num).val($("#qtd_cx_pag_int").val());
+
+                    if ($("#qtd_cx_empr").val() == "0") {
+                        itemsRows.find("#qtd_cx_empr_" + row_num).val($("#quantidade").val());
+                    }
+                }
+
+                $('input[type="text"]').setMask();
+
+                clear_item();
+                HideLoad();
+            });
+        });
+
+        function validFormItem() {
+            const_erro = false;
+            msg = "";
+
+            if ($("#id_produto").val() == "") {
+                $('span[data-valmsg-for="xprod"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Produto) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="xprod"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#valor_unitario").val() == "0,00") {
+                $('span[data-valmsg-for="valor_unitario"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Valor Unitário) é obrigatório.</li>";
+                const_erro = true;
+            }
+            else {
+                $('span[data-valmsg-for="valor_unitario"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#quantidade").val() == "0,00") {
+                $('span[data-valmsg-for="quantidade"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Quantidade) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="quantidade"]').attr('class', "field-validation-valid");
+            }
+
+            if (const_erro == true) {
+                $('#ValidItem').html("<ul>" + msg + "</ul>");
+                HideLoad();
+                return false;
+            }
+            else {
+                $('#ValidItem').html("");
+                return true;
+            }
+        }
+
+        function clear_item() {
+
+            $("#cp_id_pedido_item").val("");
+            $("#cp_id_pedido").val("");
+            $("#tp_embalagem").val("");
+
+            $("#id_produto").val("");
+            $("#xprod").val("");
+            $("#cprod").val("");
+
+            $("#quantidade").val("0,00");
+            $("#valor_unitario").val("0,00");
+            $("#total").val("0,00");
+
+            $("#qtd_cx_empr").val("0");
+            $("#qtd_cx_devol").val("0");
+            $("#qtd_cx_pag_int").val("0");
+
+            $("#grid_linha_num").val("-1");
+        }
+
+        function edit_item(id_pedido_item, row) {
+            var itemsRows = $("#grid_item > tbody").find("tr#row_" + row);
+
+            clear_item();
+            ShowLoad();
+
+            $("#cp_id_pedido_item").val(itemsRows.find("#id_pedido_item_" + row).val());
+            $("#cp_id_pedido").val(itemsRows.find("#id_pedido_" + row).val());
+
+            $("#id_produto").val(itemsRows.find("#id_produto_" + row).val());
+            $("#xprod").val(itemsRows.find("#xprod_" + row).val());
+            $("#cprod").val(itemsRows.find("#cprod_" + row).val());
+
+            $("#tp_embalagem").val(itemsRows.find("#tp_embalagem_" + row).val());
+
+            $("#quantidade").val(itemsRows.find("#quantidade_" + row).val());
+            $("#valor_unitario").val(itemsRows.find("#valor_unitario_" + row).val());
+            $("#total").val(itemsRows.find("#valor_total_" + row).val());
+
+            $("#qtd_cx_empr").val(itemsRows.find("#qtd_cx_empr_" + row).val());
+            $("#qtd_cx_devol").val(itemsRows.find("#qtd_cx_devol_" + row).val());
+            $("#qtd_cx_pag_int").val(itemsRows.find("#qtd_cx_pag_int_" + row).val());
+
+            $("#grid_linha_num").val(row);
+            HideLoad();
+        }
+
+        function delete_item(id_pedido_item, row) {
+            if (id_pedido_item == 0) {
+                clear_item();
+
+                var itemsRows = $("#grid_item > tbody").find("tr#row_" + row);
+                itemsRows.find("#tp_embalagem_" + row).val("DL");
+
+                $("#grid_item > tbody").find('#row_' + row).fadeOut("slow", function () {
+                    $("#grid_item > tbody").find('#row_' + row).attr("style", "display:none");
+                });
+            }
+        }
+    </script>
+</fieldset>
+

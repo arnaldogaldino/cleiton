@@ -1,0 +1,93 @@
+﻿@model ProjectMaster.Application.Models.LimiteCreditoModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de Limite de Crédito";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Limite de Crédito.", "cadastrar", "CadastrarNovo", "", Url.Content("~/LimiteCredito/LimiteCredito?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Limite de Crédito.", "Editar Limite de Crédito.", "editar", "", Url.Content("~/LimiteCredito/LimiteCredito?acao=Edit&id_limite_credito=" + Model.id_limite_credito), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Limite de Crédito.", "Excluir Limite de Crédito.", "excluir", "", Url.Content("~/LimiteCredito/LimiteCredito"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Limite de Crédito.", "Gravar Limite de Crédito.", "gravar", "", "javascript:ShowLoad();$('#formulario_limite_credito').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/LimiteCredito/LimiteCredito"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/LimiteCredito/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Limite de Crédito.", "cadastrar", "CadastrarNovo", "", Url.Content("~/LimiteCredito/LimiteCredito?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Limite de Crédito.", "Editar Limite de Crédito.", "editar", "", Url.Content("~/LimiteCredito/LimiteCredito?acao=Edit&id_limite_credito=" + Model.id_limite_credito), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Limite de Crédito.", "Excluir Limite de Crédito.", "excluir", "", Url.Content("~/LimiteCredito/LimiteCredito"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Limite de Crédito.", "Gravar Limite de Crédito.", "gravar", "", "javascript:ShowLoad();$('#formulario_limite_credito').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/LimiteCredito/LimiteCredito?acao=View&id_limite_credito=" + Model.id_limite_credito), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/LimiteCredito/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Limite de Crédito.", "cadastrar", "CadastrarNovo", "", Url.Content("~/LimiteCredito/LimiteCredito?acao=New"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Limite de Crédito.", "Editar Limite de Crédito.", "editar", "", Url.Content("~/LimiteCredito/LimiteCredito?acao=Edit&id_limite_credito=" + Model.id_limite_credito), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Limite de Crédito.", "Excluir Limite de Crédito.", "excluir", "", Url.Content("~/LimiteCredito/LimiteCredito"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Limite de Crédito.", "Gravar Limite de Crédito.", "gravar", "", Url.Content("~/LimiteCredito/LimiteCredito"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/LimiteCredito/LimiteCredito"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/LimiteCredito/Index"), true, true));
+        read_only = "readonly='readonly'";
+    }
+}
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+@using (Html.BeginForm("LimiteCredito", "LimiteCredito", FormMethod.Post, new { id = "formulario_limite_credito", name = "formulario_limite_credito" }))
+{   
+    <fieldset title="LimiteCredito">
+        <legend>Limite de Crédito</legend>
+
+        <label class="normal">Id:</label>
+        <input type="text" value="@Model.id_limite_credito" id="id_limite_credito" name="id_limite_credito" size="7" maxlength="6" readonly="readonly" />
+
+        <br />
+        
+        <label class="normal">Código:</label>
+        <input type="text" value="@Model.ds_codigo" id="ds_codigo" name="ds_codigo" size="20" maxlength="15" @read_only />
+        @Html.ValidationMessage("ds_codigo", "*")
+
+        <label class="normal">Descrição:</label>
+        <input type="text" value="@Model.ds_descricao" id="ds_descricao" name="ds_descricao" size="80" maxlength="60" @read_only />
+        @Html.ValidationMessage("ds_descricao", "*")
+
+        <br />
+        
+        <label class="normal">Dias de Crédito:</label>
+        <input type="text" value="@Model.dias_credito" id="dias_credito" name="dias_credito" size="3" maxlength="3" @read_only alt="number3" />
+        @Html.ValidationMessage("dias_credito", "*")
+                
+        <label class="normal">Descrição:</label>
+        <input type="text" value="@Model.valor_credito" id="valor_credito" name="valor_credito" size="20" maxlength="20" @read_only alt="decimal6" />
+        @Html.ValidationMessage("valor_credito", "*")
+        
+    </fieldset>  
+    @Html.ValidationSummary()
+}
+</div>
+
+<div id="dialog-confirm" title="Limite de Crédito" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Limite de Crédito?</p>
+</div>

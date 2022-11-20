@@ -1,0 +1,60 @@
+﻿@model IQueryable<ProjectMaster.Data.pm_produto_estoque_historico>
+@{
+    Layout = "~/Views/Shared/_LayoutClear.cshtml";
+
+    var classRow = "webgrid-rows";
+}
+
+<div class="main-scroll">
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px" align="center">
+                    <span>Data</span>
+                </th>
+                <th width="50px">
+                    <span>Código</span>
+                </th>
+                <th>
+                    <span>Descrição</span>
+                </th>
+                <th align="right">
+                    <span>Quantidade</span>
+                </th>
+                <th  align="right">
+                    <span>Saldo</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var linha in Model)
+            {
+            <tr class="@classRow">
+                <td align="center">
+                    <span>@linha.data.ToString("dd/MM/yyyy")</span>
+                </td>
+                <td>
+                    <span>@linha.pm_produto.cprod</span>
+                </td>
+                <td>
+                    <span>@linha.pm_produto.xprod</span>
+                </td>
+                <td align="right">
+                    <span>@linha.quantidade.ToString("n2")</span>
+                </td>
+                <td align="right">
+                    <span>@linha.saldo.ToString("n2")</span>
+                </td>
+            </tr>        
+                if (classRow == "webgrid-alternating-rows")
+                {
+                    classRow = "webgrid-rows";
+                }
+                else
+                {
+                    classRow = "webgrid-alternating-rows";
+                }
+            }            
+        </tbody>
+    </table>
+</div>

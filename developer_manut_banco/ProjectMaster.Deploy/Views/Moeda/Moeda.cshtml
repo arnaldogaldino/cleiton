@@ -1,0 +1,94 @@
+﻿@model ProjectMaster.Application.Models.MoedaModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de Moeda";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Moeda.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Moeda/Moeda?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Moeda.", "Editar Moeda.", "editar", "", Url.Content("~/Moeda/Moeda?acao=Edit&id_moeda=" + Model.id_moeda), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Moeda.", "Excluir Moeda.", "excluir", "", Url.Content("~/Moeda/Moeda"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Moeda.", "Gravar Moeda.", "gravar", "", "javascript:ShowLoad();$('#formulario_moeda').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Moeda/Moeda"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Moeda/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Moeda.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Moeda/Moeda?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Moeda.", "Editar Moeda.", "editar", "", Url.Content("~/Moeda/Moeda?acao=Edit&id_moeda=" + Model.id_moeda), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Moeda.", "Excluir Moeda.", "excluir", "", "JavaScript:delete_file(" + Model.id_moeda + ",'Moeda','form')", true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Moeda.", "Gravar Moeda.", "gravar", "", "javascript:ShowLoad();$('#formulario_moeda').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Moeda/Moeda?acao=View&id_moeda=" + Model.id_moeda), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Moeda/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Moeda.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Moeda/Moeda?acao=New"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Moeda.", "Editar Moeda.", "editar", "", Url.Content("~/Moeda/Moeda?acao=Edit&id_moeda=" + Model.id_moeda), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Moeda.", "Excluir Moeda.", "excluir", "", "JavaScript:delete_file(" + Model.id_moeda + ",'Moeda','form')", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Moeda.", "Gravar Moeda.", "gravar", "", Url.Content("~/Moeda/Moeda"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Moeda/Moeda"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Moeda/Index"), true, true));
+        read_only = "readonly='readonly'";
+    }
+}
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+@using (Html.BeginForm("Moeda", "Moeda", FormMethod.Post, new { id = "formulario_moeda", name = "formulario_moeda" }))
+{   
+    <fieldset title="Moeda">
+        <legend>Moeda</legend>
+        <label class="normal">Id:</label>
+        <input type="text" value="@Model.id_moeda" id="id_moeda" name="id_moeda" size="7" maxlength="6" readonly="readonly" />
+
+        <br />
+        
+        <label class="normal">Data:</label>
+        <input type="text" value="@Model.dt_cotacao.ToString("dd/MM/yyyy")" id="dt_cotacao" name="dt_cotacao" size="10" maxlength="20" readonly="readonly" />
+        @Html.ValidationMessage("dt_cotacao", "*")
+
+        <label class="normal">Tipo Moeda:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.dm_tipo_moeda, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoMoeda, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.dm_tipo_moeda, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoMoeda, true), new { disabled = "disabled" });
+            }
+        @Html.ValidationMessage("dm_tipo_moeda", "*")
+
+        <label class="normal">Valor ($):</label>
+        <input type="text" value="@Model.nr_valor" id="nr_valor" name="nr_valor" size="10" maxlength="8" @read_only alt="decimal5" />
+        @Html.ValidationMessage("nr_valor", "*")
+
+    </fieldset>  
+    @Html.ValidationSummary()
+
+}
+</div>
+
+<div id="dialog-confirm" title="Moeda" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Moeda?</p>
+</div>

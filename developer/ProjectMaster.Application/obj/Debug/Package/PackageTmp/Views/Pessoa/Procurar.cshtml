@@ -1,0 +1,25 @@
+﻿@using MvcJqGrid
+@using MvcJqGrid.Enums
+
+
+@(Html.Grid("gridPessoa")
+    .SetCaption("Pesquisar Cliente/Fornecedor")
+    .AddColumn(new Column("id").SetHidden(true))
+    .AddColumn(new Column("Codigo").SetLabel("Código do Cliente/Fornecedor").SetWidth(170).SetFixedWidth(true))
+    .AddColumn(new Column("Nome").SetLabel("Nome/Razão Social do Cliente").SetWidth(245).SetFixedWidth(true))
+    .AddColumn(new Column("TipoDocumento").SetLabel("Tipo de Documento").SetSearchType(MvcJqGrid.Enums.Searchtype.Select)
+               .SetSearchTerms((SelectList)ViewBag.TipoDocumento).SetWidth(170).SetFixedWidth(true))
+    .AddColumn(new Column("NumeroDocumento").SetLabel("Número do Documento").SetWidth(170).SetFixedWidth(true))
+    .AddColumn(new Column("InscricaoEstadual").SetLabel("Inscrição Estadual").SetWidth(170).SetFixedWidth(true))
+    .AddColumn(new Column("TipoPessoa").SetWidth(170).SetFixedWidth(true).SetLabel("Tipo")
+               .SetSearchType(MvcJqGrid.Enums.Searchtype.Select).SetSearchTerms((SelectList)ViewBag.TipoCliente))
+    .AddColumn(new Column("acoes").SetLabel("Ações").SetSearch(false).SetCustomFormatter("CriarBotoesPessoa")
+    .SetWidth(100).SetFixedWidth(true))
+    .SetUrl(Url.Action("ProcurarPessoas", "Pessoa")).SetAutoWidth(true).SetRowNum(20)
+    .SetRowList(new[] { 10, 15, 20, 50 }).SetViewRecords(true).SetPager("pager").SetSearchToolbar(true)
+    .SetSearchOnEnter(false)
+    .SetToolbar(true)
+    .SetToolbarPosition(ToolbarPosition.Bottom))
+
+
+<script src="@Url.Content("~/Scripts/MeusScripts/paginas/pessoa/procurar.js")" type="text/javascript"></script>

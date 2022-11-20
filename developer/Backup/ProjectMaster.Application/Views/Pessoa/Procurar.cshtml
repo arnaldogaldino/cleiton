@@ -1,0 +1,45 @@
+﻿@using MvcJqGrid
+<script src="@Url.Content("~/Scripts/MeusScripts/Paginas/Pessoa/procurar.js")" type="text/javascript"></script>
+<div>
+    <h1>
+        Manutenção de Cliente/Fornecedor</h1>
+    <p>
+        @Html.Label("Razão Social do Cliente/Fornecedor:")
+        @Html.TextBox("ds_razao_social", "", new { Id = "ds_razao_social" })
+    </p>
+    <p>
+        @Html.Label("Marca/Código:")
+        @Html.TextBox("ds_marca", "", new { Id = "ds_marca" })
+    </p>
+    <p>
+        @Html.Label("Tipo Documento:")
+        @Html.DropDownList("dm_tipo_pessoa", (SelectList)ViewBag.TipoCliente, new { ID = "dm_tipo_pessoa" })
+    </p>
+    <p>
+        @Html.Label("Número do documento:")
+        @Html.TextBox("nr_documento", "", new { Id = "nr_documento" })
+    </p>
+    <p>
+        @Html.Label("Inscrição Estadual:")
+        @Html.TextBox("nr_ie", "", new { Id = "nr_ie" })
+    </p>
+    <p>
+        @Html.Label("Tipo de Cliente:")
+        @Html.DropDownList("ds_fisico_juridico", (SelectList)ViewBag.TipoDocumento, new { ID = "ds_fisico_juridico" })
+    </p>
+    <input type="submit" />
+    @(Html.Grid("Basic")
+    .SetCaption("Basic Grid")
+    .AddColumn(new Column("Id").SetLabel("Código do Cliente/Fornecedor"))
+    .AddColumn(new Column("Nome").SetLabel("Nome/Razão Social do Cliente"))
+    .AddColumn(new Column("TipoDocumento").SetLabel("Tipo de Documento"))
+    .AddColumn(new Column("NumeroDocumento").SetLabel("Número do Documento"))
+    .AddColumn(new Column("InscricaoEstadual").SetLabel("Inscrição Estadual"))
+    .AddColumn(new Column("TipoPessoa")
+               .SetLabel("Tipo")
+               .SetSearchType(MvcJqGrid.Enums.Searchtype.Select)
+               .SetSearchTerms((SelectList)ViewBag.TipoCliente))
+    .SetUrl(Url.Action("ProcurarPessoas", "Pessoa")).SetAutoWidth(true).SetRowNum(20)
+    .SetRowList(new[] { 10, 15, 20, 50 }).SetViewRecords(true).SetPager("pager").SetSearchToolbar(true)
+    .SetSearchOnEnter(false))
+</div>

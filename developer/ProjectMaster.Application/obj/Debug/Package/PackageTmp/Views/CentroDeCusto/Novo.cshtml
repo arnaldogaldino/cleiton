@@ -1,0 +1,30 @@
+﻿@model ProjectMaster.Application.Models.CentroDeCustoModel
+<h1>Manutenção de Centro de Custo</h1>
+<script src="@Url.Content("~/Scripts/MeusScripts/paginas/centroDeCusto/novo.js")" type="text/javascript"></script>
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "formCentroDeCusto" }))
+{
+    @Html.Hidden("id_centro_de_custo", Model == null ? 0 : Model.id_centro_de_custo, "id_centro_de_custo")
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Centro de Custo</legend>
+
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_codigo)
+            @Html.EditorFor(model => model.ds_codigo)
+            @Html.ValidationMessageFor(model => model.ds_codigo)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_descricao)
+            @Html.EditorFor(model => model.ds_descricao)
+            @Html.ValidationMessageFor(model => model.ds_descricao)
+        </div>
+        <br />
+        <p>
+            <input type="button" id="btnSalvar" value="Salvar" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Voltar para pesquisa", "Procurar")
+</div>

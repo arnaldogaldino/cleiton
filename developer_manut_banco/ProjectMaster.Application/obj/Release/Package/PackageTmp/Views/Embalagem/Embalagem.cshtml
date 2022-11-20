@@ -1,0 +1,90 @@
+﻿@model ProjectMaster.Application.Models.EmbalagemModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de Embalagem";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Embalagem.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Embalagem/Embalagem?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Embalagem.", "Editar Embalagem.", "editar", "", Url.Content("~/Embalagem/Embalagem?acao=Edit&id_embalagem=" + Model.id_embalagem), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Embalagem.", "Excluir Embalagem.", "excluir", "", Url.Content("~/Embalagem/Embalagem"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Embalagem.", "Gravar Embalagem.", "gravar", "", "javascript:ShowLoad();$('#formulario_embalagem').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Embalagem/Embalagem"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Embalagem/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Embalagem.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Embalagem/Embalagem?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Embalagem.", "Editar Embalagem.", "editar", "", Url.Content("~/Embalagem/Embalagem?acao=Edit&id_embalagem=" + Model.id_embalagem), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Embalagem.", "Excluir Embalagem.", "excluir", "", "JavaScript:delete_file('@linha.id_embalagem','Embalagem','form')", true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Embalagem.", "Gravar Embalagem.", "gravar", "", "javascript:ShowLoad();$('#formulario_embalagem').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Embalagem/Embalagem?acao=View&id_embalagem=" + Model.id_embalagem), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Embalagem/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Embalagem.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Embalagem/Embalagem?acao=New"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Embalagem.", "Editar Embalagem.", "editar", "", Url.Content("~/Embalagem/Embalagem?acao=Edit&id_embalagem=" + Model.id_embalagem), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Embalagem.", "Excluir Embalagem.", "excluir", "", "JavaScript:delete_file('@linha.id_embalagem','Embalagem','form')", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Embalagem.", "Gravar Embalagem.", "gravar", "", Url.Content("~/Embalagem/Embalagem"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Embalagem/Embalagem"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Embalagem/Index"), true, true));
+        read_only = "readonly='readonly'";
+    }
+}
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+@using (Html.BeginForm("Embalagem", "Embalagem", FormMethod.Post, new { id = "formulario_embalagem", name = "formulario_embalagem" }))
+{   
+    <fieldset title="Embalagem">
+        <legend>Embalagem</legend>
+        <label class="normal">Id:</label>
+        <input type="text" value="@Model.id_embalagem" id="id_embalagem" name="id_embalagem" size="7" maxlength="6" readonly="readonly" />
+
+        <br />
+        
+        <label class="normal">Tipo de Embalagem:</label>
+        @if (string.IsNullOrEmpty(read_only))
+        {
+            @Html.DropDownListFor(model => model.dm_tipo_embalagem, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoEmbalagem, true));
+        }
+        else
+        { 
+            @Html.DropDownListFor(model => model.dm_tipo_embalagem, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoEmbalagem, true), new { disabled = "disabled" });
+        }
+        @Html.ValidationMessage("dm_tipo_embalagem", "*")
+                        
+        <label class="normal">Valor:</label>
+        <input type="text" value="@Model.valor.ToString("n2")" id="valor" name="valor" size="10" maxlength="10" @read_only alt="decimal7" />
+        @Html.ValidationMessage("valor", "*")
+
+    </fieldset>  
+    @Html.ValidationSummary()
+
+}
+</div>
+
+<div id="dialog-confirm" title="Embalagem" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Embalagem?</p>
+</div>

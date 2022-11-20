@@ -1,0 +1,271 @@
+﻿@model ProjectMaster.Application.Models.FiadoModels
+@{
+    ViewBag.Title = "Cadastro de Conta de Fiado de Cliente";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Conta de Fiado.", "Cadastrar nova Conta de Fiado.", "novo", "", Url.Content("~/Fiado/Fiado?acao=New"), true, true));
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar.", "Voltar", "", Url.Content("~/Home/Index"), true, true));
+    
+    var query = (IQueryable<ProjectMaster.Data.pm_fiado>)ViewData["query"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    
+@using (Html.BeginForm("Index", "Fiado", FormMethod.Post, new { id = "formulario_procurar", name = "formulario_procurar" }))
+{           
+    <fieldset title="Procurar">
+    <legend>Procurar</legend>  
+    <table width="100%">
+        <tr>
+            <td>
+                
+                <label class="normal">Código do Fiado:</label>
+                <input type="text" id="id_fiado" name="id_fiado" size="5" maxlength="10" alt="number9"/>
+                
+                <label class="normal">Código do Produto:</label>
+                <input type="text" id="cprod" name="cprod" size="10" maxlength="10" />
+
+                <input type="hidden" value="0" id="id_produto" name="id_produto" />
+                <input type="hidden" value="0" id="tp_embalagem" name="tp_embalagem" />
+                <a href="javascript:procurar_produto();">
+                    <img src="@Url.Content("~/Content/images/buttons/procurar_16x16.png")" id="procurar_produto" alt="Procurar Produto" width="16" height="16" />
+                </a>
+
+                <script type="text/javascript">
+                    $("#cprod").change(function () {
+
+                        $("#xprod").val("");
+
+                        if ($('#cprod').val() == '') {
+                            $("#xprod").val("");
+                            return;
+                        }
+
+                        if ($('#id_produto').val() != '0')
+                            return;
+
+                        LoockProduto("cprod", "xprod", "id_produto", "", "");
+                    });
+
+                    function procurar_produto() {
+                        $("#cprod").val("");
+                        LoockProduto("cprod", "xprod", "id_produto", "", "");
+                    }
+                </script>
+
+                <input type="text" id="xprod" name="xprod" size="30" maxlength="50" readonly="readonly" />
+                <br />
+                <label class="normal">Cliente / Fornecedor:</label>
+                
+                <input type="text" value="" id="ds_marca" name="ds_marca" size="20" maxlength="50" />
+                <input type="hidden" value="" id="id_pessoa" name="id_pessoa" />
+        
+                <a href="javascript:procurar_pessoa();">
+                    <img src="@Url.Content("~/Content/images/buttons/procurar_16x16.png")" id="procurar_pessoa" alt="Procurar Cliente" width="16" height="16" />
+                </a>
+
+                <input type="text" value="" id="ds_razao_social" name="ds_razao_social" size="60" maxlength="100" readonly="readonly" />
+                
+                <script type="text/javascript">
+                    $("#ds_marca").change(function () {
+
+                        $("#ds_razao_social").val("");
+                        $("#id_pessoa").val("0");
+
+                        if ($('#ds_marca').val() == '') {
+                            $("#ds_razao_social").val("");
+                            $("#id_pessoa").val("0");
+                            return;
+                        }
+
+                        if ($('#id_pessoa').val() != '0')
+                            return;
+
+                        LookupPessoa("ds_marca", "ds_razao_social", "id_pessoa");
+                    });
+
+                    function procurar_pessoa() {
+                        $("#ds_marca").val("");
+                        LookupPessoa("ds_marca", "ds_razao_social", "id_pessoa");
+                    }
+                </script>
+
+                <br />
+
+            </td>
+            <td align="right" valign="top">
+                <input id="procurar" name="procurar" type="submit" value="Procurar" />
+            </td>
+        </tr>
+    </table>
+    </fieldset>
+    
+        <script type="text/javascript">
+            $(function () {
+                $("#procurar").button();
+            });
+        </script>
+}
+
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>Data de Emissão</span> 
+                </th>
+                <th>
+                    <span>Data Vencimento</span> 
+                </th>
+                <th>
+                    <span>Ocorrência</span> 
+                </th>
+                <th>
+                    <span>Número Pedido</span> 
+                </th>
+                <th>
+                    <span>Produto</span> 
+                </th>
+                <th>
+                    <span>Descrição Produto</span> 
+                </th>
+                <th>
+                    <span>Tipo Embalagem</span> 
+                </th>
+                <th>
+                    <span>Valor Embalagem</span> 
+                </th>
+                <th>
+                    <span>Qtd.</span> 
+                </th>
+                <th>
+                    <span>R$ Unitário</span> 
+                </th>
+                <th>
+                    <span>Total Caixa (R$)</span> 
+                </th>
+                <th>
+                    <span>Saldo Caixa Físico</span> 
+                </th>
+                <th>
+                    <span>Caixa Poder</span> 
+                </th>
+                <th>
+                    <span>R$ Saldo Caixa</span> 
+                </th>
+                <th>
+                    <span>Total Fruta</span> 
+                </th>
+                <th>
+                    <span>Saldo Fruta</span> 
+                </th>
+                <th>
+                    <span>Total Venda</span> 
+                </th>
+                <th>
+                    <span>Saldo Geral</span> 
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (query != null)
+        {
+            foreach (ProjectMaster.Data.pm_fiado linha in query)
+            {
+            <tr id='lin@(linha.id_fiado.ToString())' class="@classRow">
+                <td>
+                    <span>@linha.dta_emissao.ToString("dd/MM/yyyy")</span> 
+                </td>
+                <td>
+                    <span>@(linha.pago_ate.HasValue ? linha.pago_ate.Value.ToString("dd/MM/yyyy") : "") </span> 
+                </td>
+                <td>
+                    <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.FiadoOcorrencia, linha.ocorrencia)</span>
+                </td>
+                <td>
+                    <span>@(linha.id_pedido.HasValue ? linha.id_pedido.Value.ToString().PadLeft(5, '0') : "") </span> 
+                </td>
+                <td>
+                    @if(linha.ocorrencia == "VDA")
+                    {
+                    <span>@(linha.pm_produto != null ?  linha.pm_produto.cprod : "")</span> 
+                    }
+
+                    @if (linha.ocorrencia == "DCX")
+                    {
+                    <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.ValorEmbalagem, linha.vlr_caixa.Value.ToString())</span>
+                    }
+                </td>
+                <td>
+                    <span>@(linha.pm_produto != null ?  linha.pm_produto.xprod : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.pm_produto != null ?  ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.TipoEmbalagem, linha.pm_produto.tp_embalagem) : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.vlr_caixa.HasValue ? (decimal.Parse(linha.vlr_caixa.Value.ToString())/100).ToString("n2") : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.qtd_caixas.HasValue ? linha.qtd_caixas.Value.ToString("n2") : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.vlr_frutas.HasValue ? linha.vlr_frutas.Value.ToString("n2") : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.total_caixa.HasValue ? linha.total_caixa.Value.ToString("n2") : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.saldo_caixa_fisico.HasValue ? linha.saldo_caixa_fisico.Value.ToString("n2") : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.qtd_cx_poder.HasValue ? linha.qtd_cx_poder.Value.ToString("n2") : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.saldo_caixa.HasValue ? linha.saldo_caixa.Value.ToString("n2") : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.total_fruta.HasValue ? linha.total_fruta.Value.ToString("n2") : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.saldo_fruta.HasValue ? linha.saldo_fruta.Value.ToString("n2") : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.total_venda.HasValue ? linha.total_venda.Value.ToString("n2") : "")</span> 
+                </td>
+                <td>
+                    <span>@(linha.saldo_geral.HasValue ? linha.saldo_geral.Value.ToString("n2") : "")</span> 
+                </td>
+                <td align="center">
+                    <div style='width: 100px'>
+                        <a href='@Url.Action("Fiado", "Fiado", new { acao = "View", id_fiado = linha.id_fiado})' title="Editar"> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>
+                        <a href='JavaScript:delete_file("@linha.id_fiado","Fiado","rows")' title="Excluir"> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> 
+                    </div>
+                </td>
+            </tr>
+                if (classRow == "webgrid-alternating-rows")
+                {
+                    classRow = "webgrid-rows";
+                }
+                else
+                {
+                    classRow = "webgrid-alternating-rows";
+                }
+            }
+        }
+        </tbody>
+    </table>
+    <br />
+</div>
+
+
+
+<div id="dialog-confirm" title="Conta Fiado" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Conta Fiado?</p>
+</div>

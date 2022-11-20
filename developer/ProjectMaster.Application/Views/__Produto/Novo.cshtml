@@ -1,0 +1,175 @@
+﻿@model ProjectMaster.Application.Models.ProdutoModel
+<h1>Manutenção de Produto</h1>
+<script src="
+@Url.Content("~/Scripts/MeusScripts/paginas/produto/novo.js")" type="text/javascript"></script>
+
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "formProduto" }))
+{
+    @Html.ValidationSummary(true)
+ 
+    <fieldset>
+        <legend>Produto e Serviço</legend>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.cprod)
+            @Html.TextBoxFor(model => model.cprod, new { maxlength = "25" })
+            @Html.ValidationMessageFor(model => model.cprod)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.xprod)
+            @Html.TextBoxFor(model => model.xprod, new { maxlength = "120" })
+            @Html.ValidationMessageFor(model => model.xprod)
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Complemento de Dados da Embalagem do Produto</legend>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.tp_embalagem)
+            @Html.DropDownListFor(model => model.tp_embalagem, (SelectList)ViewBag.TipoEmbalagem)
+            @Html.ValidationMessageFor(model => model.tp_embalagem)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.vl_embalagem)
+            @Html.EditorFor(model => model.vl_embalagem)
+            @Html.ValidationMessageFor(model => model.vl_embalagem)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.cean)
+            @Html.DropDownListFor(model => model.cean, (SelectList)ViewBag.TipoEAN)
+            @Html.ValidationMessageFor(model => model.cean)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ncm)
+            @Html.DropDownListFor(model => model.ncm, (SelectList)ViewBag.NCM)
+            @Html.ValidationMessageFor(model => model.ncm)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.extipi)
+            @Html.TextBoxFor(model => model.extipi, new { maxlength = "3" })
+            @Html.ValidationMessageFor(model => model.extipi)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.genero)
+            @Html.TextBoxFor(model => model.genero, new { maxlength = "2", alt = "number" })
+            @Html.ValidationMessageFor(model => model.genero)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ucom)
+            @Html.TextBoxFor(model => model.ucom, new { maxlength = "6" })
+            @Html.ValidationMessageFor(model => model.ucom)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.vuncom)
+            @Html.TextBoxFor(model => model.vuncom, new { maxlength = "16", alt = "number" })
+            @Html.ValidationMessageFor(model => model.vuncom)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ceantrib)
+            @Html.DropDownListFor(model => model.ceantrib, (SelectList)ViewBag.TipoEAN)
+            @Html.ValidationMessageFor(model => model.ceantrib)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.utrib)
+            @Html.TextBoxFor(model => model.utrib, new { maxlength = "6" })
+            @Html.ValidationMessageFor(model => model.utrib)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.vuntrib)
+            @Html.TextBoxFor(model => model.vuntrib, new { maxlength = "16", alt = "number" })
+            @Html.ValidationMessageFor(model => model.vuntrib)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.qtrib)
+            @Html.TextBoxFor(model => model.qtrib, new { maxlength = "12", alt = "number" })
+            @Html.ValidationMessageFor(model => model.qtrib)
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Grupo de Tributos incidentes no Produto ou Serviço</legend>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.mipi)
+            @Html.TextBoxFor(model => model.mipi, new { maxlength = "1", alt = "number" })
+            @Html.ValidationMessageFor(model => model.mipi)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.qtden)
+            @Html.TextBoxFor(model => model.qtden, new { maxlength = "11", alt = "number" })
+            @Html.ValidationMessageFor(model => model.qtden)
+        </div>
+    </fieldset>    
+
+    <fieldset>
+        <legend>IPI - Informar apenas quando o item for sujeito ao IPI</legend>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.cienq)
+            @Html.TextBoxFor(model => model.cienq, new { maxlength = "5" })
+            @Html.ValidationMessageFor(model => model.cienq)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.cnpjprod)
+            @Html.TextBoxFor(model => model.cnpjprod, new { maxlength = "14" })
+            @Html.ValidationMessageFor(model => model.cnpjprod)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.cenq)
+            @Html.DropDownListFor(model => model.cenq, (SelectList)ViewBag.cEnq)
+            @Html.ValidationMessageFor(model => model.cenq)
+        </div>
+    </fieldset>    
+
+    <fieldset>
+        <legend>IPI - Informar apenas quando o item for sujeito ao IPI</legend>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.cst)
+            @Html.DropDownListFor(model => model.cst, (SelectList)ViewBag.Cst)
+            @Html.ValidationMessageFor(model => model.cst)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.orig)
+            @Html.DropDownListFor(model => model.orig, (SelectList)ViewBag.CstOrigem)
+            @Html.ValidationMessageFor(model => model.orig)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.modbc)
+            @Html.DropDownListFor(model => model.modbc, (SelectList)ViewBag.modBC)
+            @Html.ValidationMessageFor(model => model.modbc)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.picms)
+            @Html.TextBoxFor(model => model.picms, new { maxlength = "5", alt = "number" })
+            @Html.ValidationMessageFor(model => model.picms)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.predbc)
+            @Html.TextBoxFor(model => model.predbc, new { maxlength = "5", alt = "number" })
+            @Html.ValidationMessageFor(model => model.predbc)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.modbcst)
+            @Html.DropDownListFor(model => model.modbcst, (SelectList)ViewBag.modBCST)
+            @Html.ValidationMessageFor(model => model.modbcst)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.predbcst)
+            @Html.TextBoxFor(model => model.predbcst, new { maxlength = "5", alt = "number" })
+            @Html.ValidationMessageFor(model => model.predbcst)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.pmvast)
+            @Html.TextBoxFor(model => model.pmvast, new { maxlength = "5", alt = "number" })
+            @Html.ValidationMessageFor(model => model.pmvast)
+        </div>
+    </fieldset>    
+    <p>
+        <input type="button" value="Salvar" id="btnSalvar">
+        @*<input type="submit" value="Salvar" />*@
+    </p>
+    <div>
+
+        @Html.ActionLink("Voltar para pesquisa", "Procurar")
+    </div>
+    <br />
+    <br />
+}

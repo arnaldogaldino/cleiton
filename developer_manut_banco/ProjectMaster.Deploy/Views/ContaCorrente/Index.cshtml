@@ -1,0 +1,168 @@
+﻿@model ProjectMaster.Application.Models.ContaCorrenteModels
+@{
+    ViewBag.Title = "Conta Corrente";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    //Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Pedido.", "Cadastrar novo Pedido.", "CadastrarNovo", "", Url.Content("~/Pedido/Pedido?acao=New"), true, true));
+    //Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.EfetivarEstoque, "Finalizar Pedidos.", "Finalizar Pedidos.", "FinalizarPedidos", null, "javascript:FinalizarPedidos();", true, true));
+    
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar.", "Voltar", "", Url.Content("~/Home/Index"), true, true));
+
+    var queryContaCorrente = (IQueryable<ProjectMaster.Data.pm_conta_corrente>)ViewData["queryContaCorrente"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    @using (Html.BeginForm("Index", "ContaCorrente", FormMethod.Post, new { id = "formulario_procurar", name = "formulario_procurar" }))
+    {           
+        <fieldset title="Procurar">
+            <legend>Procurar</legend>
+            <table width="100%">
+                <tr>
+                    <td>
+                        <label class="normal">ID:</label>
+                        <input type="text" value="@(Model.id_pedido.HasValue ? Model.id_pedido.Value.ToString() : "")" id="id_pedido" name="id_pedido" size="25" maxlength="25" alt="number9" />
+                                                
+                        <label class="normal">Tipo (Crédito/Debito):</label>
+                        @Html.DropDownListFor(model => model.dm_tipo_dc, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoDebitoCredito, true))
+
+                        <br />
+
+                        <label class="normal">Razão Social:</label>
+                        <input type="text" value="@(Model.Pessoa != null ? Model.Pessoa.ds_razao_social : "")" id="Pessoa.ds_razao_social" name="Pessoa.ds_razao_social" size="25" maxlength="80" />
+
+                        <br />
+                        <label class="normal">Emissão:</label>
+                        <input type="text" value="@(@Model.dta_emissao_de.HasValue ? Model.dta_emissao_de.Value.ToString("dd/MM/yyyy") : "")" id="dta_emissao_de" name="dta_emissao_de" size="10" maxlength="10" alt="date" />
+                        <label class="normal">Até:</label>
+                        <input type="text" value="@(@Model.dta_emissao_ate.HasValue ? Model.dta_emissao_ate.Value.ToString("dd/MM/yyyy") : "")" id="dta_emissao_ate" name="dta_emissao_ate" size="10" maxlength="10" alt="date" />
+
+                    </td>
+                    <td align="right" valign="top">
+                        <input id="procurar" name="procurar" type="submit" value="Procurar" />
+                        <br />
+                        <label class="normal">Total Crédito:</label> 
+                        <label class="normal" style="color: blue; font-weight: bold">R$ 0,00</label>
+                        <br />
+                        <label class="normal">Total Débito:</label> 
+                        <label class="normal" style="color: red; font-weight: bold">R$ 0,00</label>
+                        <br />
+                        <label class="normal">Saldo:</label> 
+                        <label class="normal" style="font-weight: bold">R$ 0,00</label>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <script type="text/javascript">
+            $(function () {
+                $("#procurar").button();
+            });
+        </script>
+    }
+
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    <span>ID</span>
+                </th>
+                <th>
+                    <span>Razão Social</span>
+                </th>
+                <th>
+                    <span>Data Emissão</span>
+                </th>
+                <th>
+                    <span>Data Vencimento</span>
+                </th>
+                <th>
+                    <span>Data Pagamento</span>
+                </th>
+                <th>
+                    <span>Tipo</span>
+                </th>
+                <th>
+                    <span>ID</span>
+                </th>
+                <th>
+                    <span>Valor</span>
+                </th>
+                <th>
+                    <span>Saldo</span>
+                </th>
+                @*<th class="webgrid-col-action" align="center">
+                    <center><span>Ação</span></center>
+                </th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @if (queryContaCorrente != null)
+            {
+                foreach (ProjectMaster.Data.pm_conta_corrente linha in queryContaCorrente)
+                {
+                <tr id='lin@(linha.id_conta_corrente.ToString())' class="@classRow">
+                    <td>
+                        <span>@linha.id_conta_corrente</span>
+                    </td>
+                    <td>
+                        <span>@linha.pm_pessoa.ds_razao_social</span>
+                    </td>
+                    <td>
+                        <span>@linha.dta_emissao.ToString("dd/MM/yyyy")</span>
+                    </td>
+                    <td>
+                        <span>@(linha.dta_vencimento.HasValue ? linha.dta_vencimento.Value.ToString("dd/MM/yyyy") : "")</span>
+                    </td>
+                    <td>
+                        <span>@(linha.dta_pagamento.HasValue ? linha.dta_pagamento.Value.ToString("dd/MM/yyyy") : "" )</span>
+                    </td>
+                    <td>
+                        <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.TipoDebitoCredito, linha.dm_tipo_dc)</span>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td style="text-align: right">
+                        <span>R$ @linha.valor.ToString("n2") </span>
+                    </td>
+
+                    @if(linha.saldo > 0)
+                    {
+                    <td style="text-align: right; color: blue">
+                        <span>R$ @linha.saldo.ToString("n2") </span>
+                    </td>
+                    }
+                    else
+                    {
+                    <td style="text-align: right; color: red">
+                        <span>R$ @linha.saldo.ToString("n2") </span>
+                    </td>
+                    }
+                    @*<td align="center">
+                        <div style='width: 100px'>
+                            <a href='@Url.Action("Pedido", "Pedido", new { acao = "View", id_pedido = linha.id_pedido })'>
+                                <img src='@Url.Content("~/Content/images/edit.png")'/>
+                            </a>
+                            <a href='JavaScript:delete_file("@linha.id_pedido","Pedido","rows")'>
+                                <img src='@Url.Content("~/Content/images/delete.png")'/>
+                            </a>
+                        </div>
+                    </td>*@
+                </tr>        
+                        if (classRow == "webgrid-alternating-rows")
+                        {
+                            classRow = "webgrid-rows";
+                        }
+                        else
+                        {
+                            classRow = "webgrid-alternating-rows";
+                        }
+                }
+            }
+        </tbody>
+    </table>
+</div>

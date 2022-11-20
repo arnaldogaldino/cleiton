@@ -1,0 +1,713 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectMaster.Data.Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="PMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="pm_auditoria_log" EntityType="ProjectMaster.Data.Model.pm_auditoria_log" />
+    <EntitySet Name="pm_auditoria_log_detalhe" EntityType="ProjectMaster.Data.Model.pm_auditoria_log_detalhe" />
+    <EntitySet Name="pm_banco" EntityType="ProjectMaster.Data.Model.pm_banco" />
+    <EntitySet Name="pm_cargo" EntityType="ProjectMaster.Data.Model.pm_cargo" />
+    <EntitySet Name="pm_conta_corrente" EntityType="ProjectMaster.Data.Model.pm_conta_corrente" />
+    <EntitySet Name="pm_domain" EntityType="ProjectMaster.Data.Model.pm_domain" />
+    <EntitySet Name="pm_domain_value" EntityType="ProjectMaster.Data.Model.pm_domain_value" />
+    <EntitySet Name="pm_empresa" EntityType="ProjectMaster.Data.Model.pm_empresa" />
+    <EntitySet Name="pm_endereco" EntityType="ProjectMaster.Data.Model.pm_endereco" />
+    <EntitySet Name="pm_enquadramento_ipi" EntityType="ProjectMaster.Data.Model.pm_enquadramento_ipi" />
+    <EntitySet Name="pm_filial" EntityType="ProjectMaster.Data.Model.pm_filial" />
+    <EntitySet Name="pm_menu" EntityType="ProjectMaster.Data.Model.pm_menu" />
+    <EntitySet Name="pm_menu_detalhe" EntityType="ProjectMaster.Data.Model.pm_menu_detalhe" />
+    <EntitySet Name="pm_modalidade_bc_icms" EntityType="ProjectMaster.Data.Model.pm_modalidade_bc_icms" />
+    <EntitySet Name="pm_modalidade_bc_icms_st" EntityType="ProjectMaster.Data.Model.pm_modalidade_bc_icms_st" />
+    <EntitySet Name="pm_ncm" EntityType="ProjectMaster.Data.Model.pm_ncm" />
+    <EntitySet Name="pm_origem_mercadoria" EntityType="ProjectMaster.Data.Model.pm_origem_mercadoria" />
+    <EntitySet Name="pm_pessoa" EntityType="ProjectMaster.Data.Model.pm_pessoa" />
+    <EntitySet Name="pm_produto" EntityType="ProjectMaster.Data.Model.pm_produto" />
+    <EntitySet Name="pm_telefone" EntityType="ProjectMaster.Data.Model.pm_telefone" />
+    <EntitySet Name="pm_tributo_icms" EntityType="ProjectMaster.Data.Model.pm_tributo_icms" />
+    <EntitySet Name="pm_usuario" EntityType="ProjectMaster.Data.Model.pm_usuario" />
+    <EntitySet Name="sysdiagrams" EntityType="ProjectMaster.Data.Model.sysdiagrams" />
+    <AssociationSet Name="FK_pm_auditoria_log_detalhe_pm_auditoria_log" Association="ProjectMaster.Data.Model.FK_pm_auditoria_log_detalhe_pm_auditoria_log">
+      <End Role="pm_auditoria_log" EntitySet="pm_auditoria_log" />
+      <End Role="pm_auditoria_log_detalhe" EntitySet="pm_auditoria_log_detalhe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_conta_corrente_pm_banco" Association="ProjectMaster.Data.Model.FK_pm_conta_corrente_pm_banco">
+      <End Role="pm_banco" EntitySet="pm_banco" />
+      <End Role="pm_conta_corrente" EntitySet="pm_conta_corrente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_usuario_pm_cargo" Association="ProjectMaster.Data.Model.FK_pm_usuario_pm_cargo">
+      <End Role="pm_cargo" EntitySet="pm_cargo" />
+      <End Role="pm_usuario" EntitySet="pm_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_domain_value_pm_domain" Association="ProjectMaster.Data.Model.FK_pm_domain_value_pm_domain">
+      <End Role="pm_domain" EntitySet="pm_domain" />
+      <End Role="pm_domain_value" EntitySet="pm_domain_value" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_filial_pm_empresa" Association="ProjectMaster.Data.Model.FK_pm_filial_pm_empresa">
+      <End Role="pm_empresa" EntitySet="pm_empresa" />
+      <End Role="pm_filial" EntitySet="pm_filial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_enquadramento_ipi" Association="ProjectMaster.Data.Model.FK_pm_produto_pm_enquadramento_ipi">
+      <End Role="pm_enquadramento_ipi" EntitySet="pm_enquadramento_ipi" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_menu_detalhe_pm_menu" Association="ProjectMaster.Data.Model.FK_pm_menu_detalhe_pm_menu">
+      <End Role="pm_menu" EntitySet="pm_menu" />
+      <End Role="pm_menu_detalhe" EntitySet="pm_menu_detalhe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_menu_pm_menu" Association="ProjectMaster.Data.Model.FK_pm_menu_pm_menu">
+      <End Role="pm_menu" EntitySet="pm_menu" />
+      <End Role="pm_menu1" EntitySet="pm_menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_modalidade_bc_icms" Association="ProjectMaster.Data.Model.FK_pm_produto_pm_modalidade_bc_icms">
+      <End Role="pm_modalidade_bc_icms" EntitySet="pm_modalidade_bc_icms" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_modalidade_bc_icms_st" Association="ProjectMaster.Data.Model.FK_pm_produto_pm_modalidade_bc_icms_st">
+      <End Role="pm_modalidade_bc_icms_st" EntitySet="pm_modalidade_bc_icms_st" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_ncm" Association="ProjectMaster.Data.Model.FK_pm_produto_pm_ncm">
+      <End Role="pm_ncm" EntitySet="pm_ncm" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_origem_mercadoria" Association="ProjectMaster.Data.Model.FK_pm_produto_pm_origem_mercadoria">
+      <End Role="pm_origem_mercadoria" EntitySet="pm_origem_mercadoria" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_telefone_pm_pessoa" Association="ProjectMaster.Data.Model.FK_pm_telefone_pm_pessoa">
+      <End Role="pm_pessoa" EntitySet="pm_pessoa" />
+      <End Role="pm_telefone" EntitySet="pm_telefone" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_tributo_icms" Association="ProjectMaster.Data.Model.FK_pm_produto_pm_tributo_icms">
+      <End Role="pm_tributo_icms" EntitySet="pm_tributo_icms" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="pm_menu_detalhe_permissao" Association="ProjectMaster.Data.Model.pm_menu_detalhe_permissao">
+      <End Role="pm_menu_detalhe" EntitySet="pm_menu_detalhe" />
+      <End Role="pm_usuario" EntitySet="pm_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="pm_menu_permissao" Association="ProjectMaster.Data.Model.pm_menu_permissao">
+      <End Role="pm_menu" EntitySet="pm_menu" />
+      <End Role="pm_usuario" EntitySet="pm_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="pm_usuario_endereco" Association="ProjectMaster.Data.Model.pm_usuario_endereco">
+      <End Role="pm_endereco" EntitySet="pm_endereco" />
+      <End Role="pm_usuario" EntitySet="pm_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="pm_usuario_filial" Association="ProjectMaster.Data.Model.pm_usuario_filial">
+      <End Role="pm_filial" EntitySet="pm_filial" />
+      <End Role="pm_usuario" EntitySet="pm_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="pm_pessoapm_endereco" Association="ProjectMaster.Data.Model.pm_pessoapm_endereco">
+      <End Role="pm_pessoa" EntitySet="pm_pessoa" />
+      <End Role="pm_endereco" EntitySet="pm_endereco" />
+    </AssociationSet>
+    <AssociationSet Name="pm_pessoa_conta_corrente" Association="ProjectMaster.Data.Model.pm_pessoa_conta_corrente">
+      <End Role="pm_pessoa" EntitySet="pm_pessoa" />
+      <End Role="pm_conta_corrente" EntitySet="pm_conta_corrente" />
+    </AssociationSet>
+    <EntitySet Name="pm_pais" EntityType="ProjectMaster.Data.Model.pm_pais" />
+    <AssociationSet Name="pm_endereco_pais" Association="ProjectMaster.Data.Model.pm_endereco_pais">
+      <End Role="pm_endereco" EntitySet="pm_endereco" />
+      <End Role="pm_pais" EntitySet="pm_pais" />
+    </AssociationSet>
+    <EntitySet Name="pm_moeda" EntityType="ProjectMaster.Data.Model.pm_moeda" />
+    <EntitySet Name="pm_tipo_moeda" EntityType="ProjectMaster.Data.Model.pm_tipo_moeda" />
+    <AssociationSet Name="pm_moeda_tipo_moeda" Association="ProjectMaster.Data.Model.pm_moeda_tipo_moeda">
+      <End Role="pm_moeda" EntitySet="pm_moeda" />
+      <End Role="pm_tipo_moeda" EntitySet="pm_tipo_moeda" />
+    </AssociationSet>
+    <EntitySet Name="pm_centro_de_custo" EntityType="ProjectMaster.Data.Model.pm_centro_de_custo" />
+    <EntitySet Name="pm_classificacao" EntityType="ProjectMaster.Data.Model.pm_classificacao" />
+  </EntityContainer>
+  <EntityType Name="pm_auditoria_log">
+    <Key>
+      <PropertyRef Name="id_auditoria_log" />
+    </Key>
+    <Property Type="Int64" Name="id_auditoria_log" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="id_usuario" />
+    <Property Type="Int64" Name="id_record" Nullable="false" />
+    <Property Type="String" Name="usuario" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nome_tabela" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="acao" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="data_acao" Nullable="false" />
+    <NavigationProperty Name="pm_auditoria_log_detalhe" Relationship="ProjectMaster.Data.Model.FK_pm_auditoria_log_detalhe_pm_auditoria_log" FromRole="pm_auditoria_log" ToRole="pm_auditoria_log_detalhe" />
+  </EntityType>
+  <EntityType Name="pm_auditoria_log_detalhe">
+    <Key>
+      <PropertyRef Name="id_auditoria_log_detalhe" />
+    </Key>
+    <Property Type="Int64" Name="id_auditoria_log_detalhe" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="id_auditoria_log" Nullable="false" />
+    <Property Type="String" Name="nome_coluna" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="valor_original" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="valor_corrente" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_auditoria_log" Relationship="ProjectMaster.Data.Model.FK_pm_auditoria_log_detalhe_pm_auditoria_log" FromRole="pm_auditoria_log_detalhe" ToRole="pm_auditoria_log" />
+  </EntityType>
+  <EntityType Name="pm_banco">
+    <Key>
+      <PropertyRef Name="id_banco" />
+    </Key>
+    <Property Type="Int64" Name="id_banco" Nullable="false" />
+    <Property Type="String" Name="ds_banco" Unicode="false" Nullable="false" MaxLength="20" />
+    <NavigationProperty Name="pm_conta_corrente" Relationship="ProjectMaster.Data.Model.FK_pm_conta_corrente_pm_banco" FromRole="pm_banco" ToRole="pm_conta_corrente" />
+  </EntityType>
+  <EntityType Name="pm_cargo">
+    <Key>
+      <PropertyRef Name="id_cargo" />
+    </Key>
+    <Property Type="Int64" Name="id_cargo" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="nm_cargo" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_usuario" Relationship="ProjectMaster.Data.Model.FK_pm_usuario_pm_cargo" FromRole="pm_cargo" ToRole="pm_usuario" />
+  </EntityType>
+  <EntityType Name="pm_conta_corrente">
+    <Key>
+      <PropertyRef Name="id_conta_corrente" />
+    </Key>
+    <Property Type="Int64" Name="id_conta_corrente" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ds_conta_corrente" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="id_banco" />
+    <Property Type="String" Name="ds_agencia" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ds_numero_conta_corrente" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ds_emitente" Unicode="false" />
+    <NavigationProperty Name="pm_banco" Relationship="ProjectMaster.Data.Model.FK_pm_conta_corrente_pm_banco" FromRole="pm_conta_corrente" ToRole="pm_banco" />
+    <NavigationProperty Name="pm_pessoa" Relationship="ProjectMaster.Data.Model.pm_pessoa_conta_corrente" FromRole="pm_conta_corrente" ToRole="pm_pessoa" />
+    <Property Type="Int64" Name="id_pessoa" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_domain">
+    <Key>
+      <PropertyRef Name="id_domain" />
+    </Key>
+    <Property Type="Int64" Name="id_domain" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="domain_name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="descricao" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_domain_value" Relationship="ProjectMaster.Data.Model.FK_pm_domain_value_pm_domain" FromRole="pm_domain" ToRole="pm_domain_value" />
+  </EntityType>
+  <EntityType Name="pm_domain_value">
+    <Key>
+      <PropertyRef Name="id_domain_value" />
+    </Key>
+    <Property Type="Int64" Name="id_domain_value" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="id_domain" Nullable="false" />
+    <Property Type="String" Name="domain_value" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="label" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ordem" Nullable="false" />
+    <NavigationProperty Name="pm_domain" Relationship="ProjectMaster.Data.Model.FK_pm_domain_value_pm_domain" FromRole="pm_domain_value" ToRole="pm_domain" />
+  </EntityType>
+  <EntityType Name="pm_empresa">
+    <Key>
+      <PropertyRef Name="id_empresa" />
+    </Key>
+    <Property Type="Int64" Name="id_empresa" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="id_fiscal_cnae_pri" />
+    <Property Type="Int64" Name="id_fiscal_cnae_sec" />
+    <Property Type="String" Name="apelido" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="data_cadastro" Nullable="false" />
+    <Property Type="String" Name="tipo_pessoa" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="crt" />
+    <Property Type="String" Name="razao_social" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nome_fantasia" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="cnpj" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="i_estadual" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="i_municipal" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="telefone" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="fax" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="email" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="excluido" Nullable="false" />
+    <NavigationProperty Name="pm_filial" Relationship="ProjectMaster.Data.Model.FK_pm_filial_pm_empresa" FromRole="pm_empresa" ToRole="pm_filial" />
+  </EntityType>
+  <EntityType Name="pm_endereco">
+    <Key>
+      <PropertyRef Name="id_endereco" />
+    </Key>
+    <Property Type="Int64" Name="id_endereco" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="dm_tipo_endereco" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nm_endereco" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nr_numero" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ds_complemento" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ds_bairro" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ds_cidade" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ds_uf" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nr_cep" Nullable="false" Unicode="false" MaxLength="10" />
+    <NavigationProperty Name="pm_usuario" Relationship="ProjectMaster.Data.Model.pm_usuario_endereco" FromRole="pm_endereco" ToRole="pm_usuario" />
+    <NavigationProperty Name="pm_pessoa" Relationship="ProjectMaster.Data.Model.pm_pessoapm_endereco" FromRole="pm_endereco" ToRole="pm_pessoa" />
+    <NavigationProperty Name="pm_pais" Relationship="ProjectMaster.Data.Model.pm_endereco_pais" FromRole="pm_endereco" ToRole="pm_pais" />
+    <Property Type="Int64" Name="id_pais" Nullable="true" />
+  </EntityType>
+  <EntityType Name="pm_enquadramento_ipi">
+    <Key>
+      <PropertyRef Name="cenq" />
+    </Key>
+    <Property Type="Int64" Name="cenq" Nullable="false" />
+    <Property Type="String" Name="valor" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_produto" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_enquadramento_ipi" FromRole="pm_enquadramento_ipi" ToRole="pm_produto" />
+  </EntityType>
+  <EntityType Name="pm_filial">
+    <Key>
+      <PropertyRef Name="id_filial" />
+    </Key>
+    <Property Type="Int64" Name="id_filial" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="id_empresa" Nullable="false" />
+    <Property Type="Int64" Name="id_fiscal_cnae_pri" />
+    <Property Type="Int64" Name="id_fiscal_cnae_sec" />
+    <Property Type="String" Name="apelido" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="data_cadastro" Nullable="false" />
+    <Property Type="String" Name="tipo_pessoa" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="crt" />
+    <Property Type="String" Name="razao_social" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nome_fantasia" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="cnpj" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="i_estadual" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="i_municipal" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="telefone" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="fax" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="email" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="excluido" Nullable="false" />
+    <NavigationProperty Name="pm_empresa" Relationship="ProjectMaster.Data.Model.FK_pm_filial_pm_empresa" FromRole="pm_filial" ToRole="pm_empresa" />
+    <NavigationProperty Name="pm_usuario" Relationship="ProjectMaster.Data.Model.pm_usuario_filial" FromRole="pm_filial" ToRole="pm_usuario" />
+  </EntityType>
+  <EntityType Name="pm_menu">
+    <Key>
+      <PropertyRef Name="id_menu" />
+    </Key>
+    <Property Type="Int64" Name="id_menu" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="id_menu_pai" />
+    <Property Type="String" Name="nome" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="texto" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="area_name" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="controller_name" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="action_name" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="ordem" Nullable="false" />
+    <Property Type="String" Name="descricao" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_menu_detalhe" Relationship="ProjectMaster.Data.Model.FK_pm_menu_detalhe_pm_menu" FromRole="pm_menu" ToRole="pm_menu_detalhe" />
+    <NavigationProperty Name="pm_menu1" Relationship="ProjectMaster.Data.Model.FK_pm_menu_pm_menu" FromRole="pm_menu" ToRole="pm_menu1" />
+    <NavigationProperty Name="pm_menu2" Relationship="ProjectMaster.Data.Model.FK_pm_menu_pm_menu" FromRole="pm_menu1" ToRole="pm_menu" />
+    <NavigationProperty Name="pm_usuario" Relationship="ProjectMaster.Data.Model.pm_menu_permissao" FromRole="pm_menu" ToRole="pm_usuario" />
+  </EntityType>
+  <EntityType Name="pm_menu_detalhe">
+    <Key>
+      <PropertyRef Name="id_menu_detalhe" />
+    </Key>
+    <Property Type="Int64" Name="id_menu_detalhe" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="id_menu" Nullable="false" />
+    <Property Type="String" Name="nome" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="descricao" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_menu" Relationship="ProjectMaster.Data.Model.FK_pm_menu_detalhe_pm_menu" FromRole="pm_menu_detalhe" ToRole="pm_menu" />
+    <NavigationProperty Name="pm_usuario" Relationship="ProjectMaster.Data.Model.pm_menu_detalhe_permissao" FromRole="pm_menu_detalhe" ToRole="pm_usuario" />
+  </EntityType>
+  <EntityType Name="pm_modalidade_bc_icms">
+    <Key>
+      <PropertyRef Name="modbc" />
+    </Key>
+    <Property Type="Int64" Name="modbc" Nullable="false" />
+    <Property Type="String" Name="valor" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="ds_descricao" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_produto" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_modalidade_bc_icms" FromRole="pm_modalidade_bc_icms" ToRole="pm_produto" />
+  </EntityType>
+  <EntityType Name="pm_modalidade_bc_icms_st">
+    <Key>
+      <PropertyRef Name="modbcst" />
+    </Key>
+    <Property Type="Int64" Name="modbcst" Nullable="false" />
+    <Property Type="String" Name="valor" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="ds_descricao" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_produto" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_modalidade_bc_icms_st" FromRole="pm_modalidade_bc_icms_st" ToRole="pm_produto" />
+  </EntityType>
+  <EntityType Name="pm_ncm">
+    <Key>
+      <PropertyRef Name="ncm" />
+    </Key>
+    <Property Type="Int64" Name="ncm" Nullable="false" />
+    <Property Type="String" Name="ds_descricao" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nr_tec" MaxLength="2" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_produto" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_ncm" FromRole="pm_ncm" ToRole="pm_produto" />
+  </EntityType>
+  <EntityType Name="pm_origem_mercadoria">
+    <Key>
+      <PropertyRef Name="orig" />
+    </Key>
+    <Property Type="Int64" Name="orig" Nullable="false" />
+    <Property Type="String" Name="valor" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ds_descricao" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_produto" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_origem_mercadoria" FromRole="pm_origem_mercadoria" ToRole="pm_produto" />
+  </EntityType>
+  <EntityType Name="pm_pessoa">
+    <Key>
+      <PropertyRef Name="id_pessoa" />
+    </Key>
+    <Property Type="Int64" Name="id_pessoa" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="dt_cadastro" Nullable="false" />
+    <Property Type="String" Name="ds_marca" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ds_razao_social" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ds_nome_fantasia" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="dm_tipo_pessoa" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ds_fisico_juridico" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nr_documento" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nr_ie" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nr_inscricao_suframa" MaxLength="9" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_telefone" Relationship="ProjectMaster.Data.Model.FK_pm_telefone_pm_pessoa" FromRole="pm_pessoa" ToRole="pm_telefone" />
+    <Property Type="String" Name="dm_venda_agendada" Nullable="false" Unicode="false" MaxLength="1" />
+    <Property Type="String" Name="dm_dias_limite_credito" Nullable="false" Unicode="false" MaxLength="6" />
+    <NavigationProperty Name="pm_endereco" Relationship="ProjectMaster.Data.Model.pm_pessoapm_endereco" FromRole="pm_pessoa" ToRole="pm_endereco" />
+    <NavigationProperty Name="pm_conta_corrente" Relationship="ProjectMaster.Data.Model.pm_pessoa_conta_corrente" FromRole="pm_pessoa" ToRole="pm_conta_corrente" />
+  </EntityType>
+  <EntityType Name="pm_produto">
+    <Key>
+      <PropertyRef Name="cprod" />
+    </Key>
+    <Property Type="String" Name="cprod" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="xprod" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="cean" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="ncm" Nullable="false" />
+    <Property Type="String" Name="extipi" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="genero" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ucom" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="vuncom" Precision="16" Scale="4" />
+    <Property Type="String" Name="ceantrib" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="utrib" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="vuntrib" Precision="16" Scale="4" />
+    <Property Type="Decimal" Name="qtrib" Precision="12" Scale="4" />
+    <Property Type="String" Name="mipi" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="qtden" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="cieng" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="cnpjprod" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Type="Int64" Name="cenq" Nullable="false" />
+    <Property Type="Int64" Name="cst" Nullable="false" />
+    <Property Type="Int64" Name="orig" Nullable="false" />
+    <Property Type="Int64" Name="modbc" Nullable="false" />
+    <Property Type="Int64" Name="modbcst" Nullable="false" />
+    <Property Type="Decimal" Name="predbcst" Nullable="false" Precision="5" Scale="2" />
+    <Property Type="Decimal" Name="pmvast" Nullable="false" Precision="5" Scale="2" />
+    <NavigationProperty Name="pm_enquadramento_ipi" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_enquadramento_ipi" FromRole="pm_produto" ToRole="pm_enquadramento_ipi" />
+    <NavigationProperty Name="pm_modalidade_bc_icms" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_modalidade_bc_icms" FromRole="pm_produto" ToRole="pm_modalidade_bc_icms" />
+    <NavigationProperty Name="pm_modalidade_bc_icms_st" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_modalidade_bc_icms_st" FromRole="pm_produto" ToRole="pm_modalidade_bc_icms_st" />
+    <NavigationProperty Name="pm_ncm" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_ncm" FromRole="pm_produto" ToRole="pm_ncm" />
+    <NavigationProperty Name="pm_origem_mercadoria" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_origem_mercadoria" FromRole="pm_produto" ToRole="pm_origem_mercadoria" />
+    <NavigationProperty Name="pm_tributo_icms" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_tributo_icms" FromRole="pm_produto" ToRole="pm_tributo_icms" />
+  </EntityType>
+  <EntityType Name="pm_telefone">
+    <Key>
+      <PropertyRef Name="id_telefone" />
+    </Key>
+    <Property Type="Int64" Name="id_telefone" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="id_pessoa" Nullable="false" />
+    <Property Type="String" Name="nr_telefone" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="dm_tipo_telefone" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_pessoa" Relationship="ProjectMaster.Data.Model.FK_pm_telefone_pm_pessoa" FromRole="pm_telefone" ToRole="pm_pessoa" />
+    <Property Type="String" Name="nm_contato" Nullable="false" Unicode="false" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="pm_tributo_icms">
+    <Key>
+      <PropertyRef Name="cst" />
+    </Key>
+    <Property Type="Int64" Name="cst" Nullable="false" />
+    <Property Type="String" Name="valor" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ds_descricao" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_produto" Relationship="ProjectMaster.Data.Model.FK_pm_produto_pm_tributo_icms" FromRole="pm_tributo_icms" ToRole="pm_produto" />
+  </EntityType>
+  <EntityType Name="pm_usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Type="Int64" Name="id_usuario" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="marca" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nome" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="usuario" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="senha" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="email" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="data_cadastro" Nullable="false" />
+    <Property Type="DateTime" Name="dt_nascimento" />
+    <Property Type="Boolean" Name="excluido" Nullable="false" />
+    <Property Type="Int64" Name="id_cargo" />
+    <Property Type="String" Name="dm_status" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nr_rg" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nr_cpf" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nm_mae" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="nm_pai" MaxLength="60" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="pm_cargo" Relationship="ProjectMaster.Data.Model.FK_pm_usuario_pm_cargo" FromRole="pm_usuario" ToRole="pm_cargo" />
+    <NavigationProperty Name="pm_menu_detalhe" Relationship="ProjectMaster.Data.Model.pm_menu_detalhe_permissao" FromRole="pm_usuario" ToRole="pm_menu_detalhe" />
+    <NavigationProperty Name="pm_menu" Relationship="ProjectMaster.Data.Model.pm_menu_permissao" FromRole="pm_usuario" ToRole="pm_menu" />
+    <NavigationProperty Name="pm_endereco" Relationship="ProjectMaster.Data.Model.pm_usuario_endereco" FromRole="pm_usuario" ToRole="pm_endereco" />
+    <NavigationProperty Name="pm_filial" Relationship="ProjectMaster.Data.Model.pm_usuario_filial" FromRole="pm_usuario" ToRole="pm_filial" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="principal_id" Nullable="false" />
+    <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="version" />
+    <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_pm_auditoria_log_detalhe_pm_auditoria_log">
+    <End Type="ProjectMaster.Data.Model.pm_auditoria_log" Role="pm_auditoria_log" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_auditoria_log_detalhe" Role="pm_auditoria_log_detalhe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_auditoria_log">
+        <PropertyRef Name="id_auditoria_log" />
+      </Principal>
+      <Dependent Role="pm_auditoria_log_detalhe">
+        <PropertyRef Name="id_auditoria_log" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_conta_corrente_pm_banco">
+    <End Type="ProjectMaster.Data.Model.pm_banco" Role="pm_banco" Multiplicity="0..1" />
+    <End Type="ProjectMaster.Data.Model.pm_conta_corrente" Role="pm_conta_corrente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_banco">
+        <PropertyRef Name="id_banco" />
+      </Principal>
+      <Dependent Role="pm_conta_corrente">
+        <PropertyRef Name="id_banco" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_usuario_pm_cargo">
+    <End Type="ProjectMaster.Data.Model.pm_cargo" Role="pm_cargo" Multiplicity="0..1" />
+    <End Type="ProjectMaster.Data.Model.pm_usuario" Role="pm_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_cargo">
+        <PropertyRef Name="id_cargo" />
+      </Principal>
+      <Dependent Role="pm_usuario">
+        <PropertyRef Name="id_cargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_domain_value_pm_domain">
+    <End Type="ProjectMaster.Data.Model.pm_domain" Role="pm_domain" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_domain_value" Role="pm_domain_value" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_domain">
+        <PropertyRef Name="id_domain" />
+      </Principal>
+      <Dependent Role="pm_domain_value">
+        <PropertyRef Name="id_domain" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_filial_pm_empresa">
+    <End Type="ProjectMaster.Data.Model.pm_empresa" Role="pm_empresa" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_filial" Role="pm_filial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_empresa">
+        <PropertyRef Name="id_empresa" />
+      </Principal>
+      <Dependent Role="pm_filial">
+        <PropertyRef Name="id_empresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_enquadramento_ipi">
+    <End Type="ProjectMaster.Data.Model.pm_enquadramento_ipi" Role="pm_enquadramento_ipi" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_produto" Role="pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_enquadramento_ipi">
+        <PropertyRef Name="cenq" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="cenq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_menu_detalhe_pm_menu">
+    <End Type="ProjectMaster.Data.Model.pm_menu" Role="pm_menu" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_menu_detalhe" Role="pm_menu_detalhe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_menu">
+        <PropertyRef Name="id_menu" />
+      </Principal>
+      <Dependent Role="pm_menu_detalhe">
+        <PropertyRef Name="id_menu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_menu_pm_menu">
+    <End Type="ProjectMaster.Data.Model.pm_menu" Role="pm_menu" Multiplicity="0..1" />
+    <End Type="ProjectMaster.Data.Model.pm_menu" Role="pm_menu1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_menu">
+        <PropertyRef Name="id_menu" />
+      </Principal>
+      <Dependent Role="pm_menu1">
+        <PropertyRef Name="id_menu_pai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_modalidade_bc_icms">
+    <End Type="ProjectMaster.Data.Model.pm_modalidade_bc_icms" Role="pm_modalidade_bc_icms" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_produto" Role="pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_modalidade_bc_icms">
+        <PropertyRef Name="modbc" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="modbc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_modalidade_bc_icms_st">
+    <End Type="ProjectMaster.Data.Model.pm_modalidade_bc_icms_st" Role="pm_modalidade_bc_icms_st" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_produto" Role="pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_modalidade_bc_icms_st">
+        <PropertyRef Name="modbcst" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="modbcst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_ncm">
+    <End Type="ProjectMaster.Data.Model.pm_ncm" Role="pm_ncm" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_produto" Role="pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_ncm">
+        <PropertyRef Name="ncm" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="ncm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_origem_mercadoria">
+    <End Type="ProjectMaster.Data.Model.pm_origem_mercadoria" Role="pm_origem_mercadoria" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_produto" Role="pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_origem_mercadoria">
+        <PropertyRef Name="orig" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="orig" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_telefone_pm_pessoa">
+    <End Type="ProjectMaster.Data.Model.pm_pessoa" Role="pm_pessoa" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_telefone" Role="pm_telefone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_pessoa">
+        <PropertyRef Name="id_pessoa" />
+      </Principal>
+      <Dependent Role="pm_telefone">
+        <PropertyRef Name="id_pessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_tributo_icms">
+    <End Type="ProjectMaster.Data.Model.pm_tributo_icms" Role="pm_tributo_icms" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_produto" Role="pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_tributo_icms">
+        <PropertyRef Name="cst" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="cst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pm_menu_detalhe_permissao">
+    <End Type="ProjectMaster.Data.Model.pm_menu_detalhe" Role="pm_menu_detalhe" Multiplicity="*" />
+    <End Type="ProjectMaster.Data.Model.pm_usuario" Role="pm_usuario" Multiplicity="*" />
+  </Association>
+  <Association Name="pm_menu_permissao">
+    <End Type="ProjectMaster.Data.Model.pm_menu" Role="pm_menu" Multiplicity="*" />
+    <End Type="ProjectMaster.Data.Model.pm_usuario" Role="pm_usuario" Multiplicity="*" />
+  </Association>
+  <Association Name="pm_usuario_endereco">
+    <End Type="ProjectMaster.Data.Model.pm_endereco" Role="pm_endereco" Multiplicity="*" />
+    <End Type="ProjectMaster.Data.Model.pm_usuario" Role="pm_usuario" Multiplicity="*" />
+  </Association>
+  <Association Name="pm_usuario_filial">
+    <End Type="ProjectMaster.Data.Model.pm_filial" Role="pm_filial" Multiplicity="*" />
+    <End Type="ProjectMaster.Data.Model.pm_usuario" Role="pm_usuario" Multiplicity="*" />
+  </Association>
+  <Association Name="pm_pessoapm_endereco">
+    <End Type="ProjectMaster.Data.Model.pm_pessoa" Role="pm_pessoa" Multiplicity="*" />
+    <End Type="ProjectMaster.Data.Model.pm_endereco" Role="pm_endereco" Multiplicity="*" />
+  </Association>
+  <Association Name="pm_pessoa_conta_corrente">
+    <End Type="ProjectMaster.Data.Model.pm_pessoa" Role="pm_pessoa" Multiplicity="1" />
+    <End Type="ProjectMaster.Data.Model.pm_conta_corrente" Role="pm_conta_corrente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_pessoa">
+        <PropertyRef Name="id_pessoa" />
+      </Principal>
+      <Dependent Role="pm_conta_corrente">
+        <PropertyRef Name="id_pessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="pm_pais">
+    <Key>
+      <PropertyRef Name="id_pais" />
+    </Key>
+    <Property Type="Int64" Name="id_pais" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ds_iso" Nullable="false" MaxLength="2" Unicode="false" />
+    <Property Type="String" Name="ds_iso3" Nullable="false" MaxLength="3" Unicode="false" />
+    <Property Type="Int16" Name="nr_codigo" Nullable="true" />
+    <Property Type="String" Name="nm_nome" Nullable="false" Unicode="false" MaxLength="Max" />
+    <NavigationProperty Name="pm_endereco" Relationship="ProjectMaster.Data.Model.pm_endereco_pais" FromRole="pm_pais" ToRole="pm_endereco" />
+  </EntityType>
+  <Association Name="pm_endereco_pais">
+    <End Type="ProjectMaster.Data.Model.pm_endereco" Role="pm_endereco" Multiplicity="*" />
+    <End Type="ProjectMaster.Data.Model.pm_pais" Role="pm_pais" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="pm_pais">
+        <PropertyRef Name="id_pais" />
+      </Principal>
+      <Dependent Role="pm_endereco">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="pm_moeda">
+    <Key>
+      <PropertyRef Name="id_moeda" />
+    </Key>
+    <Property Type="Int64" Name="id_moeda" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="dt_cotacao" Nullable="false" />
+    <Property Type="Decimal" Name="nr_valor" Nullable="false" Precision="5" Scale="2" />
+    <NavigationProperty Name="pm_tipo_moeda" Relationship="ProjectMaster.Data.Model.pm_moeda_tipo_moeda" FromRole="pm_moeda" ToRole="pm_tipo_moeda" />
+    <Property Type="Int32" Name="id_tipo_moeda" Nullable="true" />
+    <Property Type="Boolean" Name="bl_excluido" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <EntityType Name="pm_tipo_moeda">
+    <Key>
+      <PropertyRef Name="id_tipo_moeda" />
+    </Key>
+    <Property Type="Int32" Name="id_tipo_moeda" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="nm_tipo_moeda" Nullable="false" MaxLength="20" Unicode="false" />
+    <NavigationProperty Name="pm_moeda" Relationship="ProjectMaster.Data.Model.pm_moeda_tipo_moeda" FromRole="pm_tipo_moeda" ToRole="pm_moeda" />
+  </EntityType>
+  <Association Name="pm_moeda_tipo_moeda">
+    <End Type="ProjectMaster.Data.Model.pm_moeda" Role="pm_moeda" Multiplicity="*" />
+    <End Type="ProjectMaster.Data.Model.pm_tipo_moeda" Role="pm_tipo_moeda" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="pm_tipo_moeda">
+        <PropertyRef Name="id_tipo_moeda" />
+      </Principal>
+      <Dependent Role="pm_moeda">
+        <PropertyRef Name="id_tipo_moeda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="pm_centro_de_custo">
+    <Key>
+      <PropertyRef Name="id_centro_de_custo" />
+    </Key>
+    <Property Type="Int64" Name="id_centro_de_custo" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ds_codigo" Nullable="false" Unicode="false" MaxLength="15" />
+    <Property Type="String" Name="ds_descricao" Nullable="false" Unicode="false" MaxLength="60" />
+    <Property Type="Boolean" Name="bl_excluido" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <EntityType Name="pm_classificacao">
+    <Key>
+      <PropertyRef Name="id_classificacao" />
+    </Key>
+    <Property Type="Int64" Name="id_classificacao" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ds_codigo" Nullable="false" MaxLength="15" Unicode="false" />
+    <Property Type="String" Name="ds_descricao" Nullable="false" MaxLength="60" Unicode="false" />
+    <Property Type="Boolean" Name="bl_excluido" Nullable="false" DefaultValue="false" />
+  </EntityType>
+</Schema>

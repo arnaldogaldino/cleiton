@@ -1,0 +1,52 @@
+﻿@model ProjectMaster.Application.Models.UsuarioModels
+
+@{
+    ViewBag.Title = "::.. SVC - Sistema de Vendas Ceagesp ..::";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@using (Html.BeginForm("Entrar", "Usuario", FormMethod.Post, new { id = "formulario_entrar", name = "formulario_entrar" }))
+{   
+    <div aria-labelledby="ui-id-1" role="dialog" tabindex="-1" style="outline: 0px none; z-index: 1002; height: auto; width: 300px; display: block;" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-dialog-buttons main-center">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+                <span class="ui-dialog-title" id="ui-id-1">Entrar</span>
+        </div>
+
+        <div scrollleft="0" scrolltop="0" style="width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" id="dialog-confirm">
+            <p>
+                @Html.LabelFor(model => model.login)
+                @Html.EditorFor(model => model.login)                
+            </p>
+            <p>
+                @Html.LabelFor(model => model.senha)
+                @Html.PasswordFor(model => model.senha)
+            </p>
+            <p id="campos_empresa" style="display:none">
+                @Html.LabelFor(model => model.empresa)
+                <select id="empresa" name="empresa" class="empresa"  >
+                    <option  value="">Selecione...</option>
+                </select>
+            </p>
+            <p id="campos_filial" style="display:none">
+                @Html.LabelFor(model => model.filial)
+                <select id="filial" name="filial">
+                    <option  value="">Selecione... </option>
+                </select>
+            </p>
+        </div>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <p id="msg_error" style="float: left; color: Red"></p>  
+
+            <div class="ui-dialog-buttonset">                                             
+                @*<input aria-disabled="false" type="submit" value="Entrar" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />*@
+                <button id="entrar_login" onclick="login_event()" aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button">
+                    <span class="ui-button-text">Entrar</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="z-index: 1001; margin: 0px; position:absolute" class="ui-widget-overlay">
+        
+    </div>
+}

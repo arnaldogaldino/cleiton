@@ -1,0 +1,74 @@
+﻿@model ProjectMaster.Application.Models.PessoaModel
+<h1>Manutenção de Cliente - Fornecedor</h1>
+<script src="@Url.Content("~/Scripts/MeusScripts/paginas/pessoa/novo.js")" type="text/javascript"></script>
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "formPessoa" }))
+{
+    @Html.ValidationSummary(true)
+     
+    <fieldset>
+        <legend>@string.Format("Data de Emissão: {0}", Model == null ? DateTime.Now.ToString("dd/MM/yyyy") : Model.dt_cadastro.Value.ToString("dd/MM/yyyy"))</legend>
+        @Html.Hidden("id_pessoa", Model == null ? 0 : Model.id_pessoa, "id_pessoa")
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_marca)
+            @Html.EditorFor(model => model.ds_marca)
+            @Html.ValidationMessageFor(model => model.ds_marca)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_razao_social)
+            @Html.EditorFor(model => model.ds_razao_social)
+            @Html.ValidationMessageFor(model => model.ds_razao_social)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_nome_fantasia)
+            @Html.EditorFor(model => model.ds_nome_fantasia)
+            @Html.ValidationMessageFor(model => model.ds_nome_fantasia)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.dm_tipo_pessoa)
+            @Html.DropDownListFor(model => model.dm_tipo_pessoa, (SelectList)ViewBag.TipoCliente)
+            @Html.ValidationMessageFor(model => model.dm_tipo_pessoa)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_fisico_juridico)
+            @Html.DropDownListFor(model => model.ds_fisico_juridico, (SelectList)ViewBag.TipoDocumento)
+            @Html.ValidationMessageFor(model => model.ds_fisico_juridico)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.nr_documento)
+            @Html.EditorFor(model => model.nr_documento)
+            @Html.ValidationMessageFor(model => model.nr_documento)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.nr_ie)
+            @Html.EditorFor(model => model.nr_ie)
+            @Html.ValidationMessageFor(model => model.nr_ie)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.nr_inscricao_suframa)
+            @Html.EditorFor(model => model.nr_inscricao_suframa)
+            @Html.ValidationMessageFor(model => model.nr_inscricao_suframa)
+        </div>
+
+        <div class="editor-field">
+            @Html.LabelFor(model => model.dm_dias_limite_credito)
+            @Html.DropDownListFor(model => model.dm_dias_limite_credito, (SelectList)ViewBag.LimiteDeCredito)
+            @Html.ValidationMessageFor(model => model.dm_dias_limite_credito)
+        </div>
+
+        <div class="editor-field">
+            @Html.LabelFor(model => model.dm_venda_agendada)
+            @Html.DropDownListFor(model => model.dm_venda_agendada, (SelectList)ViewBag.OpcaoDeAceitacao)
+            @Html.ValidationMessageFor(model => model.dm_venda_agendada)
+        </div>
+
+    </fieldset>
+}
+@Html.Action("Index", "Endereco", new { idPessoa = Model == null ? 0 : Model.id_pessoa })
+@Html.Action("Index", "Telefone", new { idPessoa = Model == null ? 0 : Model.id_pessoa })
+@Html.Action("Index", "ContaCorrente", new { idPessoa = Model == null ? 0 : Model.id_pessoa })
+<p>
+    <input type="submit" value="Salvar" />
+</p>
+<div>
+    @Html.ActionLink("Voltar para pesquisa", "Procurar")
+</div>

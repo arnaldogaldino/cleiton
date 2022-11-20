@@ -1,0 +1,117 @@
+﻿@model ProjectMaster.Application.Models.HistoricoModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de Historico";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Historico.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Historico/Historico?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Historico.", "Editar Historico.", "editar", "", Url.Content("~/Historico/Historico?acao=Edit&id_historico=" + Model.id_historico), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Historico.", "Excluir Historico.", "excluir", "", Url.Content("~/Historico/Historico"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Historico.", "Gravar Historico.", "gravar", "", "javascript:ShowLoad();$('#formulario_historico').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Historico/Historico"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Historico/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Historico.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Historico/Historico?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Historico.", "Editar Historico.", "editar", "", Url.Content("~/Historico/Historico?acao=Edit&id_historico=" + Model.id_historico), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Historico.", "Excluir Historico.", "excluir", "", "JavaScript:delete_file(" + Model.id_historico + ",'Historico','form')", true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Historico.", "Gravar Historico.", "gravar", "", "javascript:ShowLoad();$('#formulario_historico').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Historico/Historico?acao=View&id_historico=" + Model.id_historico), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Historico/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Historico.", "cadastrar", "CadastrarNovo", "", Url.Content("~/Historico/Historico?acao=New"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar Historico.", "Editar Historico.", "editar", "", Url.Content("~/Historico/Historico?acao=Edit&id_historico=" + Model.id_historico), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir Historico.", "Excluir Historico.", "excluir", "", "JavaScript:delete_file(" + Model.id_historico + ",'Historico','form')", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar Historico.", "Gravar Historico.", "gravar", "", Url.Content("~/Historico/Historico"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Historico/Historico"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Historico/Index"), true, true));
+        read_only = "readonly='readonly'";
+    }
+}
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+@using (Html.BeginForm("Historico", "Historico", FormMethod.Post, new { id = "formulario_historico", name = "formulario_historico" }))
+{   
+    <fieldset title="Historico">
+        <legend>Historico</legend>
+        <label class="normal">Id:</label>
+        <input type="text" value="@Model.id_historico" id="id_historico" name="id_historico" size="7" maxlength="6" readonly="readonly" />
+
+        <br />
+        
+        <label class="normal">Código:</label>
+        <input type="text" value="@Model.ds_codigo" id="ds_codigo" name="ds_codigo" size="20" maxlength="15" @(Model.id_historico == 0 ? read_only : "readonly='readonly'") />
+        @Html.ValidationMessage("ds_codigo", "*")
+
+        <label class="normal">Descrição:</label>
+        <input type="text" value="@Model.ds_descricao" id="ds_descricao" name="ds_descricao" size="80" maxlength="60" @read_only />
+        @Html.ValidationMessage("ds_descricao", "*")
+
+        <br />
+
+        <label class="normal">Tipo Historico:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.dm_operacao, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoHistorico, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.dm_operacao, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoHistorico, true), new { disabled = "disabled" });
+            }
+        @Html.ValidationMessage("dm_operacao", "*")
+        
+        <label class="normal">Tipo de Situação Financeira:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.dm_associacao, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoSituacaoFinanceira, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.dm_associacao, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoSituacaoFinanceira, true), new { disabled = "disabled" });
+            }
+        @Html.ValidationMessage("dm_associacao", "*")
+                
+        <label class="normal">Código Contábil:</label>
+            @if (string.IsNullOrEmpty(read_only))
+            { 
+                @Html.DropDownListFor(model => model.dm_codigo_contabil, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.CodigoContabil, true));
+            }
+            else
+            { 
+                @Html.DropDownListFor(model => model.dm_codigo_contabil, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.CodigoContabil, true), new { disabled = "disabled" });
+            }
+        @Html.ValidationMessage("dm_codigo_contabil", "*")
+
+    </fieldset>  
+    @Html.ValidationSummary()
+}
+</div>
+
+<div id="dialog-confirm" title="Historico" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Historico?</p>
+</div>

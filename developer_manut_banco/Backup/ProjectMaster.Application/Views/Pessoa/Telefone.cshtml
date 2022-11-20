@@ -1,0 +1,279 @@
+﻿@model IEnumerable<ProjectMaster.Application.Models.PessoaModels.TelefoneModels>
+@{
+    Layout = null;
+
+    var classRow = "webgrid-rows";
+    int row_num = 0;
+    var read_only = "";
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        read_only = "readonly='readonly'";
+    }
+}
+    <fieldset title="Telefone" id="Telefone" name="Telefone">
+        <legend>Telefone</legend>    
+               
+        <input type="hidden" value="" id="cp_id_pessoa_telefone" name="id_pessoa_telefone" />
+        <input type="hidden" value="-1" id="grid_linha_num" name="grid_linha_num" />
+
+        <label class="normal">Contato:</label>
+        <input type="text" value="" id="cp_contato" name="contato" size="30" maxlength="50" @read_only />
+        @Html.ValidationMessage("contato", "*")
+
+        <label class="normal">Nùmero Telefone:</label>
+        <input type="text" value="" id="cp_nr_telefone" name="nr_telefone" size="20" maxlength="15" @read_only />
+        @Html.ValidationMessage("nr_telefone", "*")
+
+        <label class="normal">Tipo Telefone:</label>
+        @if (string.IsNullOrEmpty(read_only))
+        { 
+            @Html.DropDownList("cp_dm_tipo_telefone", ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoTelefone, true), new { id = "cp_dm_tipo_telefone" });
+        }
+        else
+        { 
+            @Html.DropDownList("cp_dm_tipo_telefone", ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoTelefone, true), new { disabled = "disabled", id = "cp_dm_tipo_telefone" });
+        }
+        @Html.ValidationMessage("dm_tipo_telefone", "*")
+        @if (string.IsNullOrEmpty(read_only))
+        {
+        <input id="gravar_telefone" name="gravar_telefone" type="button" value="Gravar" />
+        }
+        <br />
+        
+        <div id="ValidTelefone" class="validation-summary-valid" data-valmsg-summary="true"> </div>
+
+    <table id="grid_telefone" class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    <span>Contato</span> 
+                </th>
+                <th>
+                    <span>Telefone</span> 
+                </th>
+                <th>
+                    <span>Tipo Telefone</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var linha in Model)
+        {
+            <tr id='row_@(row_num.ToString())' class="@classRow">
+                <td>
+                    <input id="id_pessoa_telefone_@(row_num.ToString())" name="Telefone[@(row_num.ToString())].id_pessoa_telefone" type="hidden" value="@linha.id_pessoa_telefone" /> 
+                    <input id="id_pessoa_@(row_num.ToString())" name="Telefone[@(row_num.ToString())].id_pessoa" type="hidden" value="@linha.id_pessoa" /> 
+                    <input id="contato_@(row_num.ToString())" name="Telefone[@(row_num.ToString())].contato" type="hidden" value="@linha.contato" /> 
+                    <input id="nr_telefone_@(row_num.ToString())" name="Telefone[@(row_num.ToString())].nr_telefone" type="hidden" value="@linha.nr_telefone" /> 
+                    <input id="dm_tipo_telefone_@(row_num.ToString())" name="Telefone[@(row_num.ToString())].dm_tipo_telefone" type="hidden" value="@linha.dm_tipo_telefone" />
+                    
+                    <span>@linha.contato</span>
+                </td>
+                <td>
+                    <span>@linha.nr_telefone</span>
+                </td>
+                <td>
+                    <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.TipoTelefone, linha.dm_tipo_telefone)</span>
+                </td>
+                <td align="center">
+                    <div style='width: 100px'> 
+                        @if (string.IsNullOrEmpty(read_only))
+                        {
+                            <a href='JavaScript:edit_pessoa_telefone(0,@row_num)'> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                            <a href='JavaScript:delete_pessoa_telefone(0,@row_num)'> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> 
+                        }
+                        else
+                        {
+                            <img src='@Url.Content("~/Content/images/edit.png")'/> 
+                            <img src='@Url.Content("~/Content/images/delete.png")'/>
+                        }
+                    </div>
+                </td>
+            </tr>
+            if (classRow == "webgrid-alternating-rows")
+            {
+                classRow = "webgrid-rows";
+                row_num = row_num + 1;
+            }
+            else
+            {
+                classRow = "webgrid-alternating-rows";
+                row_num = row_num + 1;
+            }
+        }
+        </tbody>
+    </table>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#gravar_telefone").button().click(function (event) {
+                ShowLoad();
+                var telefonesRows = $("#grid_telefone > tbody").find("tr");
+                classRow = "";
+                row_num = (telefonesRows.length);
+
+                if (!validFormTelefone())
+                    return;
+
+                if (row_num % 2 == 0) {
+                    classRow = "webgrid-alternating-rows";
+                }
+                else {
+                    classRow = "webgrid-rows";
+                }
+
+                if ($("#grid_linha_num").val() != "-1") {
+                    row_num = $("#grid_linha_num").val();
+                }
+
+                new_rows = '' +
+                            '<tr id="row_' + row_num + '" class="' + classRow + '">' +
+                            '    <td>' +
+                            '        <input id="id_pessoa_telefone_' + row_num + '" name="Telefone[' + row_num + '].id_pessoa_telefone" type="hidden" value="' + $("#cp_id_pessoa_telefone").val() + '" /> ' +
+                            '        <input id="id_pessoa_' + row_num + '" name="Telefone[' + row_num + '].id_pessoa" type="hidden" value="' + $("#cp_id_pessoa").val() + '" /> ' +
+                            '        <input id="contato_' + row_num + '"  name="Telefone[' + row_num + '].contato" type="hidden" value="' + $("#cp_contato").val() + '" /> ' +
+                            '        <input id="nr_telefone_' + row_num + '"  name="Telefone[' + row_num + '].nr_telefone" type="hidden" value="' + $("#cp_nr_telefone").val() + '" /> ' +
+                            '        <input id="dm_tipo_telefone_' + row_num + '" name="Telefone[' + row_num + '].dm_tipo_telefone" type="hidden" value="' + $("#cp_dm_tipo_telefone").val() + '" /> ' +
+                            '        <span>' + $("#cp_contato").val() + '</span>' +
+                            '    </td>' +
+                            '    <td>' +
+                            '        <span>' + $("#cp_nr_telefone").val() + '</span>' +
+                            '    </td>' +
+                            '    <td>' +
+                            '        <span>' + $('select[name="cp_dm_tipo_telefone"] option:selected').text() + '</span>' +
+                            '    </td>' +
+                            '    <td align="center">' +
+                            '        <div style="width: 100px"> ' +
+                            '            <a href="JavaScript:edit_pessoa_telefone(0,' + row_num + ')"> <img src="@Url.Content("~/Content/images/edit.png")"/> </a>  ' +
+                            '            <a href="JavaScript:delete_pessoa_telefone(0,' + row_num + ')"> <img src="@Url.Content("~/Content/images/delete.png")"/> </a> ' +
+                            '        </div>' +
+                            '    </td>' +
+                            '</tr>';
+
+                if ($("#grid_linha_num").val() == "-1") {
+                    $('#grid_telefone > tbody:last').append(new_rows);
+                } else {
+
+                    var telefonesRows = $("#grid_telefone > tbody").find("tr#row_" + row_num);
+                    telefonesRows.find("#dm_tipo_telefone_" + row_num).val("DL");
+
+                    $("#grid_telefone > tbody").find('#row_' + row_num).fadeOut("slow", function () {
+                        $("#grid_telefone > tbody").find('#row_' + row_num).attr("style", "display:none");
+                        telefonesRows.remove();
+                        $("#grid_telefone > tbody").append(new_rows);
+                    });                    
+                }
+                HideLoad();
+
+                clear_telefone();
+            });
+        });
+
+        function validFormTelefone() {
+            const_erro = false;
+            msg = "";
+
+            if ($("#cp_contato").val() == "") {
+                $('span[data-valmsg-for="contato"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Contato) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="contato"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#cp_nr_telefone").val() == "") {
+                $('span[data-valmsg-for="nr_telefone"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Número Telefone) é obrigatório.</li>";
+                const_erro = true;
+            }
+            else {
+                $('span[data-valmsg-for="nr_telefone"]').attr('class', "field-validation-valid");
+            }
+
+            if ($("#cp_dm_tipo_telefone").val() == "") {
+                $('span[data-valmsg-for="dm_tipo_telefone"]').attr('class', "field-validation-error");
+                msg += "<li>Campo (Tipo Telefone) é obrigatório.</li>";
+                const_erro = true;
+            } else {
+                $('span[data-valmsg-for="dm_tipo_telefone"]').attr('class', "field-validation-valid");
+            }
+
+            if (const_erro == true) {
+                $('#ValidTelefone').html("<ul>" + msg + "</ul>");
+                HideLoad();
+                return false;
+            }
+            else {
+                $('#ValidTelefone').html("");
+                return true;
+            }
+        }
+
+        function clear_telefone() {
+
+            $("#cp_id_pessoa_contato").val("");
+            $("#cp_id_pessoa").val("");
+
+            $("#cp_contato").val("");
+            $("#cp_nr_telefone").val("");
+            $("#cp_dm_tipo_telefone").val("");
+            $("#cp_id_pessoa_telefone").val("");
+            $("#grid_linha_num").val("-1");
+        }
+
+        function edit_pessoa_telefone(id_pessoa_telefone, row) {
+            var telefonesRows = $("#grid_telefone > tbody").find("tr#row_" + row);
+
+            clear_telefone();
+            ShowLoad();
+            $("#cp_id_pessoa_telefone").val(telefonesRows.find("#id_pessoa_telefone_" + row).val());
+            $("#cp_id_pessoa").val(telefonesRows.find("#id_pessoa_" + row).val());
+
+            $("#cp_contato").val(telefonesRows.find("#contato_" + row).val());
+            $("#cp_nr_telefone").val(telefonesRows.find("#nr_telefone_" + row).val());
+            $("#cp_dm_tipo_telefone").val(telefonesRows.find("#dm_tipo_telefone_" + row).val());
+            $("#cp_id_pessoa_telefone").val(telefonesRows.find("#id_pessoa_telefone_" + row).val());
+            $("#grid_linha_num").val(row);
+            HideLoad();
+        }
+
+        function delete_pessoa_telefone(id_pessoa_telefone, row) {
+            if (id_pessoa_telefone == 0) {
+                clear_telefone();
+
+                var telefonesRows = $("#grid_telefone > tbody").find("tr#row_" + row);
+                telefonesRows.find("#dm_tipo_telefone_" + row).val("DL");
+
+                $("#grid_telefone > tbody").find('#row_' + row).fadeOut("slow", function () {
+                    $("#grid_telefone > tbody").find('#row_' + row).attr("style", "display:none");
+                });
+            }
+        }
+    </script>
+    </fieldset>

@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Cadastro de Moeda";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Moeda.", "Cadastrar novo Moeda.", "CadastrarNovo", "", Url.Content("~/Moeda/Moeda?acao=New"), true, true));
+
+    var queryMoeda = (IQueryable<ProjectMaster.Data.pm_moeda>)ViewData["queryMoeda"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>ID</span> 
+                </th>
+                <th width="150px" align="center">
+                    <span>Data da Cotação</span> 
+                </th>
+                <th>
+                    <span>Tipo Moeda</span>
+                </th>
+                <th align="center">
+                    <span>Valor ($)</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (ProjectMaster.Data.pm_moeda linha in queryMoeda)
+        {
+            <tr id='lin@(linha.id_moeda.ToString())' class="@classRow">
+                <td>
+                    <span>@linha.id_moeda</span>
+                </td>
+                <td align="center">
+                    <span>@linha.dt_cotacao.ToString("dd/MM/yyyy")</span>
+                </td>
+                <td>
+                    <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.TipoMoeda, linha.dm_tipo_moeda)</span>
+                </td>
+                <td align="right">
+                    <span>$ @linha.nr_valor</span>
+                </td>
+                <td align="center">
+                    <div style='width: 100px'> 
+                        <a href='@Url.Action("Moeda", "Moeda", new { acao = "View", id_moeda = linha.id_moeda })'> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                        <a href="JavaScript:delete_file('@linha.id_moeda','Moeda','rows')"> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> </div>
+                </td>
+            </tr>        
+             if (classRow == "webgrid-alternating-rows")
+             {
+                 classRow = "webgrid-rows";
+             }
+             else
+             {
+                 classRow = "webgrid-alternating-rows";
+             }
+        }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div id="dialog-confirm" title="Moeda" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Moeda?</p>
+</div>

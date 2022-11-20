@@ -1,0 +1,125 @@
+﻿@model ProjectMaster.Application.Models.MenuModels
+@{
+    var read_only = "";
+
+    ViewBag.Title = "Cadastro de Menu";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    string acao = string.Empty;
+
+    if (ViewData["acao"] == null)
+    {
+        acao = "New";
+    }
+
+    if (ViewData["acao"] != null || ViewData["acao"] == "New")
+    {
+        acao = ViewData["acao"].ToString();
+    }
+
+    if (acao.Equals("New", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo menu.", "cadastrar.", "CadastrarNovo", "", Url.Content("~/Menu/Menu?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar menu.", "Editar menu.", "editar", "", Url.Content("~/Menu/Menu?acao=Edit&id_menu=" + Model.id_menu), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir menu.", "Excluir menu.", "excluir", "", Url.Content("~/Menu/Menu"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar menu.", "Gravar menu.", "gravar", "", "javascript:$('#formulario_menu').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Menu/Menu"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Menu/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("Edit", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo menu.", "cadastrar.", "CadastrarNovo", "", Url.Content("~/Menu/Menu?acao=New"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar menu.", "Editar menu.", "editar", "", Url.Content("~/Menu/Menu?acao=Edit&id_menu=" + Model.id_menu), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir menu.", "Excluir menu.", "excluir", "", Url.Content("~/Menu/Menu"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar menu.", "Gravar menu.", "gravar", "", "javascript:$('#formulario_menu').submit();", true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Menu/Menu?acao=View&id_menu=" + Model.id_menu), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Menu/Index"), true, true));
+        read_only = "";
+    }
+
+    if (acao.Equals("View", StringComparison.OrdinalIgnoreCase))
+    {
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo menu.", "cadastrar.", "CadastrarNovo", "", Url.Content("~/Menu/Menu?acao=New"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Editar, "Editar menu.", "Editar menu.", "editar", "", Url.Content("~/Menu/Menu?acao=Edit&id_menu=" + Model.id_menu), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Excluir, "Excluir menu.", "Excluir menu.", "excluir", "", Url.Content("~/Menu/Menu"), true, true));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Gravar, "Gravar menu.", "Gravar menu.", "gravar", "", Url.Content("~/Menu/Menu"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Cancelar, "Cancelar ação.", "Cancelar ação.", "cancelar", "", Url.Content("~/Menu/Menu"), true, false));
+        Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar", "voltar", "", Url.Content("~/Menu/Index"), true, true));
+        read_only = "readonly='readonly'";
+    }
+}
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+@using (Html.BeginForm("Menu", "Menu", FormMethod.Post, new { id = "formulario_menu", name = "formulario_menu" }))
+{   
+    <fieldset title="Menu">
+        <legend>Menu</legend>
+        <label class="normal">Id:</label>
+        <input type="text" value="@Model.id_menu" id="id_menu" name="id_menu" size="7" maxlength="6" readonly="readonly" />
+
+        <br />
+        
+        <label class="normal">Menu Pai:</label>
+        @if (string.IsNullOrEmpty(read_only))
+        {
+            <select id="id_menu_pai" name="id_menu_pai" @read_only.Replace("readonly", "disabled")>
+                <option value="">Selecione...</option>
+                @foreach (var i in (new ProjectMaster.Bussiness.Menu().GetMenuGrid()))
+                {
+                    <option value="@i.id_menu" @(i.id_menu == Model.id_menu_pai ? "selected='selected'" : "")>@i.nome</option>
+                }
+            </select>
+        }
+        else
+        {
+            foreach (var i in (new ProjectMaster.Bussiness.Menu().GetMenuGrid()))
+            {
+                if (i.id_menu == Model.id_menu_pai)
+                {
+                    <input type="text" value="@i.nome" id="menu_pai" name="menu_pai" size="20" maxlength="20" @read_only />
+                    <input type="hidden" value="@i.id_menu_pai" id="id_menu_pai" name="id_menu_pai" />
+                }
+            }
+        }
+
+        <br />
+        
+        <label class="normal">Nome:</label>
+        <input type="text" value="@Model.nome" id="nome" name="nome" size="15" maxlength="20" @read_only />
+        @Html.ValidationMessage("Nome", "*")
+
+        <label class="normal">Texto:</label>
+        <input type="text" value="@Model.texto" id="texto" name="texto" size="15" maxlength="20" @read_only />
+        @Html.ValidationMessage("Texto", "*")
+
+        <br />
+
+        <label class="normal">Ordem:</label>
+        <input type="text" value="@Model.ordem" id="ordem" name="ordem" size="5" maxlength="5" @read_only />
+
+        <br />
+
+        <label class="normal">Area:</label>
+        <input type="text" value="@Model.area_name" id="area_name" name="area_name" size="20" maxlength="20" @read_only />
+
+        <label class="normal">Controller:</label>
+        <input type="text" value="@Model.controller_name" id="controller_name" name="controller_name" size="20" maxlength="20" @read_only />
+
+        <label class="normal">Action:</label>
+        <input type="text" value="@Model.action_name" id="action_name" name="action_name" size="20" maxlength="20" @read_only />
+
+        <br />
+                
+        <label class="normal">Descrição:</label>
+        <input type="text" value="@Model.descricao" id="descricao" name="descricao" size="50" maxlength="50" @read_only />
+
+    </fieldset>  
+    @Html.ValidationSummary()
+
+}
+</div>

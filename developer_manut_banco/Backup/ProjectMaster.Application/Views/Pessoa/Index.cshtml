@@ -1,0 +1,130 @@
+﻿@model ProjectMaster.Application.Models.PessoaModels
+@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    ViewBag.Title = "Cadastro de Pessoa ( Cliente / Fornecedor / Transportadora )";
+    
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Pessoa.", "Cadastrar nova Pessoa.", "CadastrarNovo", "", Url.Content("~/Pessoa/Pessoa?acao=New"), true, true));
+
+    var queryPessoa = (IQueryable<ProjectMaster.Data.pm_pessoa>)ViewData["queryPessoa"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+
+@using (Html.BeginForm("Index", "Pessoa", FormMethod.Post, new { id = "formulario_procurar", name = "formulario_procurar" }))
+{           
+    <fieldset title="Procurar">
+    <legend>Procurar</legend>  
+    <table width="100%">
+        <tr>
+            <td>
+                <label class="normal">Marca / Código:</label>
+                <input type="text" value="@Model.ds_marca" id="ds_marca" name="ds_marca" size="25" maxlength="25" />
+        
+                <br />
+        
+                <label class="normal">Razão Social:</label>
+                <input type="text" value="@Model.ds_razao_social" id="ds_razao_social" name="ds_razao_social" size="25" maxlength="80" />
+        
+                <br />
+
+                <label class="normal">Documento:</label>
+                <input type="text" value="@Model.nr_documento" id="nr_documento" name="nr_documento" size="14" maxlength="14" />
+
+                <label class="normal">Tipo Cadastro:</label>
+                @Html.DropDownListFor(model => model.dm_tipo_pessoa, ProjectMaster.Bussiness.Domain.GetDomainByTipo(ProjectMaster.Bussiness.Domain.Tipos.TipoCliente, true))
+            </td>
+            <td align="right" valign="top">
+                <input id="procurar" name="procurar" type="submit" value="Procurar" />
+            </td>
+        </tr>
+    </table>
+    </fieldset>
+        <script type="text/javascript">
+            $(function () {
+                $("#procurar").button();
+            });
+        </script>
+}
+
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>ID</span> 
+                </th>
+                <th width="150px">
+                    <span>Marca/Código</span> 
+                </th>
+                <th>
+                    <span>Razão Social</span>
+                </th>
+                <th>
+                    <span>Documento</span>
+                </th>
+                <th>
+                    <span>Inscrição Estadual</span>
+                </th>
+                <th>
+                    <span>Tipo Cadastro</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (queryPessoa != null)
+        {
+            foreach (ProjectMaster.Data.pm_pessoa linha in queryPessoa)
+            {
+            <tr id='lin@(linha.id_pessoa.ToString())' class="@classRow">
+                <td>
+                    <span>@linha.id_pessoa</span>
+                </td>
+                <td>
+                    <span>@linha.ds_marca</span>
+                </td>
+                <td>
+                    <span>@linha.ds_razao_social</span>
+                </td>
+                <td>
+                    <span>@linha.nr_documento</span>
+                </td>
+                <td>
+                    <span>@linha.nr_ie</span>
+                </td>
+                <td>
+                    <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.TipoCliente, linha.dm_tipo_pessoa)</span>
+                </td>
+                <td align="center">
+                    <div style='width: 100px'> 
+                        <a href='@Url.Action("Pessoa", "Pessoa", new { acao = "View", id_pessoa = linha.id_pessoa })'> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                        <a href="JavaScript:delete_file('@linha.id_pessoa','Pessoa','rows')"> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> 
+                    </div>
+                </td>
+            </tr>        
+                if (classRow == "webgrid-alternating-rows")
+                {
+                    classRow = "webgrid-rows";
+                }
+                else
+                {
+                    classRow = "webgrid-alternating-rows";
+                }
+            }
+        }
+        </tbody>
+    </table>
+
+</div>
+
+<br />
+
+<div id="dialog-confirm" title="Pessoa" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Pessoa?</p>
+</div>

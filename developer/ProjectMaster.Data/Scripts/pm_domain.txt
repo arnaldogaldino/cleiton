@@ -1,0 +1,24 @@
+﻿IF NOT EXISTS( SELECT TOP 1 1 FROM pm_domain where domain_name = 'TIPO_DE_CLIENTE')
+BEGIN
+	INSERT INTO pm_domain VALUES('TIPO_DE_CLIENTE','Dominio de tipos de cliente')
+END
+IF NOT EXISTS( SELECT TOP 1 1 FROM pm_domain where domain_name = 'TIPO_DE_DOCUMENTO')
+BEGIN
+	INSERT INTO pm_domain VALUES('TIPO_DE_DOCUMENTO','Dominio de tipos de documento')
+END
+IF NOT EXISTS( SELECT TOP 1 1 FROM pm_domain where domain_name = 'OPCOES_DE_ACEITACAO')
+BEGIN
+	INSERT INTO pm_domain VALUES('OPCOES_DE_ACEITACAO','Dominio de respostas de aceitação')
+END
+IF NOT EXISTS( SELECT TOP 1 1 FROM pm_domain where domain_name = 'LIMITE_CREDITO')
+BEGIN
+	INSERT INTO pm_domain VALUES('LIMITE_CREDITO','Dominio de limites de credito')
+END
+IF NOT EXISTS( SELECT TOP 1 1 FROM pm_domain where domain_name = 'TIPO_TELEFONE')
+BEGIN
+	INSERT INTO pm_domain VALUES('TIPO_TELEFONE','Dominio de tipos de telefone')
+END
+IF NOT EXISTS( SELECT TOP 1 1 FROM pm_domain where domain_name = 'BANCOS')
+BEGIN
+	INSERT INTO pm_domain VALUES('BANCOS','Lista de Bancos')
+END

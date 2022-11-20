@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E8604815-04F7-4880-8724-5200535642D9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProjectMaster.Bussiness</RootNamespace>
+    <AssemblyName>ProjectMaster.Bussiness</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataModels\CentroDeCusto.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataModels\Classificacao.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataModels\ContaCorrente.cs" />
+    <Compile Include="DataModels\ContasPagar.cs" />
+    <Compile Include="DataModels\Embalagem.cs" />
+    <Compile Include="DataModels\Domain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataModels\Empresa.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataModels\Estoque.cs" />
+    <Compile Include="DataModels\Fiado.cs" />
+    <Compile Include="DataModels\Filial.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataModels\Historico.cs" />
+    <Compile Include="DataModels\LimiteCredito.cs" />
+    <Compile Include="DataModels\Menu.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataModels\Moeda.cs" />
+    <Compile Include="DataModels\NCM.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataModels\Pedido.cs" />
+    <Compile Include="DataModels\Pessoa.cs" />
+    <Compile Include="DataModels\Produto.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataModels\Usuario.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectMaster.Core\ProjectMaster.Core.csproj">
+      <Project>{AB67DEE5-3C5E-4178-BE9F-E5820733E1FA}</Project>
+      <Name>ProjectMaster.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectMaster.Data\ProjectMaster.Data.csproj">
+      <Project>{86E6A029-44F1-440D-B972-F41F7FD3BA61}</Project>
+      <Name>ProjectMaster.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

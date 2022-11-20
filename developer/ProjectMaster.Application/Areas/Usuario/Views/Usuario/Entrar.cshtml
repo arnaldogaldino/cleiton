@@ -1,0 +1,59 @@
+﻿@model ProjectMaster.Application.Areas.Usuario.Models.UsuarioModel
+           
+@{
+    ViewBag.Title = "::.. SVC - Sistema de Vendas Ceagesp ..::";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+    
+    <div aria-labelledby="ui-id-1" role="dialog" tabindex="-1" style="outline: 0px none; z-index: 1002; height: auto; width: 300px; display: block;" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-dialog-buttons main-center">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+                <span class="ui-dialog-title" id="ui-id-1">Entrar</span>
+        </div>
+
+        <div scrollleft="0" scrolltop="0" style="width: auto; min-height: 0px;" class="ui-dialog-content ui-widget-content" id="dialog-confirm">
+            <p>
+                @Html.LabelFor(model => model.Login)
+                @Html.EditorFor(model => model.Login)                
+            </p>
+            <p>
+                @Html.LabelFor(model => model.Senha)
+                @Html.PasswordFor(model => model.Senha)
+            </p>
+            <p id="campos_empresa" style="display:none">
+                @Html.LabelFor(model => model.Empresas)
+                <select id="empresa" class="empresa"  >
+                    <option  value="">Selecione...</option>
+                    <option  value="1">Markbem</option>
+                    <option  value="2">Frutas Conchal</option>
+                    <option  value="3">Irmãos Andrade</option>
+                    <option  value="4">R.I.</option>
+                    <option  value="5">J.U.</option>
+                </select>
+            </p>
+            <p id="campos_filial" style="display:none">
+                <select id="filial">
+                    <option  value="">Selecione... </option>
+                    <option  value="1">HFN - Box 58</option>
+                    <option  value="2">HFH - Box 189 </option>
+                    <option  value="3">HFN - Box 45</option>
+                    <option  value="4">CGI - Box 122</option>
+                    <option  value="5">AAP - Box 54</option>
+                </select>
+            </p>
+        </div>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <div class="ui-dialog-buttonset">
+                <p id="msg_error"></p>
+                <button aria-disabled="false" onclick="ShowLoad()"  role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" type="button">
+                    <span class="ui-button-text">Entrar</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+}
+
+    <div style="z-index: 1001; margin: 0px; position:absolute" class="ui-widget-overlay">
+        
+    </div>
+

@@ -1,0 +1,834 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectMaster.Data.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="ProjectMasterDataModelStoreContainer">
+    <EntitySet Name="pm_auditoria_log" EntityType="ProjectMaster.Data.Model.Store.pm_auditoria_log" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_auditoria_log_detalhe" EntityType="ProjectMaster.Data.Model.Store.pm_auditoria_log_detalhe" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_banco" EntityType="ProjectMaster.Data.Model.Store.pm_banco" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_cargo" EntityType="ProjectMaster.Data.Model.Store.pm_cargo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_conta_corrente" EntityType="ProjectMaster.Data.Model.Store.pm_conta_corrente" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_domain" EntityType="ProjectMaster.Data.Model.Store.pm_domain" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_domain_value" EntityType="ProjectMaster.Data.Model.Store.pm_domain_value" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_empresa" EntityType="ProjectMaster.Data.Model.Store.pm_empresa" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_endereco" EntityType="ProjectMaster.Data.Model.Store.pm_endereco" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_enquadramento_ipi" EntityType="ProjectMaster.Data.Model.Store.pm_enquadramento_ipi" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_filial" EntityType="ProjectMaster.Data.Model.Store.pm_filial" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_menu" EntityType="ProjectMaster.Data.Model.Store.pm_menu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_menu_detalhe" EntityType="ProjectMaster.Data.Model.Store.pm_menu_detalhe" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_modalidade_bc_icms" EntityType="ProjectMaster.Data.Model.Store.pm_modalidade_bc_icms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_modalidade_bc_icms_st" EntityType="ProjectMaster.Data.Model.Store.pm_modalidade_bc_icms_st" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_ncm" EntityType="ProjectMaster.Data.Model.Store.pm_ncm" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_origem_mercadoria" EntityType="ProjectMaster.Data.Model.Store.pm_origem_mercadoria" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_pessoa" EntityType="ProjectMaster.Data.Model.Store.pm_pessoa" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_produto" EntityType="ProjectMaster.Data.Model.Store.pm_produto" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_telefone" EntityType="ProjectMaster.Data.Model.Store.pm_telefone" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_tributo_icms" EntityType="ProjectMaster.Data.Model.Store.pm_tributo_icms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_usuario" EntityType="ProjectMaster.Data.Model.Store.pm_usuario" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="ProjectMaster.Data.Model.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_pais" EntityType="ProjectMaster.Data.Model.Store.pm_pais" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_moeda" EntityType="ProjectMaster.Data.Model.Store.pm_moeda" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_tipo_moeda" EntityType="ProjectMaster.Data.Model.Store.pm_tipo_moeda" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_centro_de_custo" EntityType="ProjectMaster.Data.Model.Store.pm_centro_de_custo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_classificacao" EntityType="ProjectMaster.Data.Model.Store.pm_classificacao" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_menu_detalhe_permissao" EntityType="ProjectMaster.Data.Model.Store.pm_menu_detalhe_permissao" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_menu_permissao" EntityType="ProjectMaster.Data.Model.Store.pm_menu_permissao" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_usuario_endereco" EntityType="ProjectMaster.Data.Model.Store.pm_usuario_endereco" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_usuario_filial" EntityType="ProjectMaster.Data.Model.Store.pm_usuario_filial" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pm_pessoapm_endereco" EntityType="ProjectMaster.Data.Model.Store.pm_pessoapm_endereco" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_pm_auditoria_log_detalhe_pm_auditoria_log" Association="ProjectMaster.Data.Model.Store.FK_pm_auditoria_log_detalhe_pm_auditoria_log">
+      <End Role="pm_auditoria_log" EntitySet="pm_auditoria_log" />
+      <End Role="pm_auditoria_log_detalhe" EntitySet="pm_auditoria_log_detalhe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_conta_corrente_pm_banco" Association="ProjectMaster.Data.Model.Store.FK_pm_conta_corrente_pm_banco">
+      <End Role="pm_banco" EntitySet="pm_banco" />
+      <End Role="pm_conta_corrente" EntitySet="pm_conta_corrente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_usuario_pm_cargo" Association="ProjectMaster.Data.Model.Store.FK_pm_usuario_pm_cargo">
+      <End Role="pm_cargo" EntitySet="pm_cargo" />
+      <End Role="pm_usuario" EntitySet="pm_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_domain_value_pm_domain" Association="ProjectMaster.Data.Model.Store.FK_pm_domain_value_pm_domain">
+      <End Role="pm_domain" EntitySet="pm_domain" />
+      <End Role="pm_domain_value" EntitySet="pm_domain_value" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_filial_pm_empresa" Association="ProjectMaster.Data.Model.Store.FK_pm_filial_pm_empresa">
+      <End Role="pm_empresa" EntitySet="pm_empresa" />
+      <End Role="pm_filial" EntitySet="pm_filial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_enquadramento_ipi" Association="ProjectMaster.Data.Model.Store.FK_pm_produto_pm_enquadramento_ipi">
+      <End Role="pm_enquadramento_ipi" EntitySet="pm_enquadramento_ipi" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_menu_detalhe_pm_menu" Association="ProjectMaster.Data.Model.Store.FK_pm_menu_detalhe_pm_menu">
+      <End Role="pm_menu" EntitySet="pm_menu" />
+      <End Role="pm_menu_detalhe" EntitySet="pm_menu_detalhe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_menu_pm_menu" Association="ProjectMaster.Data.Model.Store.FK_pm_menu_pm_menu">
+      <End Role="pm_menu" EntitySet="pm_menu" />
+      <End Role="pm_menu1" EntitySet="pm_menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_modalidade_bc_icms" Association="ProjectMaster.Data.Model.Store.FK_pm_produto_pm_modalidade_bc_icms">
+      <End Role="pm_modalidade_bc_icms" EntitySet="pm_modalidade_bc_icms" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_modalidade_bc_icms_st" Association="ProjectMaster.Data.Model.Store.FK_pm_produto_pm_modalidade_bc_icms_st">
+      <End Role="pm_modalidade_bc_icms_st" EntitySet="pm_modalidade_bc_icms_st" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_ncm" Association="ProjectMaster.Data.Model.Store.FK_pm_produto_pm_ncm">
+      <End Role="pm_ncm" EntitySet="pm_ncm" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_origem_mercadoria" Association="ProjectMaster.Data.Model.Store.FK_pm_produto_pm_origem_mercadoria">
+      <End Role="pm_origem_mercadoria" EntitySet="pm_origem_mercadoria" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_telefone_pm_pessoa" Association="ProjectMaster.Data.Model.Store.FK_pm_telefone_pm_pessoa">
+      <End Role="pm_pessoa" EntitySet="pm_pessoa" />
+      <End Role="pm_telefone" EntitySet="pm_telefone" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_produto_pm_tributo_icms" Association="ProjectMaster.Data.Model.Store.FK_pm_produto_pm_tributo_icms">
+      <End Role="pm_tributo_icms" EntitySet="pm_tributo_icms" />
+      <End Role="pm_produto" EntitySet="pm_produto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_menu_detalhe_permissao_pm_menu_detalhe" Association="ProjectMaster.Data.Model.Store.FK_pm_menu_detalhe_permissao_pm_menu_detalhe">
+      <End Role="pm_menu_detalhe" EntitySet="pm_menu_detalhe" />
+      <End Role="pm_menu_detalhe_permissao" EntitySet="pm_menu_detalhe_permissao" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_menu_detalhe_permissao_pm_usuario" Association="ProjectMaster.Data.Model.Store.FK_pm_menu_detalhe_permissao_pm_usuario">
+      <End Role="pm_usuario" EntitySet="pm_usuario" />
+      <End Role="pm_menu_detalhe_permissao" EntitySet="pm_menu_detalhe_permissao" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_menu_permissao_pm_menu" Association="ProjectMaster.Data.Model.Store.FK_pm_menu_permissao_pm_menu">
+      <End Role="pm_menu" EntitySet="pm_menu" />
+      <End Role="pm_menu_permissao" EntitySet="pm_menu_permissao" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_menu_permissao_pm_usuario" Association="ProjectMaster.Data.Model.Store.FK_pm_menu_permissao_pm_usuario">
+      <End Role="pm_usuario" EntitySet="pm_usuario" />
+      <End Role="pm_menu_permissao" EntitySet="pm_menu_permissao" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_usuario_endereco_pm_endereco" Association="ProjectMaster.Data.Model.Store.FK_pm_usuario_endereco_pm_endereco">
+      <End Role="pm_endereco" EntitySet="pm_endereco" />
+      <End Role="pm_usuario_endereco" EntitySet="pm_usuario_endereco" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_usuario_endereco_pm_usuario" Association="ProjectMaster.Data.Model.Store.FK_pm_usuario_endereco_pm_usuario">
+      <End Role="pm_usuario" EntitySet="pm_usuario" />
+      <End Role="pm_usuario_endereco" EntitySet="pm_usuario_endereco" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_usuario_filial_pm_filial" Association="ProjectMaster.Data.Model.Store.FK_pm_usuario_filial_pm_filial">
+      <End Role="pm_filial" EntitySet="pm_filial" />
+      <End Role="pm_usuario_filial" EntitySet="pm_usuario_filial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_usuario_filial_pm_usuario" Association="ProjectMaster.Data.Model.Store.FK_pm_usuario_filial_pm_usuario">
+      <End Role="pm_usuario" EntitySet="pm_usuario" />
+      <End Role="pm_usuario_filial" EntitySet="pm_usuario_filial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_pessoapm_endereco_pm_pessoa" Association="ProjectMaster.Data.Model.Store.FK_pm_pessoapm_endereco_pm_pessoa">
+      <End Role="pm_pessoa" EntitySet="pm_pessoa" />
+      <End Role="pm_pessoapm_endereco" EntitySet="pm_pessoapm_endereco" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pm_pessoapm_endereco_pm_endereco" Association="ProjectMaster.Data.Model.Store.FK_pm_pessoapm_endereco_pm_endereco">
+      <End Role="pm_endereco" EntitySet="pm_endereco" />
+      <End Role="pm_pessoapm_endereco" EntitySet="pm_pessoapm_endereco" />
+    </AssociationSet>
+    <AssociationSet Name="pm_pessoa_conta_corrente" Association="ProjectMaster.Data.Model.Store.pm_pessoa_conta_corrente">
+      <End Role="pm_pessoa" EntitySet="pm_pessoa" />
+      <End Role="pm_conta_corrente" EntitySet="pm_conta_corrente" />
+    </AssociationSet>
+    <AssociationSet Name="pm_endereco_pais" Association="ProjectMaster.Data.Model.Store.pm_endereco_pais">
+      <End Role="pm_endereco" EntitySet="pm_endereco" />
+      <End Role="pm_pais" EntitySet="pm_pais" />
+    </AssociationSet>
+    <AssociationSet Name="pm_moeda_tipo_moeda" Association="ProjectMaster.Data.Model.Store.pm_moeda_tipo_moeda">
+      <End Role="pm_moeda" EntitySet="pm_moeda" />
+      <End Role="pm_tipo_moeda" EntitySet="pm_tipo_moeda" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="pm_auditoria_log">
+    <Key>
+      <PropertyRef Name="id_auditoria_log" />
+    </Key>
+    <Property Name="id_auditoria_log" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_usuario" Type="bigint" Nullable="true" />
+    <Property Name="id_record" Type="bigint" Nullable="false" />
+    <Property Name="usuario" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="nome_tabela" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="acao" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="data_acao" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_auditoria_log_detalhe">
+    <Key>
+      <PropertyRef Name="id_auditoria_log_detalhe" />
+    </Key>
+    <Property Name="id_auditoria_log_detalhe" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_auditoria_log" Type="bigint" Nullable="false" />
+    <Property Name="nome_coluna" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="valor_original" Type="varchar" Nullable="true" MaxLength="255" />
+    <Property Name="valor_corrente" Type="varchar" Nullable="true" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="pm_banco">
+    <Key>
+      <PropertyRef Name="id_banco" />
+    </Key>
+    <Property Name="id_banco" Type="bigint" Nullable="false" />
+    <Property Name="ds_banco" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="pm_cargo">
+    <Key>
+      <PropertyRef Name="id_cargo" />
+    </Key>
+    <Property Name="id_cargo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nm_cargo" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="pm_conta_corrente">
+    <Key>
+      <PropertyRef Name="id_conta_corrente" />
+    </Key>
+    <Property Name="id_conta_corrente" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ds_conta_corrente" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="id_banco" Type="bigint" Nullable="true" />
+    <Property Name="ds_agencia" Type="varchar" Nullable="true" MaxLength="25" />
+    <Property Name="ds_numero_conta_corrente" Type="varchar" Nullable="true" MaxLength="25" />
+    <Property Name="ds_emitente" Type="varchar(max)" Nullable="true" />
+    <Property Name="id_pessoa" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_domain">
+    <Key>
+      <PropertyRef Name="id_domain" />
+    </Key>
+    <Property Name="id_domain" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="domain_name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="descricao" Type="varchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="pm_domain_value">
+    <Key>
+      <PropertyRef Name="id_domain_value" />
+    </Key>
+    <Property Name="id_domain_value" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_domain" Type="bigint" Nullable="false" />
+    <Property Name="domain_value" Type="varchar" Nullable="false" MaxLength="3" />
+    <Property Name="label" Type="varchar" Nullable="false" MaxLength="120" />
+    <Property Name="ordem" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_empresa">
+    <Key>
+      <PropertyRef Name="id_empresa" />
+    </Key>
+    <Property Name="id_empresa" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_fiscal_cnae_pri" Type="bigint" Nullable="true" />
+    <Property Name="id_fiscal_cnae_sec" Type="bigint" Nullable="true" />
+    <Property Name="apelido" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="data_cadastro" Type="datetime" Nullable="false" />
+    <Property Name="tipo_pessoa" Type="varchar" Nullable="false" MaxLength="9" />
+    <Property Name="crt" Type="int" Nullable="true" />
+    <Property Name="razao_social" Type="varchar" Nullable="false" MaxLength="70" />
+    <Property Name="nome_fantasia" Type="varchar" Nullable="false" MaxLength="70" />
+    <Property Name="cnpj" Type="varchar" Nullable="false" MaxLength="18" />
+    <Property Name="i_estadual" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="i_municipal" Type="varchar" Nullable="true" MaxLength="15" />
+    <Property Name="telefone" Type="varchar" Nullable="true" MaxLength="15" />
+    <Property Name="fax" Type="varchar" Nullable="true" MaxLength="15" />
+    <Property Name="email" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_endereco">
+    <Key>
+      <PropertyRef Name="id_endereco" />
+    </Key>
+    <Property Name="id_endereco" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dm_tipo_endereco" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="nm_endereco" Type="varchar" Nullable="false" MaxLength="60" />
+    <Property Name="nr_numero" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="ds_complemento" Type="varchar" Nullable="true" MaxLength="60" />
+    <Property Name="ds_bairro" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ds_cidade" Type="varchar" Nullable="false" MaxLength="25" />
+    <Property Name="ds_uf" Type="varchar" Nullable="false" MaxLength="2" />
+    <Property Name="nr_cep" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="id_pais" Type="bigint" Nullable="true" />
+  </EntityType>
+  <EntityType Name="pm_enquadramento_ipi">
+    <Key>
+      <PropertyRef Name="cenq" />
+    </Key>
+    <Property Name="cenq" Type="bigint" Nullable="false" />
+    <Property Name="valor" Type="varchar" Nullable="false" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="pm_filial">
+    <Key>
+      <PropertyRef Name="id_filial" />
+    </Key>
+    <Property Name="id_filial" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_empresa" Type="bigint" Nullable="false" />
+    <Property Name="id_fiscal_cnae_pri" Type="bigint" Nullable="true" />
+    <Property Name="id_fiscal_cnae_sec" Type="bigint" Nullable="true" />
+    <Property Name="apelido" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="data_cadastro" Type="datetime" Nullable="false" />
+    <Property Name="tipo_pessoa" Type="varchar" Nullable="false" MaxLength="9" />
+    <Property Name="crt" Type="int" Nullable="true" />
+    <Property Name="razao_social" Type="varchar" Nullable="false" MaxLength="70" />
+    <Property Name="nome_fantasia" Type="varchar" Nullable="false" MaxLength="70" />
+    <Property Name="cnpj" Type="varchar" Nullable="false" MaxLength="18" />
+    <Property Name="i_estadual" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="i_municipal" Type="varchar" Nullable="true" MaxLength="15" />
+    <Property Name="telefone" Type="varchar" Nullable="true" MaxLength="15" />
+    <Property Name="fax" Type="varchar" Nullable="true" MaxLength="15" />
+    <Property Name="email" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_menu">
+    <Key>
+      <PropertyRef Name="id_menu" />
+    </Key>
+    <Property Name="id_menu" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_menu_pai" Type="bigint" Nullable="true" />
+    <Property Name="nome" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="texto" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="area_name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="controller_name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="action_name" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="ordem" Type="int" Nullable="false" />
+    <Property Name="descricao" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="pm_menu_detalhe">
+    <Key>
+      <PropertyRef Name="id_menu_detalhe" />
+    </Key>
+    <Property Name="id_menu_detalhe" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_menu" Type="bigint" Nullable="false" />
+    <Property Name="nome" Type="varchar" Nullable="false" MaxLength="25" />
+    <Property Name="descricao" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="pm_modalidade_bc_icms">
+    <Key>
+      <PropertyRef Name="modbc" />
+    </Key>
+    <Property Name="modbc" Type="bigint" Nullable="false" />
+    <Property Name="valor" Type="nchar" Nullable="false" MaxLength="10" />
+    <Property Name="ds_descricao" Type="varchar" Nullable="false" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="pm_modalidade_bc_icms_st">
+    <Key>
+      <PropertyRef Name="modbcst" />
+    </Key>
+    <Property Name="modbcst" Type="bigint" Nullable="false" />
+    <Property Name="valor" Type="nchar" Nullable="false" MaxLength="10" />
+    <Property Name="ds_descricao" Type="varchar" Nullable="false" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="pm_ncm">
+    <Key>
+      <PropertyRef Name="ncm" />
+    </Key>
+    <Property Name="ncm" Type="bigint" Nullable="false" />
+    <Property Name="ds_descricao" Type="varchar" Nullable="false" MaxLength="80" />
+    <Property Name="nr_tec" Type="varchar" Nullable="true" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="pm_origem_mercadoria">
+    <Key>
+      <PropertyRef Name="orig" />
+    </Key>
+    <Property Name="orig" Type="bigint" Nullable="false" />
+    <Property Name="valor" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="ds_descricao" Type="varchar" Nullable="false" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="pm_pessoa">
+    <Key>
+      <PropertyRef Name="id_pessoa" />
+    </Key>
+    <Property Name="id_pessoa" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dt_cadastro" Type="datetime" Nullable="false" />
+    <Property Name="ds_marca" Type="varchar" Nullable="false" MaxLength="25" />
+    <Property Name="ds_razao_social" Type="varchar" Nullable="false" MaxLength="80" />
+    <Property Name="ds_nome_fantasia" Type="varchar" Nullable="true" MaxLength="80" />
+    <Property Name="dm_tipo_pessoa" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="ds_fisico_juridico" Type="varchar" Nullable="true" MaxLength="1" />
+    <Property Name="nr_documento" Type="varchar" Nullable="false" MaxLength="18" />
+    <Property Name="nr_ie" Type="varchar" Nullable="true" MaxLength="14" />
+    <Property Name="nr_inscricao_suframa" Type="varchar" Nullable="true" MaxLength="9" />
+    <Property Name="dm_venda_agendada" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="dm_dias_limite_credito" Type="varchar" Nullable="false" MaxLength="6" />
+  </EntityType>
+  <EntityType Name="pm_produto">
+    <Key>
+      <PropertyRef Name="cprod" />
+    </Key>
+    <Property Name="cprod" Type="varchar" Nullable="false" MaxLength="25" />
+    <Property Name="xprod" Type="varchar" Nullable="false" MaxLength="120" />
+    <Property Name="cean" Type="varchar" Nullable="true" MaxLength="14" />
+    <Property Name="ncm" Type="bigint" Nullable="false" />
+    <Property Name="extipi" Type="varchar" Nullable="true" MaxLength="3" />
+    <Property Name="genero" Type="varchar" Nullable="true" MaxLength="2" />
+    <Property Name="ucom" Type="varchar" Nullable="true" MaxLength="6" />
+    <Property Name="vuncom" Type="decimal" Nullable="true" Precision="16" Scale="4" />
+    <Property Name="ceantrib" Type="varchar" Nullable="true" MaxLength="14" />
+    <Property Name="utrib" Type="varchar" Nullable="true" MaxLength="6" />
+    <Property Name="vuntrib" Type="decimal" Nullable="true" Precision="16" Scale="4" />
+    <Property Name="qtrib" Type="decimal" Nullable="true" Precision="12" Scale="4" />
+    <Property Name="mipi" Type="varchar" Nullable="true" MaxLength="1" />
+    <Property Name="qtden" Type="varchar" Nullable="true" MaxLength="11" />
+    <Property Name="cieng" Type="varchar" Nullable="true" MaxLength="5" />
+    <Property Name="cnpjprod" Type="varchar" Nullable="true" MaxLength="14" />
+    <Property Name="cenq" Type="bigint" Nullable="false" />
+    <Property Name="cst" Type="bigint" Nullable="false" />
+    <Property Name="orig" Type="bigint" Nullable="false" />
+    <Property Name="modbc" Type="bigint" Nullable="false" />
+    <Property Name="modbcst" Type="bigint" Nullable="false" />
+    <Property Name="predbcst" Type="decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="pmvast" Type="decimal" Nullable="false" Precision="5" Scale="2" />
+  </EntityType>
+  <EntityType Name="pm_telefone">
+    <Key>
+      <PropertyRef Name="id_telefone" />
+    </Key>
+    <Property Name="id_telefone" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_pessoa" Type="bigint" Nullable="false" />
+    <Property Name="nr_telefone" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="dm_tipo_telefone" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="nm_contato" Type="varchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="pm_tributo_icms">
+    <Key>
+      <PropertyRef Name="cst" />
+    </Key>
+    <Property Name="cst" Type="bigint" Nullable="false" />
+    <Property Name="valor" Type="varchar" Nullable="false" MaxLength="2" />
+    <Property Name="ds_descricao" Type="varchar" Nullable="false" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="pm_usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="marca" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="nome" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="usuario" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="senha" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="email" Type="varchar" Nullable="false" MaxLength="150" />
+    <Property Name="data_cadastro" Type="datetime" Nullable="false" />
+    <Property Name="dt_nascimento" Type="datetime" Nullable="true" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+    <Property Name="id_cargo" Type="bigint" Nullable="true" />
+    <Property Name="dm_status" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="nr_rg" Type="varchar" Nullable="true" MaxLength="9" />
+    <Property Name="nr_cpf" Type="varchar" Nullable="true" MaxLength="15" />
+    <Property Name="nm_mae" Type="varchar" Nullable="true" MaxLength="60" />
+    <Property Name="nm_pai" Type="varchar" Nullable="true" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" Nullable="true" />
+    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="pm_pais">
+    <Key>
+      <PropertyRef Name="id_pais" />
+    </Key>
+    <Property Name="id_pais" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ds_iso" Type="varchar" Nullable="false" MaxLength="2" />
+    <Property Name="ds_iso3" Type="varchar" Nullable="false" MaxLength="3" />
+    <Property Name="nr_codigo" Type="smallint" Nullable="true" />
+    <Property Name="nm_nome" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_moeda">
+    <Key>
+      <PropertyRef Name="id_moeda" />
+    </Key>
+    <Property Name="id_moeda" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dt_cotacao" Type="datetime" Nullable="false" />
+    <Property Name="nr_valor" Type="decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="id_tipo_moeda" Type="int" Nullable="true" />
+    <Property Name="bl_excluido" Type="bit" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <EntityType Name="pm_tipo_moeda">
+    <Key>
+      <PropertyRef Name="id_tipo_moeda" />
+    </Key>
+    <Property Name="id_tipo_moeda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nm_tipo_moeda" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="pm_centro_de_custo">
+    <Key>
+      <PropertyRef Name="id_centro_de_custo" />
+    </Key>
+    <Property Name="id_centro_de_custo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ds_codigo" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="ds_descricao" Type="varchar" Nullable="false" MaxLength="60" />
+    <Property Name="bl_excluido" Type="bit" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <EntityType Name="pm_classificacao">
+    <Key>
+      <PropertyRef Name="id_classificacao" />
+    </Key>
+    <Property Name="id_classificacao" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ds_codigo" Type="varchar" Nullable="false" MaxLength="15" />
+    <Property Name="ds_descricao" Type="varchar" Nullable="false" MaxLength="60" />
+    <Property Name="bl_excluido" Type="bit" Nullable="false" DefaultValue="false" />
+  </EntityType>
+  <EntityType Name="pm_menu_detalhe_permissao">
+    <Key>
+      <PropertyRef Name="pm_menu_detalhe_id_menu_detalhe" />
+      <PropertyRef Name="pm_usuario_id_usuario" />
+    </Key>
+    <Property Name="pm_menu_detalhe_id_menu_detalhe" Type="bigint" Nullable="false" />
+    <Property Name="pm_usuario_id_usuario" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_menu_permissao">
+    <Key>
+      <PropertyRef Name="pm_menu_id_menu" />
+      <PropertyRef Name="pm_usuario_id_usuario" />
+    </Key>
+    <Property Name="pm_menu_id_menu" Type="bigint" Nullable="false" />
+    <Property Name="pm_usuario_id_usuario" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_usuario_endereco">
+    <Key>
+      <PropertyRef Name="pm_endereco_id_endereco" />
+      <PropertyRef Name="pm_usuario_id_usuario" />
+    </Key>
+    <Property Name="pm_endereco_id_endereco" Type="bigint" Nullable="false" />
+    <Property Name="pm_usuario_id_usuario" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_usuario_filial">
+    <Key>
+      <PropertyRef Name="pm_filial_id_filial" />
+      <PropertyRef Name="pm_usuario_id_usuario" />
+    </Key>
+    <Property Name="pm_filial_id_filial" Type="bigint" Nullable="false" />
+    <Property Name="pm_usuario_id_usuario" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pm_pessoapm_endereco">
+    <Key>
+      <PropertyRef Name="pm_pessoa_id_pessoa" />
+      <PropertyRef Name="pm_endereco_id_endereco" />
+    </Key>
+    <Property Name="pm_pessoa_id_pessoa" Type="bigint" Nullable="false" />
+    <Property Name="pm_endereco_id_endereco" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_pm_auditoria_log_detalhe_pm_auditoria_log">
+    <End Role="pm_auditoria_log" Type="ProjectMaster.Data.Model.Store.pm_auditoria_log" Multiplicity="1" />
+    <End Role="pm_auditoria_log_detalhe" Type="ProjectMaster.Data.Model.Store.pm_auditoria_log_detalhe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_auditoria_log">
+        <PropertyRef Name="id_auditoria_log" />
+      </Principal>
+      <Dependent Role="pm_auditoria_log_detalhe">
+        <PropertyRef Name="id_auditoria_log" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_conta_corrente_pm_banco">
+    <End Role="pm_banco" Type="ProjectMaster.Data.Model.Store.pm_banco" Multiplicity="0..1" />
+    <End Role="pm_conta_corrente" Type="ProjectMaster.Data.Model.Store.pm_conta_corrente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_banco">
+        <PropertyRef Name="id_banco" />
+      </Principal>
+      <Dependent Role="pm_conta_corrente">
+        <PropertyRef Name="id_banco" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_usuario_pm_cargo">
+    <End Role="pm_cargo" Type="ProjectMaster.Data.Model.Store.pm_cargo" Multiplicity="0..1" />
+    <End Role="pm_usuario" Type="ProjectMaster.Data.Model.Store.pm_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_cargo">
+        <PropertyRef Name="id_cargo" />
+      </Principal>
+      <Dependent Role="pm_usuario">
+        <PropertyRef Name="id_cargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_domain_value_pm_domain">
+    <End Role="pm_domain" Type="ProjectMaster.Data.Model.Store.pm_domain" Multiplicity="1" />
+    <End Role="pm_domain_value" Type="ProjectMaster.Data.Model.Store.pm_domain_value" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_domain">
+        <PropertyRef Name="id_domain" />
+      </Principal>
+      <Dependent Role="pm_domain_value">
+        <PropertyRef Name="id_domain" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_filial_pm_empresa">
+    <End Role="pm_empresa" Type="ProjectMaster.Data.Model.Store.pm_empresa" Multiplicity="1" />
+    <End Role="pm_filial" Type="ProjectMaster.Data.Model.Store.pm_filial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_empresa">
+        <PropertyRef Name="id_empresa" />
+      </Principal>
+      <Dependent Role="pm_filial">
+        <PropertyRef Name="id_empresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_enquadramento_ipi">
+    <End Role="pm_enquadramento_ipi" Type="ProjectMaster.Data.Model.Store.pm_enquadramento_ipi" Multiplicity="1" />
+    <End Role="pm_produto" Type="ProjectMaster.Data.Model.Store.pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_enquadramento_ipi">
+        <PropertyRef Name="cenq" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="cenq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_menu_detalhe_pm_menu">
+    <End Role="pm_menu" Type="ProjectMaster.Data.Model.Store.pm_menu" Multiplicity="1" />
+    <End Role="pm_menu_detalhe" Type="ProjectMaster.Data.Model.Store.pm_menu_detalhe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_menu">
+        <PropertyRef Name="id_menu" />
+      </Principal>
+      <Dependent Role="pm_menu_detalhe">
+        <PropertyRef Name="id_menu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_menu_pm_menu">
+    <End Role="pm_menu" Type="ProjectMaster.Data.Model.Store.pm_menu" Multiplicity="0..1" />
+    <End Role="pm_menu1" Type="ProjectMaster.Data.Model.Store.pm_menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_menu">
+        <PropertyRef Name="id_menu" />
+      </Principal>
+      <Dependent Role="pm_menu1">
+        <PropertyRef Name="id_menu_pai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_modalidade_bc_icms">
+    <End Role="pm_modalidade_bc_icms" Type="ProjectMaster.Data.Model.Store.pm_modalidade_bc_icms" Multiplicity="1" />
+    <End Role="pm_produto" Type="ProjectMaster.Data.Model.Store.pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_modalidade_bc_icms">
+        <PropertyRef Name="modbc" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="modbc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_modalidade_bc_icms_st">
+    <End Role="pm_modalidade_bc_icms_st" Type="ProjectMaster.Data.Model.Store.pm_modalidade_bc_icms_st" Multiplicity="1" />
+    <End Role="pm_produto" Type="ProjectMaster.Data.Model.Store.pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_modalidade_bc_icms_st">
+        <PropertyRef Name="modbcst" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="modbcst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_ncm">
+    <End Role="pm_ncm" Type="ProjectMaster.Data.Model.Store.pm_ncm" Multiplicity="1" />
+    <End Role="pm_produto" Type="ProjectMaster.Data.Model.Store.pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_ncm">
+        <PropertyRef Name="ncm" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="ncm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_origem_mercadoria">
+    <End Role="pm_origem_mercadoria" Type="ProjectMaster.Data.Model.Store.pm_origem_mercadoria" Multiplicity="1" />
+    <End Role="pm_produto" Type="ProjectMaster.Data.Model.Store.pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_origem_mercadoria">
+        <PropertyRef Name="orig" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="orig" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_telefone_pm_pessoa">
+    <End Role="pm_pessoa" Type="ProjectMaster.Data.Model.Store.pm_pessoa" Multiplicity="1" />
+    <End Role="pm_telefone" Type="ProjectMaster.Data.Model.Store.pm_telefone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_pessoa">
+        <PropertyRef Name="id_pessoa" />
+      </Principal>
+      <Dependent Role="pm_telefone">
+        <PropertyRef Name="id_pessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_produto_pm_tributo_icms">
+    <End Role="pm_tributo_icms" Type="ProjectMaster.Data.Model.Store.pm_tributo_icms" Multiplicity="1" />
+    <End Role="pm_produto" Type="ProjectMaster.Data.Model.Store.pm_produto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_tributo_icms">
+        <PropertyRef Name="cst" />
+      </Principal>
+      <Dependent Role="pm_produto">
+        <PropertyRef Name="cst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pm_pessoa_conta_corrente">
+    <End Role="pm_pessoa" Type="ProjectMaster.Data.Model.Store.pm_pessoa" Multiplicity="1" />
+    <End Role="pm_conta_corrente" Type="ProjectMaster.Data.Model.Store.pm_conta_corrente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_pessoa">
+        <PropertyRef Name="id_pessoa" />
+      </Principal>
+      <Dependent Role="pm_conta_corrente">
+        <PropertyRef Name="id_pessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pm_endereco_pais">
+    <End Role="pm_endereco" Type="ProjectMaster.Data.Model.Store.pm_endereco" Multiplicity="*" />
+    <End Role="pm_pais" Type="ProjectMaster.Data.Model.Store.pm_pais" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="pm_pais">
+        <PropertyRef Name="id_pais" />
+      </Principal>
+      <Dependent Role="pm_endereco">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pm_moeda_tipo_moeda">
+    <End Role="pm_moeda" Type="ProjectMaster.Data.Model.Store.pm_moeda" Multiplicity="*" />
+    <End Role="pm_tipo_moeda" Type="ProjectMaster.Data.Model.Store.pm_tipo_moeda" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="pm_tipo_moeda">
+        <PropertyRef Name="id_tipo_moeda" />
+      </Principal>
+      <Dependent Role="pm_moeda">
+        <PropertyRef Name="id_tipo_moeda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_menu_detalhe_permissao_pm_menu_detalhe">
+    <End Role="pm_menu_detalhe" Type="ProjectMaster.Data.Model.Store.pm_menu_detalhe" Multiplicity="1" />
+    <End Role="pm_menu_detalhe_permissao" Type="ProjectMaster.Data.Model.Store.pm_menu_detalhe_permissao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_menu_detalhe">
+        <PropertyRef Name="id_menu_detalhe" />
+      </Principal>
+      <Dependent Role="pm_menu_detalhe_permissao">
+        <PropertyRef Name="pm_menu_detalhe_id_menu_detalhe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_menu_detalhe_permissao_pm_usuario">
+    <End Role="pm_menu_detalhe_permissao" Type="ProjectMaster.Data.Model.Store.pm_menu_detalhe_permissao" Multiplicity="*" />
+    <End Role="pm_usuario" Type="ProjectMaster.Data.Model.Store.pm_usuario" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="pm_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="pm_menu_detalhe_permissao">
+        <PropertyRef Name="pm_usuario_id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_menu_permissao_pm_menu">
+    <End Role="pm_menu" Type="ProjectMaster.Data.Model.Store.pm_menu" Multiplicity="1" />
+    <End Role="pm_menu_permissao" Type="ProjectMaster.Data.Model.Store.pm_menu_permissao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_menu">
+        <PropertyRef Name="id_menu" />
+      </Principal>
+      <Dependent Role="pm_menu_permissao">
+        <PropertyRef Name="pm_menu_id_menu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_menu_permissao_pm_usuario">
+    <End Role="pm_menu_permissao" Type="ProjectMaster.Data.Model.Store.pm_menu_permissao" Multiplicity="*" />
+    <End Role="pm_usuario" Type="ProjectMaster.Data.Model.Store.pm_usuario" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="pm_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="pm_menu_permissao">
+        <PropertyRef Name="pm_usuario_id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_usuario_endereco_pm_endereco">
+    <End Role="pm_endereco" Type="ProjectMaster.Data.Model.Store.pm_endereco" Multiplicity="1" />
+    <End Role="pm_usuario_endereco" Type="ProjectMaster.Data.Model.Store.pm_usuario_endereco" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_endereco">
+        <PropertyRef Name="id_endereco" />
+      </Principal>
+      <Dependent Role="pm_usuario_endereco">
+        <PropertyRef Name="pm_endereco_id_endereco" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_usuario_endereco_pm_usuario">
+    <End Role="pm_usuario_endereco" Type="ProjectMaster.Data.Model.Store.pm_usuario_endereco" Multiplicity="*" />
+    <End Role="pm_usuario" Type="ProjectMaster.Data.Model.Store.pm_usuario" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="pm_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="pm_usuario_endereco">
+        <PropertyRef Name="pm_usuario_id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_usuario_filial_pm_filial">
+    <End Role="pm_filial" Type="ProjectMaster.Data.Model.Store.pm_filial" Multiplicity="1" />
+    <End Role="pm_usuario_filial" Type="ProjectMaster.Data.Model.Store.pm_usuario_filial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_filial">
+        <PropertyRef Name="id_filial" />
+      </Principal>
+      <Dependent Role="pm_usuario_filial">
+        <PropertyRef Name="pm_filial_id_filial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_usuario_filial_pm_usuario">
+    <End Role="pm_usuario_filial" Type="ProjectMaster.Data.Model.Store.pm_usuario_filial" Multiplicity="*" />
+    <End Role="pm_usuario" Type="ProjectMaster.Data.Model.Store.pm_usuario" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="pm_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="pm_usuario_filial">
+        <PropertyRef Name="pm_usuario_id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_pessoapm_endereco_pm_pessoa">
+    <End Role="pm_pessoa" Type="ProjectMaster.Data.Model.Store.pm_pessoa" Multiplicity="1" />
+    <End Role="pm_pessoapm_endereco" Type="ProjectMaster.Data.Model.Store.pm_pessoapm_endereco" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pm_pessoa">
+        <PropertyRef Name="id_pessoa" />
+      </Principal>
+      <Dependent Role="pm_pessoapm_endereco">
+        <PropertyRef Name="pm_pessoa_id_pessoa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pm_pessoapm_endereco_pm_endereco">
+    <End Role="pm_pessoapm_endereco" Type="ProjectMaster.Data.Model.Store.pm_pessoapm_endereco" Multiplicity="*" />
+    <End Role="pm_endereco" Type="ProjectMaster.Data.Model.Store.pm_endereco" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="pm_endereco">
+        <PropertyRef Name="id_endereco" />
+      </Principal>
+      <Dependent Role="pm_pessoapm_endereco">
+        <PropertyRef Name="pm_endereco_id_endereco" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

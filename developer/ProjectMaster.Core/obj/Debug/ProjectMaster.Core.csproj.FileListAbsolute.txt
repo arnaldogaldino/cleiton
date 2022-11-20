@@ -1,0 +1,17 @@
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\ProjectMaster.Core.dll
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\ProjectMaster.Core.pdb
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.Unity.dll
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.Unity.Interception.dll
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.pdb
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.pdb
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.Unity.pdb
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\bin\Debug\Microsoft.Practices.Unity.Interception.pdb
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\obj\Debug\ProjectMaster.Core.dll
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\obj\Debug\ProjectMaster.Core.pdb
+D:\projetos\ceasa\project\branches\developer\ProjectMaster.Core\obj\Debug\ProjectMaster.Core.csprojResolveAssemblyReference.cache

@@ -1,0 +1,1 @@
+update pm_menu set action_name = 'ClienteFornecedor' where name = 'Cliente/Fornecedor'

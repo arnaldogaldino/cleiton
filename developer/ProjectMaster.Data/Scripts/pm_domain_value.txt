@@ -1,0 +1,50 @@
+﻿DECLARE @ID_DOMAIN INT
+SELECT @ID_DOMAIN = id_domain FROM pm_domain where domain_name = 'TIPO_DE_CLIENTE'
+IF(@ID_DOMAIN is not null)
+BEGIN 
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = 'C' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'C','Cliente',1) END
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = 'F' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'F','Fornecedor',1) END
+END
+SELECT @ID_DOMAIN = id_domain FROM pm_domain where domain_name = 'TIPO_DE_DOCUMENTO'
+IF(@ID_DOMAIN is not null)
+BEGIN 
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = 'C' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'C','CPF',1) END
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = 'J' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'J','CNPJ',1) END
+END
+
+SELECT @ID_DOMAIN = id_domain FROM pm_domain where domain_name = 'OPCOES_DE_ACEITACAO'
+IF(@ID_DOMAIN is not null)
+BEGIN 
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = 'S' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'S','Sim',1) END
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = 'N' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'N','Não',1) END
+END
+SELECT @ID_DOMAIN = id_domain FROM pm_domain where domain_name = 'LIMITE_CREDITO'
+IF(@ID_DOMAIN is not null)
+BEGIN 
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = '7' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'7','7 dias',1) END
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = '10' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'10','10 dias',1) END
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = '15' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'15','15 dias',1) END
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = '20' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'20','20 dias',1) END
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = '30' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'30','30 dias',1) END
+END
+SELECT @ID_DOMAIN = id_domain FROM pm_domain where domain_name = 'TIPO_TELEFONE'
+IF(@ID_DOMAIN is not null)
+BEGIN 
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = 'R' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'R','Residencial',1) END
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = 'C' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'C','Comercial',1) END
+	IF NOT EXISTS(SELECT TOP 1 1 from pm_domain_value where domain_value = 'M' and id_domain = @ID_DOMAIN )
+	BEGIN INSERT pm_domain_value VALUES (@ID_DOMAIN,'M','Móvel',1) END
+END

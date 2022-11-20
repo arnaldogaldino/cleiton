@@ -1,0 +1,58 @@
+﻿@model ProjectMaster.Application.Models.ContaCorrenteModel
+@using MvcJqGrid
+<script src="@Url.Content("~/Scripts/MeusScripts/paginas/contaCorrente/index.js")" type="text/javascript"></script>
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "formContaCorrente" }))
+{
+    @Html.HiddenFor(model => model.proximoId, new { @id = "cc_proximoId" })
+    @Html.Hidden("cc_id_edicao", "", new { @id = "cc_id_edicao" })
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Conta Corrente</legend>
+
+        <div class="editor-field">
+            @Html.LabelFor(model => model.id_banco)
+            @Html.DropDownListFor(model => model.id_banco, (SelectList)ViewBag.Bancos)
+            @Html.ValidationMessageFor(model => model.id_banco)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_agencia)
+            @Html.EditorFor(model => model.ds_agencia)
+            @Html.ValidationMessageFor(model => model.ds_agencia)
+        </div>
+
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_numero_conta_corrente)
+            @Html.EditorFor(model => model.ds_numero_conta_corrente)
+            @Html.ValidationMessageFor(model => model.ds_numero_conta_corrente)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_emitente)
+            @Html.EditorFor(model => model.ds_emitente)
+            @Html.ValidationMessageFor(model => model.ds_emitente)
+        </div>
+        <div class="editor-field">
+            @Html.LabelFor(model => model.ds_conta_corrente)
+            @Html.EditorFor(model => model.ds_conta_corrente)
+            @Html.ValidationMessageFor(model => model.ds_conta_corrente)
+        </div>
+        <br />
+        <p>
+            <input type="button" id="btnEdtContaCorrente" value="Editar" />
+            <input type="button" id="btnAddContaCorrente" value="Adicionar" />
+        </p>
+    </fieldset>
+    @(Html.Grid("gridContaCorrente")
+    .SetCaption("Contas")
+    .AddColumn(new Column("id").SetKey(true).SetHidden(true))
+    .AddColumn(new Column("id_banco").SetHidden(true))
+    .AddColumn(new Column("ds_banco").SetLabel("Banco"))
+    .AddColumn(new Column("ds_agencia").SetLabel("Agencia"))
+    .AddColumn(new Column("ds_numero_conta_corrente").SetLabel("Conta Corrente"))
+    .AddColumn(new Column("ds_emitente").SetLabel("Emitente"))
+    .AddColumn(new Column("ds_conta_corrente").SetLabel("Descrição"))
+    .AddColumn(new Column("acoes").SetLabel("Ações").SetCustomFormatter("CriarBotoesContaCorrente"))
+    .SetAutoWidth(true).SetRowNum(20)
+    .SetUrl(Url.Action("Procurar", "ContaCorrente", new { idPessoa = Model.id_pessoa }))
+    .SetRowList(new[] { 10, 15, 20, 50 }).SetViewRecords(true))
+
+}

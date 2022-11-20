@@ -1,0 +1,120 @@
+﻿@model ProjectMaster.Application.Models.ProdutoModels
+@{
+    Layout = "~/Views/Shared/_LayoutClear.cshtml";
+
+    var queryProduto = (IQueryable<ProjectMaster.Data.pm_produto>)ViewData["queryProduto"];
+    var classRow = "webgrid-rows";
+}
+@using (Html.BeginForm("LookupScreen", "Produto", FormMethod.Post, new { id = "formulario_procurar", name = "formulario_procurar" }))
+{           
+    <fieldset title="Procurar">
+        <legend>Procurar</legend>
+        <table width="100%">
+            <tr>
+                <td>
+                    <label class="normal">Código:</label>
+                    <input type="text" value="@Model.cprod" id="cprod" name="cprod" size="25" maxlength="25" />
+
+                    <label class="normal">Descrição:</label>
+                    <input type="text" value="@Model.xprod" id="xprod" name="xprod" size="25" maxlength="80" />
+                </td>
+                <td align="right" valign="top">
+                    <input id="procurar" name="procurar" type="submit" value="Procurar" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <script type="text/javascript">
+        $(function () {
+            $("#procurar").button();
+        });
+    </script>
+}
+
+<div class="main-scroll">
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>ID</span>
+                </th>
+                <th width="50px">
+                    <span>Código</span>
+                </th>
+                <th>
+                    <span>Descrição</span>
+                </th>
+                <th>
+                    <span>Preço R$</span>
+                </th>
+                <th>
+                    <span>Embalagem</span>
+                </th>
+                <th>
+                    <span>Vl. Embalagem</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                    <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (queryProduto != null)
+            {
+                foreach (ProjectMaster.Data.pm_produto linha in queryProduto)
+                {
+                <tr id='lin@(linha.id_produto.ToString())' class="@classRow">
+                    <td>
+                        <span>@linha.id_produto</span>
+                    </td>
+                    <td>
+                        <span>@linha.cprod</span>
+                    </td>
+                    <td>
+                        <span>
+                            <input type="text" value="@linha.xprod" size="50" readonly="readonly" />
+                        </span>
+                    </td>
+                    <td align="right">
+                        <span>R$ @(linha.vuncom != null ? linha.vuncom.Value.ToString("n2") : "0,00") </span>
+                    </td>
+                    <td>
+                        <span>@linha.tp_embalagem</span>
+                    </td>
+                    <td>
+                        <span>R$ @(linha.vl_embalagem != null ? linha.vl_embalagem.Value.ToString("n2") : "0,00") </span>
+                    </td>
+                    <td align="center">
+                        <div style='width: 100px'>
+                            <a href="javascript:close('@linha.id_produto','@linha.cprod','@linha.xprod','@linha.vuncom', '@linha.tp_embalagem')" title="Selecionar">
+                                <img src='@Url.Content("~/Content/images/ok.png")' alt="Selecionar"/>
+                            </a>
+                        </div>
+                    </td>
+                </tr>        
+                    if (classRow == "webgrid-alternating-rows")
+                    {
+                        classRow = "webgrid-rows";
+                    }
+                    else
+                    {
+                        classRow = "webgrid-alternating-rows";
+                    }
+                }
+            }
+        </tbody>
+    </table>
+    <script type="text/jscript">
+        function close(id_produto, cprod, xprod, valor_unitario, tp_embalagem) {
+            window.parent.$("#id_produto").val(id_produto);
+            window.parent.$("#cprod").val(cprod);
+            window.parent.$("#xprod").val(xprod);
+
+            window.parent.$("#valor_unitario").val(valor_unitario);
+            window.parent.$("#tp_embalagem").val(tp_embalagem);
+
+            window.parent.$("#quantidade").focus();
+            window.parent.$("#dialog-lookup-produto").dialog("close");
+        }
+    </script>
+</div>

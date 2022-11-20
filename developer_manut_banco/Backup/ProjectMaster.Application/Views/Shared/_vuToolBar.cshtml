@@ -1,0 +1,65 @@
+﻿@{
+    List<ProjectMaster.Core.ToolBarButton> buttons = (List<ProjectMaster.Core.ToolBarButton>)Model;
+}
+<div id="tool_bar">
+    @if (buttons != null)
+    {
+        foreach (var m in buttons)
+        {
+            string scr = string.Empty;
+
+            if (m.Button == ProjectMaster.Core.ToolBarButtonType.CadastrarNovo)
+            {
+                if (m.Enable) { scr = Url.Content("~/Content/images/buttons/novo.png"); } else { scr = Url.Content("~/Content/images/buttons/novo_false.png"); }
+            }
+
+            if (m.Button == ProjectMaster.Core.ToolBarButtonType.Editar)
+            {
+                if (m.Enable) { scr = Url.Content("~/Content/images/buttons/editar.png"); } else { scr = Url.Content("~/Content/images/buttons/editar_false.png"); }
+            }
+
+            if (m.Button == ProjectMaster.Core.ToolBarButtonType.Excluir)
+            {
+                if (m.Enable) { scr = Url.Content("~/Content/images/buttons/excluir.png"); } else { scr = Url.Content("~/Content/images/buttons/excluir_false.png"); }
+            }
+
+            if (m.Button == ProjectMaster.Core.ToolBarButtonType.Gravar)
+            {
+                if (m.Enable) { scr = Url.Content("~/Content/images/buttons/gravar.png"); } else { scr = Url.Content("~/Content/images/buttons/gravar_false.png"); }
+            }
+
+            if (m.Button == ProjectMaster.Core.ToolBarButtonType.Cancelar)
+            {
+                if (m.Enable) { scr = Url.Content("~/Content/images/buttons/cancelar.png"); } else { scr = Url.Content("~/Content/images/buttons/cancelar_false.png"); }
+            }
+
+            if (m.Button == ProjectMaster.Core.ToolBarButtonType.Voltar)
+            {
+                if (m.Enable) { scr = Url.Content("~/Content/images/buttons/voltar.png"); } else { scr = Url.Content("~/Content/images/buttons/voltar_false.png"); }
+            }
+
+            if (m.Button == ProjectMaster.Core.ToolBarButtonType.AddItemPedido)
+            {
+                if (m.Enable) { scr = Url.Content("~/Content/images/buttons/procurar_pasta.png"); } else { scr = Url.Content("~/Content/images/buttons/procurar_pasta.png"); }
+            }
+
+            if (string.IsNullOrEmpty(m.Href))
+            {
+                <img alt="@m.Alt" title="@m.Title" class="bt" @(m.Enable == true ? (string.IsNullOrEmpty(m.OnClick) ? "" : "onclick=" + m.OnClick + "") : "" ) src="@scr" />
+            }
+            else
+            {   
+                if (m.Enable)
+                {
+                    <a href="@m.Href">
+                        <img alt="@m.Alt" title="@m.Title" class="bt" @(m.Enable == true ? (string.IsNullOrEmpty(m.OnClick) ? "" : "onclick=" + m.OnClick + "") : "") src="@scr" />
+                    </a>
+                }
+                else
+                {
+                    <img alt="@m.Alt" title="@m.Title" class="bt" @(m.Enable == true ? (string.IsNullOrEmpty(m.OnClick) ? "" : "onclick=" + m.OnClick + "") : "") src="@scr" />
+                }
+            }
+        }
+    }
+</div>

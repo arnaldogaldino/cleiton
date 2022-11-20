@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-1.7.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-menu.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.9.0.custom.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/MeusScripts/ajaxHelper.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/i18n/grid.locale-pt-br.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.jqGrid.min.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/jquery-menu.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/jquery.jqGrid/ui.jqgrid.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/jquery-ui-1.9.0.custom.min.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    @Html.Hidden("hdfUrlRoot", Url.Content("~/"))
+    @Html.Partial("_vuTopo")
+    @Html.Partial("_vuMenu")
+    <div id="main_default" class="main-scroll">
+        @RenderBody()
+    </div>
+    <div class="ui-widget-overlay div_loading" id="divLoading">
+        <img src="@Url.Content("~/Content/images/load.gif")" /></div>
+</body>
+</html>

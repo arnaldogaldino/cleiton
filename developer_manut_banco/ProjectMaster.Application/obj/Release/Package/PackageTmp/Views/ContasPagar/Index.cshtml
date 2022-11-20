@@ -1,0 +1,176 @@
+﻿@model ProjectMaster.Application.Models.ContaPagarModels
+@{
+    ViewBag.Title = "Cadastro de Contas a Pagar";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar nova Contas a Pagar.", "Cadastrar nova Contas a Pagar.", "novo", "", Url.Content("~/ContasPagar/ContasPagar?acao=New"), true, true));
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar.", "Voltar", "", Url.Content("~/Home/Index"), true, true));
+    
+    var query = (IQueryable<ProjectMaster.Data.pm_conta_pagar>)ViewData["query"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+@using (Html.BeginForm("Index", "ContasPagar", FormMethod.Post, new { id = "formulario_procurar", name = "formulario_procurar" }))
+{           
+    <fieldset title="Procurar">
+    <legend>Procurar</legend>  
+    <table width="100%">
+        <tr>
+            <td>
+                <label class="normal">Nº Titulo:</label>
+                <input type="text" value="@(Model.id_conta_pagar != 0 ? Model.id_conta_pagar.ToString() : "")" id="id_conta_pagar" name="id_conta_pagar" size="10" maxlength="25" alt="number9" />
+        
+                <br />
+        
+                <label class="normal">Fornecedor:</label>
+                <input type="text" value="@Model.ds_razao_social" id="ds_razao_social" name="ds_razao_social" size="25" maxlength="80" />
+        
+                <br />
+
+                <label class="normal">Data Vencimento:</label>
+                <input type="text" value="@(Model.dta_vencimento != DateTime.MinValue ? Model.dta_vencimento.ToString("dd/MM/yyyy") : "")" id="dta_vencimento" name="dta_vencimento" size="10" maxlength="10" readonly="readonly" />
+                <label class="normal">até:</label>
+                <input type="text" value="@(Model.dta_emissao != DateTime.MinValue ? Model.dta_emissao.ToString("dd/MM/yyyy") : "")" id="dta_emissao" name="dta_emissao" size="10" maxlength="10" readonly="readonly" />
+                    
+                    <script type="text/javascript">
+                        $("#dta_vencimento").datepicker({
+                            beforeShowDay: $.datepicker.noWeekends,
+                            dateFormat: "dd/mm/yy",
+                            dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
+                            dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+                            dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+                            monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                            monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+                        });
+                        $("#dta_emissao").datepicker({
+                            beforeShowDay: $.datepicker.noWeekends,
+                            dateFormat: "dd/mm/yy",
+                            dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
+                            dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+                            dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+                            monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                            monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+                        });
+                    </script>
+            </td>
+            <td align="right" valign="top">
+                <input id="procurar" name="procurar" type="submit" value="Procurar" />
+            </td>
+        </tr>
+    </table>
+    </fieldset>
+        <script type="text/javascript">
+            $(function () {
+                $("#procurar").button();
+            });
+        </script>
+}
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th align="right">
+                    <span>Titulo</span>
+                </th>
+                <th align="center">
+                    <span>Fornecedor</span>
+                </th>
+                <th>
+                    <span>Centro de Custo</span>
+                </th>
+                <th align="center">
+                    <span>Data Emissão</span>
+                </th>
+                <th align="center">
+                    <span>Data Vencimento</span>
+                </th>
+                <th align="right">
+                    <span>Valor Titulo</span>
+                </th>
+                <th align="right">
+                    <span>Juros</span>
+                </th>
+                <th align="right">
+                    <span>Multa</span>
+                </th>
+                <th align="center">
+                    <span>Data Pagto</span>
+                </th>
+                <th align="right">
+                    <span>Valor Pagto</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                    <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(query!=null)
+            {
+                foreach (ProjectMaster.Data.pm_conta_pagar linha in query)
+                {
+                    <tr id='lin@(linha.id_conta_pagar.ToString())' class="@classRow">
+                        <td align="right">
+                            <span>@linha.id_conta_pagar.ToString().PadLeft(5, '0')</span>
+                        </td>
+                        <td>
+                            <span>@linha.pm_pessoa.ds_razao_social</span>
+                        </td>
+                        <td>
+                            <span>@linha.pm_centro_de_custo.ds_descricao</span>
+                        </td align="center">
+                        <td>
+                            <span>@linha.dta_emissao.ToString("dd/MM/yyyy")</span>
+                        </td>
+                        <td align="center">
+                            <span>@linha.dta_vencimento.ToString("dd/MM/yyyy")</span>
+                        </td>
+                        <td align="right">
+                            <span>@linha.vlr_titulo.ToString("n2")</span>
+                        </td>
+                        <td align="right">
+                            <span>@linha.vlr_juros.ToString("n2")</span>
+                        </td>
+                        <td align="right">
+                            <span>@linha.vlr_multa.ToString("n2")</span>
+                        </td>
+                        <td align="center">
+                            <span>@(linha.dta_pagto.HasValue ? linha.dta_pagto.Value.ToString("dd/MM/yyyy") : "")</span>
+                        </td>
+                        <td align="right">
+                            <span>@(linha.vlr_pagto.HasValue ? linha.vlr_pagto.Value.ToString("n2") : "")</span>
+                        </td>
+                        <td align="center">
+                            <div style='width: 100px'>
+                                <a href='@Url.Action("ContasPagar", "ContasPagar", new { acao = "View", id_conta_pagar = linha.id_conta_pagar })' title="Editar">
+                                    <img src='@Url.Content("~/Content/images/edit.png")'/>
+                                </a>
+                                <a href="JavaScript:delete_file('@linha.id_conta_pagar','ContasPagar','rows')" title="Excluir">
+                                    <img src='@Url.Content("~/Content/images/delete.png")'/>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>        
+                    if (classRow == "webgrid-alternating-rows")
+                    {
+                        classRow = "webgrid-rows";
+                    }
+                    else
+                    {
+                        classRow = "webgrid-alternating-rows";
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div id="dialog-confirm" title="Contas a Pagar" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Contas a Pagar?</p>
+</div>

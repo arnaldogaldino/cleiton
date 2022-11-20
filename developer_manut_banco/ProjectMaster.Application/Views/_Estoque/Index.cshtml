@@ -1,0 +1,228 @@
+﻿@model ProjectMaster.Application.Models.EstoqueModels
+@{
+    ViewBag.Title = "Cadastro de Entrada e Saida do Estoque de Produto";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Estoque de Produto.", "Cadastrar novo Estoque de Produto.", "CadastrarNovoEstoque", "", Url.Content("~/Estoque/Estoque?acao=New"), true, true));
+
+    var query = (IQueryable<ProjectMaster.Data.pm_produto_estoque_entrada>)ViewData["queryProdutoEstoque"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+
+
+@using (Html.BeginForm("Index", "Estoque", FormMethod.Post, new { id = "formulario_procurar", name = "formulario_procurar" }))
+{           
+    <fieldset title="Procurar">
+    <legend>Procurar</legend>  
+    <table width="100%">
+        <tr>
+            <td>
+                
+                <label class="normal">Código do Produto:</label>
+                <input type="text" id="cprod" name="cprod" size="10" maxlength="10" />
+
+                <input type="hidden" value="0" id="id_produto" name="id_produto" />
+                <input type="hidden" value="0" id="tp_embalagem" name="tp_embalagem" />
+                <a href="javascript:procurar_produto();">
+                    <img src="@Url.Content("~/Content/images/buttons/procurar_16x16.png")" id="procurar_produto" alt="Procurar Produto" width="16" height="16" />
+                </a>
+
+                <script type="text/javascript">
+                    $("#cprod").change(function () {
+
+                        $("#xprod").val("");
+
+                        if ($('#cprod').val() == '') {
+                            $("#xprod").val("");
+                            return;
+                        }
+
+                        if ($('#id_produto').val() != '0')
+                            return;
+
+                        LoockProduto("cprod", "xprod", "id_produto", "", "");
+                    });
+
+                    function procurar_produto() {
+                        $("#cprod").val("");
+                        LoockProduto("cprod", "xprod", "id_produto", "", "");
+                    }
+                </script>
+
+                <input type="text" id="xprod" name="xprod" size="30" maxlength="50" readonly="readonly" />
+                <br />
+                <label class="normal">Cliente / Fornecedor:</label>
+                
+                <input type="text" value="" id="ds_marca" name="ds_marca" size="20" maxlength="50" />
+                <input type="hidden" value="" id="id_pessoa" name="id_pessoa" />
+        
+                <a href="javascript:procurar_pessoa();">
+                    <img src="@Url.Content("~/Content/images/buttons/procurar_16x16.png")" id="procurar_pessoa" alt="Procurar Cliente" width="16" height="16" />
+                </a>
+
+                <input type="text" value="" id="ds_razao_social" name="ds_razao_social" size="60" maxlength="100" readonly="readonly" />
+                
+                <script type="text/javascript">
+                    $("#ds_marca").change(function () {
+
+                        $("#ds_razao_social").val("");
+                        $("#id_pessoa").val("0");
+
+                        if ($('#ds_marca').val() == '') {
+                            $("#ds_razao_social").val("");
+                            $("#id_pessoa").val("0");
+                            return;
+                        }
+
+                        if ($('#id_pessoa').val() != '0')
+                            return;
+
+                        LookupPessoa("ds_marca", "ds_razao_social", "id_pessoa");
+                    });
+
+                    function procurar_pessoa() {
+                        $("#ds_marca").val("");
+                        LookupPessoa("ds_marca", "ds_razao_social", "id_pessoa");
+                    }
+                </script>
+
+                <br />
+
+                <label class="normal">Descrição:</label>
+                <input type="text" value="" id="descricao" name="descricao" size="25" maxlength="50" />
+
+                <label class="normal">Periodo de:</label>
+                <input type="text" value="" id="dta_inicio" name="dta_inicio" size="10" maxlength="10" alt="date" />
+
+                <label class="normal">ate:</label>
+                <input type="text" value="" id="dta_fim" name="dta_fim" size="10" maxlength="10" alt="date" />
+                        <script type="text/javascript">
+                            $("#dta_fim").datepicker({
+                                beforeShowDay: $.datepicker.noWeekends,
+                                dateFormat: "dd/mm/yy",
+                                dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
+                                dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+                                dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+                                monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                                monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+                            });
+                            $("#dta_inicio").datepicker({
+                                beforeShowDay: $.datepicker.noWeekends,
+                                dateFormat: "dd/mm/yy",
+                                dayNames: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"],
+                                dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+                                dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+                                monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                                monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+                            });
+                        </script>
+            </td>
+            <td align="right" valign="top">
+                <input id="procurar" name="procurar" type="submit" value="Procurar" />
+            </td>
+        </tr>
+    </table>
+    </fieldset>
+    
+        <script type="text/javascript">
+            $(function () {
+                $("#procurar").button();
+            });
+        </script>
+}
+
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>ID</span> 
+                </th>
+                <th>
+                    <span>Tipo</span> 
+                </th>
+                <th width="50px">
+                    <span>Código</span> 
+                </th>
+                <th>
+                    <span>Produto</span> 
+                </th>
+                <th>
+                    <span>Empresa</span> 
+                </th>
+                <th>
+                    <span>Quantidade</span> 
+                </th>
+                <th>
+                    <span>Data Entrada</span> 
+                </th>
+                <th>
+                    <span>Documento</span> 
+                </th>
+                <th>
+                    <span>Descrição</span>
+                </th>
+@*                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>*@
+            </tr>
+        </thead>
+        <tbody>
+        @if (query != null)
+        {
+            foreach (ProjectMaster.Data.pm_produto_estoque_entrada linha in query)
+            {
+            <tr id='lin@(linha.id_produto.ToString())' class="@classRow">
+                <td>
+                    <span>@linha.id_produto_estoque_entrada</span>
+                </td>
+                <td>
+                    <span>@ProjectMaster.Bussiness.Domain.GetTextByDomain(ProjectMaster.Bussiness.Domain.Tipos.TipoEstoque, linha.dm_tipo)</span>
+                </td>
+                <td>
+                    <span>@linha.pm_produto.cprod</span>
+                </td>
+                <td>
+                    <span>@linha.pm_produto.xprod</span>
+                </td>
+                <td>
+                    <span>@linha.pm_pessoa.ds_razao_social</span>
+                </td>
+                <td align="right">
+                    <span>@linha.quantidade</span>
+                </td>
+                <td align="center">
+                    <span>@linha.dta_entrada.ToString("dd/MM/yyyy")</span>
+                </td>
+                <td align="center">
+                    <span>@linha.dta_doc.ToString("dd/MM/yyyy")</span>
+                </td>
+                <td>
+                    <span>@linha.descricao</span>
+                </td>
+                @*<td align="center">
+                    <div style='width: 100px'> 
+                        <a href='@Url.Action("Produto", "Produto", new { acao = "View", id_produto = linha.id_produto })'> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                        <a href='JavaScript:delete_produto("@linha.id_produto")'> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> </div>
+                </td>*@
+            </tr>        
+                if (classRow == "webgrid-alternating-rows")
+                {
+                    classRow = "webgrid-rows";
+                }
+                else
+                {
+                    classRow = "webgrid-alternating-rows";
+                }
+            }
+        }
+        </tbody>
+    </table>
+</div>
+
+<br />

@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Cadastro de Limite de Crédito";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Limite de Crédito.", "Cadastrar novo LimiteCredito.", "CadastrarNovo", "", Url.Content("~/LimiteCredito/LimiteCredito?acao=New"), true, true));
+
+    var queryLimiteCredito = (IQueryable<ProjectMaster.Data.pm_limite_credito>)ViewData["queryLimiteCredito"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>ID</span> 
+                </th>
+                <th width="150px">
+                    <span>Código</span> 
+                </th>
+                <th>
+                    <span>Descrição</span>
+                </th>
+                <th>
+                    <span>Dias de Crédito</span>
+                </th>
+                <th>
+                    <span>Valor do Crédito</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (ProjectMaster.Data.pm_limite_credito linha in queryLimiteCredito)
+        {
+            <tr id='lin@(linha.id_limite_credito.ToString())' class="@classRow">
+                <td>
+                    <span>@linha.id_limite_credito</span>
+                </td>
+                <td>
+                    <span>@linha.ds_codigo</span>
+                </td>
+                <td>
+                    <span>@linha.ds_descricao</span>
+                </td>
+                <td>
+                    <span>@linha.dias_credito</span>
+                </td>
+                <td>
+                    <span>@linha.valor_credito</span>
+                </td>
+                <td align="center">
+                    <div style='width: 100px'> 
+                        <a href='@Url.Action("LimiteCredito", "LimiteCredito", new { acao = "View", id_limite_credito = linha.id_limite_credito })'> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                        <a href="JavaScript:delete_file('@linha.id_limite_credito','LimiteCredito','rows')"> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> </div>
+                </td>
+            </tr>        
+             if (classRow == "webgrid-alternating-rows")
+             {
+                 classRow = "webgrid-rows";
+             }
+             else
+             {
+                 classRow = "webgrid-alternating-rows";
+             }
+        }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div id="dialog-confirm" title="LimiteCredito" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir LimiteCredito?</p>
+</div>

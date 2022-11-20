@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Cadastro de Centro de Custo";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+
+    List<ProjectMaster.Core.ToolBarButton> Buttons = new List<ProjectMaster.Core.ToolBarButton>();
+
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.CadastrarNovo, "Cadastrar novo Centro de Custo.", "Cadastrar novo Centro de Custo.", "novo", "", Url.Content("~/CentroDeCusto/CentroDeCusto?acao=New"), true, true));
+    Buttons.Add(new ProjectMaster.Core.ToolBarButton(ProjectMaster.Core.ToolBarButtonType.Voltar, "Voltar.", "Voltar.", "Voltar", "", Url.Content("~/Home/Index"), true, true));
+
+    var queryCentroDeCusto = (IQueryable<ProjectMaster.Data.pm_centro_de_custo>)ViewData["queryCentroDeCusto"];
+    var classRow = "webgrid-rows";
+}
+
+@Html.Partial("_vuToolBar", Buttons)
+
+<div id="main" class="main-scroll">
+    <table class="webgrid" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th width="50px">
+                    <span>ID</span> 
+                </th>
+                <th width="150px" align="center">
+                    <span>Código</span> 
+                </th>
+                <th>
+                    <span>Centro de Custo</span>
+                </th>
+                <th class="webgrid-col-action" align="center">
+                   <center><span>Ação</span></center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (ProjectMaster.Data.pm_centro_de_custo linha in queryCentroDeCusto)
+        {
+            <tr id='lin@(linha.id_centro_de_custo.ToString())' class="@classRow">
+                <td>
+                    <span>@linha.id_centro_de_custo</span>
+                </td>
+                <td align="center">
+                    <span>@linha.ds_codigo</span>
+                </td>
+                <td>
+                    <span>@linha.ds_descricao</span>
+                </td>
+                <td align="center">
+                    <div style='width: 100px'> 
+                        <a href='@Url.Action("CentroDeCusto", "CentroDeCusto", new { acao = "View", id_centro_de_custo = linha.id_centro_de_custo })' title="Editar"> <img src='@Url.Content("~/Content/images/edit.png")'/> </a>  
+                        <a href="JavaScript:delete_file('@linha.id_centro_de_custo','CentroDeCusto','rows')" title="Excluir"> <img src='@Url.Content("~/Content/images/delete.png")'/> </a> </div>
+                </td>
+            </tr>        
+             if (classRow == "webgrid-alternating-rows")
+             {
+                 classRow = "webgrid-rows";
+             }
+             else
+             {
+                 classRow = "webgrid-alternating-rows";
+             }
+        }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+<div id="dialog-confirm" title="Centro de Custos" style="display: none">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Excluir Centro de Custos?</p>
+</div>
